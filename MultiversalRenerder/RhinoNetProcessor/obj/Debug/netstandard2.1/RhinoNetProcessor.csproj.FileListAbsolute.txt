@@ -1,0 +1,5 @@
+C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Debug\netstandard2.1\RhinoNetProcessor.csproj.AssemblyReference.cache
+C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Debug\netstandard2.1\RhinoNetProcessor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Debug\netstandard2.1\RhinoNetProcessor.AssemblyInfoInputs.cache
+C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Debug\netstandard2.1\RhinoNetProcessor.AssemblyInfo.cs
+C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Debug\netstandard2.1\RhinoNetProcessor.csproj.CoreCompileInputs.cache

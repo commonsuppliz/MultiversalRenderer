@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "jhCasB1u1yw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\RhinoNetProcessor\\RhinoNetProcessor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hideoyon\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\hideoyon\\.nuget\\packages\\nlog\\5.3.4\\nlog.5.3.4.nupkg.sha512",
+    "C:\\Users\\hideoyon\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
+    "C:\\Users\\hideoyon\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\hideoyon\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512",
+    "C:\\Users\\hideoyon\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
+    "C:\\Users\\hideoyon\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

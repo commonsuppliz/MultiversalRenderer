@@ -1,0 +1,334 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptv8processor\\v8processor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|solutionrelative:v8processor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\icommonobjectinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\ichtmlelementinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\ichtmldocumentinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{309E58D7-15CA-4049-BCCF-5039CEAE65DE}|V8ScriptProcessorTest\\V8ScriptProcessorTest.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptv8processor\\v8scriptprocessortest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{309E58D7-15CA-4049-BCCF-5039CEAE65DE}|V8ScriptProcessorTest\\V8ScriptProcessorTest.csproj|solutionrelative:v8scriptprocessortest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptv8processor\\v8proscessorscope.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|solutionrelative:v8proscessorscope.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imultiversalscriptprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imultiversalscope.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptv8processor\\clearscriptv8processor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|solutionrelative:clearscriptv8processor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptv8processor\\clearscriptv8processor.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{A496F144-FD85-4743-99A4-6DB84E32376F}|ClearScriptV8Processor.csproj|solutionrelative:clearscriptv8processor.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imultiversaluniquetag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imultiversalhostingwinformcontrolinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\iprototypefunction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imutilversalenumtypedefinitions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imultiversalwindow_html5_property_interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B310B6BE-F3C9-4380-9D77-D12A9EA13249}|..\\Interfaces\\Interfaces.csproj|c:\\users\\hideoyon\\source\\repos\\multiversalrenderer\\multiversalrenerder\\interfaces\\imultiversalwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.GlobalUsings.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.GlobalUsings.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.AssemblyInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.AssemblyInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\netcoreapp3.1\\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\V8ScriptProcessorTest\\Program.cs",
+              "RelativeDocumentMoniker": "V8ScriptProcessorTest\\Program.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\V8ScriptProcessorTest\\Program.cs",
+              "RelativeToolTip": "V8ScriptProcessorTest\\Program.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAkwBwAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:21:39.558Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICHtmlElementInterface.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\ICHtmlElementInterface.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\ICHtmlElementInterface.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\ICHtmlElementInterface.cs",
+              "RelativeToolTip": "..\\Interfaces\\ICHtmlElementInterface.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:06:05.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ICommonObjectInterface.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\ICommonObjectInterface.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\ICommonObjectInterface.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\ICommonObjectInterface.cs",
+              "RelativeToolTip": "..\\Interfaces\\ICommonObjectInterface.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:06:00.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "V8Processor.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\V8Processor.cs",
+              "RelativeDocumentMoniker": "V8Processor.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\V8Processor.cs",
+              "RelativeToolTip": "V8Processor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T05:17:52.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ICHtmlDocumentInterface.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\ICHtmlDocumentInterface.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\ICHtmlDocumentInterface.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\ICHtmlDocumentInterface.cs",
+              "RelativeToolTip": "..\\Interfaces\\ICHtmlDocumentInterface.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:06:09.147Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IMultiversalScriptProcessor.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalScriptProcessor.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMultiversalScriptProcessor.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalScriptProcessor.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMultiversalScriptProcessor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T06:16:35.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IMultiversalScope.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalScope.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMultiversalScope.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalScope.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMultiversalScope.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:05:44.502Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "V8ProscessorScope.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\V8ProscessorScope.cs",
+              "RelativeDocumentMoniker": "V8ProscessorScope.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\V8ProscessorScope.cs",
+              "RelativeToolTip": "V8ProscessorScope.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACEAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:17:22.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAUwJcAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-27T04:59:05.951Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ClearScriptV8Processor.csproj",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\ClearScriptV8Processor.csproj",
+              "RelativeDocumentMoniker": "ClearScriptV8Processor.csproj",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\ClearScriptV8Processor.csproj",
+              "RelativeToolTip": "ClearScriptV8Processor.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2023-10-17T05:14:56.919Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ClearScriptV8Processor.AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.AssemblyInfo.cs",
+              "RelativeToolTip": "obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.AssemblyInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-20T07:32:53.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": ".NETCoreApp,Version=v3.1.AssemblyAttributes.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs",
+              "RelativeDocumentMoniker": "obj\\Debug\\netcoreapp3.1\\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs",
+              "RelativeToolTip": "obj\\Debug\\netcoreapp3.1\\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-20T07:32:53.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ClearScriptV8Processor",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\ClearScriptV8Processor.csproj",
+              "RelativeDocumentMoniker": "ClearScriptV8Processor.csproj",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\ClearScriptV8Processor.csproj",
+              "RelativeToolTip": "ClearScriptV8Processor.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2023-10-17T05:17:20.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IMultiversalUniqueTag.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalUniqueTag.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMultiversalUniqueTag.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalUniqueTag.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMultiversalUniqueTag.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:04:59.302Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IMultiversalHostingWinFormControlInterface.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalHostingWinFormControlInterface.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMultiversalHostingWinFormControlInterface.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalHostingWinFormControlInterface.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMultiversalHostingWinFormControlInterface.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-18T05:05:56.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IMultiversalWindow.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalWindow.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMultiversalWindow.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalWindow.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMultiversalWindow.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T06:16:26.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IMultiversalWindow_HTML5_Property_Interfaces.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalWindow_HTML5_Property_Interfaces.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMultiversalWindow_HTML5_Property_Interfaces.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMultiversalWindow_HTML5_Property_Interfaces.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMultiversalWindow_HTML5_Property_Interfaces.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T06:16:29.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IMutilversalEnumTypeDefinitions.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMutilversalEnumTypeDefinitions.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IMutilversalEnumTypeDefinitions.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IMutilversalEnumTypeDefinitions.cs",
+              "RelativeToolTip": "..\\Interfaces\\IMutilversalEnumTypeDefinitions.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T06:16:31.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IPrototypeFunction.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IPrototypeFunction.cs",
+              "RelativeDocumentMoniker": "..\\Interfaces\\IPrototypeFunction.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\Interfaces\\IPrototypeFunction.cs",
+              "RelativeToolTip": "..\\Interfaces\\IPrototypeFunction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T06:16:12.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ClearScriptV8Processor.GlobalUsings.g.cs",
+              "DocumentMoniker": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.GlobalUsings.g.cs",
+              "RelativeDocumentMoniker": "obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.GlobalUsings.g.cs",
+              "ToolTip": "C:\\Users\\hideoyon\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptV8Processor\\obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.GlobalUsings.g.cs",
+              "RelativeToolTip": "obj\\Debug\\netcoreapp3.1\\ClearScriptV8Processor.GlobalUsings.g.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-10-17T05:20:00.279Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
