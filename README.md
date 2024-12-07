@@ -13,13 +13,23 @@ HTML Rendering Library for .NET 6 and above [WIP]
 ## DOM API
 - Most of HMLT5 DOM API has been implemented
     - Document.createElement()
+    - Document.createEvent()
+    - Document.createTextNode()
     - Document.querySelector()
     - Document.querySelectorAll()
     - Document.getElementById()
+    - Document.evaluate()
     - Documennt.getElementsByClassName()
     - Document.getElementsByTagName()
     - Element.appendChild()
     - Element.removeChild()
+    - Element.contains()
+    - Element.insertBefore()
+    - Element.replaceChild()
+    - CSStyleSheet.addRule()
+    - HTMLCanvasElement.getContext("2D")   [All Canvas 2D API are supported]
+    - DOMParser.parseFromStrig()
+ 
     - etc
 ## Previous Project Screen Image 
 

@@ -1,4 +1,0 @@
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\obj\Debug\net8.0\MultiversalRenderer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\obj\Debug\net8.0\MultiversalRenderer.AssemblyInfoInputs.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\obj\Debug\net8.0\MultiversalRenderer.AssemblyInfo.cs
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\obj\Debug\net8.0\MultiversalRenderer.csproj.CoreCompileInputs.cache

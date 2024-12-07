@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("V8ScriptProcessorTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d18fb9e1b9ce179a34b5b56a8a44378a4725685c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcc96b445703a41112d2a0a2839c41baf652cf54")]
 [assembly: System.Reflection.AssemblyProductAttribute("V8ScriptProcessorTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("V8ScriptProcessorTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
