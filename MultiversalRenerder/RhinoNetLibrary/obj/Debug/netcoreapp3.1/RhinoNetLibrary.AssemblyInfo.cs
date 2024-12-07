@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RhinoNetLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcc96b445703a41112d2a0a2839c41baf652cf54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c59e5f922ba2884f2194d2b3f07d712dd4155dc8")]
 [assembly: System.Reflection.AssemblyProductAttribute("RhinoNetLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RhinoNetLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
