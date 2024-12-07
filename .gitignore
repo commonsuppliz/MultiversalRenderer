@@ -63,6 +63,7 @@ project.fragment.lock.json
 artifacts/
 
 .vs/
+/.vs/
 MulversalRenderder/.vs/
 
 # ASP.NET Scaffolding
