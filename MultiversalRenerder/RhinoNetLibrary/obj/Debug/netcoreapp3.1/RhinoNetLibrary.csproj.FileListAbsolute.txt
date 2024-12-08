@@ -1,9 +1,0 @@
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\bin\Debug\netcoreapp3.1\RhinoNetLibrary.deps.json
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\bin\Debug\netcoreapp3.1\RhinoNetLibrary.dll
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\bin\Debug\netcoreapp3.1\RhinoNetLibrary.pdb
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\obj\Debug\netcoreapp3.1\RhinoNetLibrary.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\obj\Debug\netcoreapp3.1\RhinoNetLibrary.AssemblyInfoInputs.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\obj\Debug\netcoreapp3.1\RhinoNetLibrary.AssemblyInfo.cs
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\obj\Debug\netcoreapp3.1\RhinoNetLibrary.csproj.CoreCompileInputs.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\obj\Debug\netcoreapp3.1\RhinoNetLibrary.dll
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetLibrary\obj\Debug\netcoreapp3.1\RhinoNetLibrary.pdb

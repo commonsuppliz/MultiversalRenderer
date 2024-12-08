@@ -1,5 +1,0 @@
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Core\obj\Debug\netcoreapp3.1\Core.csproj.AssemblyReference.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Core\obj\Debug\netcoreapp3.1\Core.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache

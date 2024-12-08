@@ -1,4 +1,0 @@
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Release\netcoreapp3.1\RhinoNetProcessor.csproj.IkvmFrameworkReference.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Release\netcoreapp3.1\RhinoNetProcessor.csproj.AssemblyReference.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Release\netcoreapp3.1\RhinoNetProcessor.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\RhinoNetProcessor\obj\Release\netcoreapp3.1\RhinoNetProcessor.csproj.CoreCompileInputs.cache

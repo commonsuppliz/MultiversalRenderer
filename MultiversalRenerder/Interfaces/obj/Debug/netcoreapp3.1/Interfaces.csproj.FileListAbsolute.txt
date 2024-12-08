@@ -1,7 +1,0 @@
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\bin\Debug\netcoreapp3.1\MultiversalRenderer.Interfaces.deps.json
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\bin\Debug\netcoreapp3.1\MultiversalRenderer.Interfaces.dll
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\bin\Debug\netcoreapp3.1\MultiversalRenderer.Interfaces.pdb
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\obj\Debug\netcoreapp3.1\Interfaces.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\obj\Debug\netcoreapp3.1\Interfaces.csproj.CoreCompileInputs.cache
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\obj\Debug\netcoreapp3.1\MultiversalRenderer.Interfaces.dll
-C:\Users\hideoyon\source\repos\MultiversalRenderer\MultiversalRenerder\Interfaces\obj\Debug\netcoreapp3.1\MultiversalRenderer.Interfaces.pdb
