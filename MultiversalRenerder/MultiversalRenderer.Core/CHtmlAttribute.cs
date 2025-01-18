@@ -127,10 +127,6 @@ namespace MultiversalRenderer.Core
                 {
                     return string.Copy(this.value as string);
                 }
-                else if (this.value is org.mozilla.javascript.ConsString)
-                {
-                    return commonHTML.GetStringValue(this.value);
-                }
                 else
                 {
                     return this.value;

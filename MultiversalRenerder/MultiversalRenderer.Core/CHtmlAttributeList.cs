@@ -239,15 +239,7 @@ namespace MultiversalRenderer.Core
                     }
                     return null;
                 }
-                else if (key is org.mozilla.javascript.ConsString)
-                {
-                    string strKey = commonHTML.GetStringValue(key);
-                    if (base.TryGetValue(strKey as string, out objReturn) == true)
-                    {
-                        return objReturn;
-                    }
-                    return null;
-                }
+
                 else if (key != null && commonHTML.isClrNumeric(key))
                 {
                     int __intKey = Convert.ToInt32(key);
@@ -260,19 +252,7 @@ namespace MultiversalRenderer.Core
                         return null;
                     }
                 }
-                else if (key is java.lang.Double)
-                {
-                    int __intKey2 = commonHTML.GetIntFromObject(key, -1);
-                    if (__intKey2 >= 0 && base.Count > __intKey2)
-                    {
-                        return this.GetByIndex(__intKey2);
-                    }
-                    else
-                    {
-                        return null;
-                    }
 
-                }
                 else
                 {
                     if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
@@ -330,7 +310,7 @@ namespace MultiversalRenderer.Core
             {
                commonLog.LogEntry("calling item({0}) to get value '{1}' ", _key, this);
             }
-            if(_key is string || _key is org.mozilla.javascript.ConsString)
+            if(_key is string)
 			{
                 return base[commonHTML.GetStringValue(_key)];
 			}

@@ -255,22 +255,11 @@ namespace MultiversalRenderer.Core
                     if (___args[1] is string)
                     {
                         strFileName = commonHTML.GetStringValue(___args[1]);
-                    }else if (___args[1] is org.mozilla.javascript.NativeObject)
-                    {
-                        strMimeType = string.Format("{0}", ___getTypePropertyFromObject("type", ___args[1]));
-                        strEndings = string.Format("{0}", ___getTypePropertyFromObject("endings", ___args[1]));
-                        dateTimeValue = commonHTML.convertDateTimeToUnix(commonData.convertObjectIntoDateTime(___getTypePropertyFromObject("lastModified", ___args[1])));
                     }
                 }
                 if(__paramCount > 2)
                 {
-                    if (___args[2] is org.mozilla.javascript.NativeObject)
-                    {
-                        strMimeType = string.Format("{0}", ___getTypePropertyFromObject("type", ___args[2])) ;
-                        strEndings = string.Format("{0}", ___getTypePropertyFromObject("endings", ___args[2]));
-                        dateTimeValue  = commonHTML.convertDateTimeToUnix(commonData.convertObjectIntoDateTime(___getTypePropertyFromObject("lastModified", ___args[2])));
-                        
-                    }
+
                 }
                 if(string.IsNullOrEmpty(strFileName) == false && strFileName.Contains("/") == true)
                 {
@@ -302,19 +291,14 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         internal object  ___getTypePropertyFromObject(string propName, object ___obj)
         {
-            if (___obj is org.mozilla.javascript.Scriptable)
-            {
-                org.mozilla.javascript.Scriptable ___scriptableObject = ___obj as org.mozilla.javascript.Scriptable;
-                return ___scriptableObject.get(propName, null);
-            }
-            else
-            {
+
+            
                 System.Reflection.PropertyInfo typePropertyInfo = ___obj.GetType().GetProperty(propName);
                 if (typePropertyInfo != null)
                 {
                     return typePropertyInfo.GetValue(___obj, null);
                 }
-            }
+            
             return "";
         }
 

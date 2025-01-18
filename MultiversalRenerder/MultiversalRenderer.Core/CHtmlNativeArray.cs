@@ -457,14 +457,14 @@ namespace MultiversalRenderer.Core
             //         we needs to check data type here
             if (___p1 != null)
             {
-                if (___p1 is java.lang.Double  ||  commonHTML.isClrNumeric(___p1))
+                if ( commonHTML.isClrNumeric(___p1))
                 {
                     this.___set_inner( ___p2, commonData.GetDoubleFromObject(___p1,0), null);
                     return;
                 }
                 if (___p2 != null)
                 {
-                    if (___p2 is java.lang.Double || commonHTML.isClrNumeric(___p2))
+                    if (commonHTML.isClrNumeric(___p2))
                     {
                         this.___set_inner(___p1, null, commonData.GetDoubleFromObject(___p2, 0));
                             return;
@@ -519,19 +519,7 @@ namespace MultiversalRenderer.Core
                 {
                     switch (___array) 
                     {
-                        case org.mozilla.javascript.typedarrays.NativeArrayBuffer nativeArrayBuffer:
-                            this.___byteArray = nativeArrayBuffer.getBuffer();
-                            this.___floatArray = null;
-                            break;
-                        case org.mozilla.javascript.typedarrays.NativeUint8ClampedArray clampedArray:
-                            this.___byteArray = clampedArray.getBuffer().getBuffer();
-                            this.___floatArray = null;
-                            break;
 
-                        case org.mozilla.javascript.typedarrays.NativeInt8Array nativeInt8Array:
-                            this.___byteArray = nativeInt8Array.getBuffer().getBuffer();
-                            this.___floatArray = null;
-                            break;
                         default:
                             ___floatArray = commonData.___convertObjectIntoFloatArray(___array, -1, -1);
                             ___createArrayList(___floatArray);
@@ -589,126 +577,8 @@ namespace MultiversalRenderer.Core
         }
         object[] objArray = null;
 
-        if (___objArray is org.mozilla.javascript.typedarrays.NativeArrayBuffer)
-        {
-            org.mozilla.javascript.typedarrays.NativeArrayBuffer _typednativeArray = ___objArray as org.mozilla.javascript.typedarrays.NativeArrayBuffer;
-            byte[] bts = _typednativeArray.getBuffer();
-            CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-            ___byteArrayList1.___arrayLength = bts.Length;
-            ___byteArrayList1.___byteArray = bts;
-            return ___byteArrayList1;
-        }
-        else if (___objArray is org.mozilla.javascript.NativeArray)
-        {
-            org.mozilla.javascript.NativeArray ___javaAarray = ___objArray as org.mozilla.javascript.NativeArray;
-            object[] tmpArray = ___javaAarray.toArray();
-            if (tmpArray.Length == 1)
-            {
-                /// =========================================================================================
-                /// Passed Array may be is array of typedarray, such as Blob
-                /// Take first array to create pure numeneric value or etc
-                /// This is may be ad hoc solution. Future re-consideration may be required
-                /// ==========================================================================================
-                if (tmpArray[0] is string)
-                {
-                    /// Store string as UTF-8 bytes array into NativeArray
-                    byte[] bts = System.Text.UTF8Encoding.UTF8.GetBytes(tmpArray[0] as string);
-                    CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-                    ___byteArrayList1.___arrayLength = bts.Length;
-                    ___byteArrayList1.___byteArray = bts;
-                    return ___byteArrayList1;
-                }
-                else if (tmpArray[0] is org.mozilla.javascript.typedarrays.NativeInt32Array)
-                {
-                    org.mozilla.javascript.typedarrays.NativeInt32Array jnInt32Array = tmpArray[0] as org.mozilla.javascript.typedarrays.NativeInt32Array;
-                    byte[] bts = jnInt32Array.getBuffer().getBuffer();
-                    CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-                    ___byteArrayList1.___arrayLength = bts.Length;
-                    ___byteArrayList1.___byteArray = bts;
-                    return ___byteArrayList1;
-                }
-                else if (tmpArray[0] is org.mozilla.javascript.typedarrays.NativeInt16Array)
-                {
-                    org.mozilla.javascript.typedarrays.NativeInt16Array jnInt16Array = tmpArray[0] as org.mozilla.javascript.typedarrays.NativeInt16Array;
-                    byte[] bts = jnInt16Array.getBuffer().getBuffer();
-                    CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-                    ___byteArrayList1.___arrayLength = bts.Length;
-                    ___byteArrayList1.___byteArray = bts;
-                    return ___byteArrayList1;
-                }
-                else if (tmpArray[0] is org.mozilla.javascript.typedarrays.NativeUint8Array)
-                {
-                    org.mozilla.javascript.typedarrays.NativeUint8Array jnInt8Array = tmpArray[0] as org.mozilla.javascript.typedarrays.NativeUint8Array;
-                    object[] objUint16Array = jnInt8Array.toArray();
-                    int len = jnInt8Array.getArrayLength();
-                    CHtmlNativeArray ___uint8ArrayList1 = new CHtmlNativeArray(CHtmlNumericArrayType.Uint8Array);
-                    ___uint8ArrayList1.___int16Array = new short[len];
-                    for (int i = 0; i < len; i++)
-                    {
-                        ___uint8ArrayList1.___int16Array[i] = (short)org.mozilla.javascript.Context.toNumber(objUint16Array[i]);
-                    }
-
-                    ___uint8ArrayList1.___arrayLength = len;
-
-                    return ___uint8ArrayList1;
-                }
-                else if (tmpArray[0] is org.mozilla.javascript.typedarrays.NativeUint16Array)
-                {
-                    org.mozilla.javascript.typedarrays.NativeUint16Array jnInt16Array = tmpArray[0] as org.mozilla.javascript.typedarrays.NativeUint16Array;
-                    byte[] bts = jnInt16Array.getBuffer().getBuffer();
-                    CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-                    ___byteArrayList1.___arrayLength = bts.Length;
-                    ___byteArrayList1.___byteArray = bts;
-                    return ___byteArrayList1;
-                }
-                else if (tmpArray[0] is org.mozilla.javascript.typedarrays.NativeUint32Array)
-                {
-                    org.mozilla.javascript.typedarrays.NativeUint32Array jnInt32Array = tmpArray[0] as org.mozilla.javascript.typedarrays.NativeUint32Array;
-                    byte[] bts = jnInt32Array.getBuffer().getBuffer();
-                    CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-                    ___byteArrayList1.___arrayLength = bts.Length;
-                    ___byteArrayList1.___byteArray = bts;
-                    return ___byteArrayList1;
-                }
-                else if (tmpArray[0] is org.mozilla.javascript.typedarrays.NativeArrayBuffer)
-                {
-                    org.mozilla.javascript.typedarrays.NativeArrayBuffer arrayBuffer = tmpArray[0] as org.mozilla.javascript.typedarrays.NativeArrayBuffer;
-                    byte[] bts = arrayBuffer.getBuffer();
-                    CHtmlNativeArray ___byteArrayList1 = new CHtmlNativeArray(___targetType);
-                    ___byteArrayList1.___arrayLength = bts.Length;
-                    ___byteArrayList1.___byteArray = bts;
-                    return ___byteArrayList1;
-                }
-                else
-                {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
-                    {
-                       commonLog.LogEntry("TODO: First Array Type needs to convert into appropiate array : {0}  ", tmpArray[0]);
-                    }
-                }
 
 
-            }
-            else
-            {
-                objArray = tmpArray;
-                if (objArray.Length > 0)
-                {
-
-                    if (tmpArray[0].GetType().IsValueType == true)
-                    {
-                        isTargetTypeChanged = true;
-                        ___targetType = CHtmlNumericArrayType.Float64Array;
-                    }
-                    else if (tmpArray[0] is java.lang.Double)
-                    {
-                        isTargetTypeChanged = true;
-                        ___targetType = CHtmlNumericArrayType.Float64Array;
-                    }
-
-                }
-            }
-        }
         if (objArray == null)
         {
             if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
@@ -740,8 +610,8 @@ namespace MultiversalRenderer.Core
                 for (int i = 0; i < objArray.Length; i++)
                 {
                     object test = objArray[i];
-                    int intval = org.mozilla.javascript.typedarrays.Conversions.toInt16(test);
-                    ___byteArrayList.___byteArray[i] = System.Convert.ToByte(intval);
+                    int intval = new int();
+                        ___byteArrayList.___byteArray[i] = System.Convert.ToByte(intval);
                 }
 
                 // =============================================================================================
@@ -1175,9 +1045,6 @@ namespace MultiversalRenderer.Core
             System.Collections.Generic.Dictionary<System.RuntimeTypeHandle, NativeArrayHandler> __list = new System.Collections.Generic.Dictionary<System.RuntimeTypeHandle, NativeArrayHandler>();
             __list[typeof(CHtmlNativeArray).TypeHandle] = new NativeArrayHandler(____getCHtmlNativeArrayIntoNewArray);
 
-            __list[typeof(org.mozilla.javascript.NativeArray).TypeHandle] = new NativeArrayHandler(____getOrgMozillaJavascriptNativeArrayIntoNewArray);
-
-            __list[typeof(org.mozilla.javascript.typedarrays.NativeArrayBuffer).TypeHandle] = new NativeArrayHandler(____getOrgMozillaJavascriptNativeArrayIntoNewArray);
 
             __list[typeof(System.Array).TypeHandle] = new NativeArrayHandler(____getSystemArrayIntoNewArray);
             __list[typeof(System.Array).TypeHandle] = new NativeArrayHandler(____getJavaArrayIntoNewArray);

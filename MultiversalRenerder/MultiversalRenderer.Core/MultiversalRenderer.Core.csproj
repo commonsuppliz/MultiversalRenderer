@@ -34,28 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClearScriptV8Processor\ClearScriptV8Processor.csproj" />
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
   </ItemGroup>
-	<ItemGroup>
-		<Reference Include="IKVM.Java">
-			<HintPath>IKVM.Java.dll</HintPath>
-		</Reference>
-		<Reference Include="IKVM.Reflection">
-			<HintPath>IKVM.Reflection.dll</HintPath>
-		</Reference>
-		<Reference Include="IKVM.Runtime">
-			<HintPath>IKVM.Runtime.dll</HintPath>
-		</Reference>
-		<Reference Include="IKVM.ByteCode">
-			<HintPath>IKVM.ByteCode.dll</HintPath>
-		</Reference>
-		<Reference Include="RhinoNet">
-			<HintPath>rhinonet.dll</HintPath>
-		</Reference>
-				<Reference Include="RhinoNetProcessor">
-			<HintPath>RhinoNetProssesor.dll</HintPath>
-		</Reference>
-	</ItemGroup>
+
 
 </Project>

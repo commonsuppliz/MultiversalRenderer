@@ -1,9 +1,4 @@
-﻿using com.sun.tools.@internal.xjc.writer;
-using javax.swing.@event;
-using javax.swing.text.html;
-using jdk.nashorn.@internal.objects;
-using sun.management.counter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,7 +14,6 @@ namespace MultiversalRenderer.Core
                 case int i1: return (double)i1;
                 case float f1: return (double)f1;
                 case double d1 : return d1;
-                case java.lang.Double jd1: return jd1.doubleValue();
             }
             return 0.0;
         }
@@ -35,7 +29,7 @@ namespace MultiversalRenderer.Core
                 case int i1: return (double)i1;
                 case float f1: return (double)f1;
                 case double d1: return d1;
-                case java.lang.Double jd1: return jd1.doubleValue();
+       
             }
             return 0.0;
         }
@@ -43,8 +37,7 @@ namespace MultiversalRenderer.Core
         {
             switch(exobj)
             {
-                case org.mozilla.javascript.RhinoException rhinoex: return rhinoex.ToString();
-                case Exception exception: return exception.ToString();
+                 case Exception exception: return exception.ToString();
          
             }
             return string.Empty;
@@ -61,7 +54,7 @@ namespace MultiversalRenderer.Core
         {
             switch (obj)
             {
-                case java.lang.Boolean jb: return jb.booleanValue();
+             
                 case bool b: return b;
             }
             return defaultValue;
@@ -70,7 +63,7 @@ namespace MultiversalRenderer.Core
         {
             switch(obj)
             {
-                case java.lang.Boolean jb: return jb.booleanValue();
+                
                 case bool b: return b;
             }
             return false;
@@ -179,34 +172,7 @@ namespace MultiversalRenderer.Core
             // }
             switch (obj)
             {
-                case org.mozilla.javascript.ScriptableObject rhinoobj:
-                    java.util.Date javaDate = org.mozilla.javascript.Context.jsToJava(rhinoobj, typeof(java.util.Date)) as java.util.Date;
-                    if (javaDate != null)
-                    {
-                        return new DateTime((javaDate.getTime() + 62135596800000L) * 10000, DateTimeKind.Utc);
-                    }
-                    else
-                    {
-                        return DateTime.Now;
-                    }
-                case java.util.Date javaUtilDate:
-              
-                    java.time.LocalDateTime localDateTime = javaUtilDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
-                    /*
-                    DateTime date = new DateTime(javaDate.getYear() + 1900,
-                                                 javaDate.getMonth() + 1,
-                                                 javaDate.getDate(),
-                                                 javaDate.getHours(),
-                                                 javaDate.getMinutes(),
-                                                 javaDate.getSeconds());
-                    return date;
-                    */
-                    return new DateTime(localDateTime.getYear(),
-                         localDateTime.getYear(),
-                         localDateTime.getDayOfMonth(),
-                         localDateTime.getHour(),
-                         localDateTime.getMinute(),
-                         localDateTime.getSecond());
+
 
                 case DateTime dt: return dt;
                 default:

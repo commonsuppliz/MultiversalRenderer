@@ -396,7 +396,7 @@ namespace MultiversalRenderer.Core
             this.___contextFontAsObject = value;
             try
             {
-                if (value is string || value is org.mozilla.javascript.ConsString)
+                if (value is string)
                 {
                     string ___strFont = commonHTML.GetStringValue(value);
                     if (string.IsNullOrEmpty(___strFont) == false && string.CompareOrdinal(___strFont, this.___contextFontAsString) == 0 && (this.___contextCHtmlFontInfo != null))
@@ -887,7 +887,7 @@ namespace MultiversalRenderer.Core
             }
             try
             {
-                if (commonHTML.isClrNumeric(imageObject) || imageObject is java.lang.Double)
+                if (commonHTML.isClrNumeric(imageObject) )
                 {
                     double doubleValue = commonData.GetDoubleFromObject(imageObject, 0);
                     return this.___createImageDataInner(doubleValue, doubleValue);
@@ -1175,33 +1175,10 @@ namespace MultiversalRenderer.Core
                             object orValue = ___ImageByteData[i];
                             try
                             {
-                                if (orValue is java.lang.Double)
-                                {
-                                    java.lang.Double javaDouble = orValue as java.lang.Double;
-
-                                    int val = javaDouble.intValue();
-                                    if (val < 0)
-                                    {
-                                        byteArray[i] = 0;
-                                        continue;
-                                    }
-                                    else if (val > 255)
-                                    {
-                                        byteArray[i] = 255;
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        byteArray[i] = System.Convert.ToByte(val);
-                                        continue;
-                                    }
-
-                                }
-                                else
-                                {
+    
 
                                     byteArray[i] = System.Convert.ToByte(orValue);
-                                }
+                                                
                             }
                             catch
                             {
@@ -2470,21 +2447,13 @@ namespace MultiversalRenderer.Core
         {
             System.Collections.Generic.Dictionary<System.RuntimeTypeHandle, BrushHandler> list = new System.Collections.Generic.Dictionary<RuntimeTypeHandle, BrushHandler>();
             list[typeof(CHtmlCanvasContextExtenstionObject).TypeHandle] = new BrushHandler(___ConvertFillStyleFromCanvasContextExtensionObject);
-            list[typeof(org.mozilla.javascript.NativeJavaObject).TypeHandle] = new BrushHandler  (___ConvertFillStyleFromNativeJavaObject);
-
             list[typeof(string).TypeHandle] = new BrushHandler(___ConvertFillStyleFromString);
-            list[typeof(org.mozilla.javascript.ConsString).TypeHandle] = new BrushHandler(___ConertFillStyleFromConString);
+        
             return list;
         }
         public static System.Drawing.Brush ___ConvertFillStyleFromNativeJavaObject(object __fillObject, Color defaultColor, CHtmlCanvasContext ___thisContext)
         {
-            org.mozilla.javascript.NativeJavaObject rhinoFillStyle = __fillObject as org.mozilla.javascript.NativeJavaObject;
-            object fillStyleObject = rhinoFillStyle.unwrap();
-            if (fillStyleObject is CHtmlCanvasContextExtenstionObject)
-            {
-               CHtmlCanvasContextExtenstionObject patternStyle = fillStyleObject as CHtmlCanvasContextExtenstionObject;
-                return ___ConvertFillStyleFromCanvasContextExtensionObject(patternStyle, defaultColor, ___thisContext);
-            }
+
             return null;
         }
 
@@ -2694,11 +2663,7 @@ namespace MultiversalRenderer.Core
                 return new SolidBrush(defaultColor);
             }
         }
-        public static System.Drawing.Brush ___ConertFillStyleFromConString(object ___fillStyle, Color defaultColor, CHtmlCanvasContext thisContext)
-        {
-            org.mozilla.javascript.ConsString consString = (org.mozilla.javascript.ConsString)___fillStyle;
-            return ___ConvertFillStyleFromString(consString.toString(),defaultColor,  thisContext);
-        }
+
         /// <summary>
         /// Fill Style can be string or gradient object Create Brush based upon the data
         /// </summary>
@@ -3115,7 +3080,7 @@ namespace MultiversalRenderer.Core
                 if (this.___contextStrokeStyleAsObject != null)
                 {
                     string strokeStyle = null;
-                    if (this.___contextStrokeStyleAsObject is org.mozilla.javascript.NativeJavaObject || this.___contextStrokeStyleAsObject is CHtmlCanvasContextExtenstionObject)
+                    if ( this.___contextStrokeStyleAsObject is CHtmlCanvasContextExtenstionObject)
                     {
                         CHtmlCanvasContextExtenstionObject __ext = null;
                         
@@ -3124,15 +3089,7 @@ namespace MultiversalRenderer.Core
                             {
                                 goto ExtObtained;
                             }
-                            if (this.___contextStrokeStyleAsObject is org.mozilla.javascript.NativeJavaObject)
-                            {
-                            org.mozilla.javascript.NativeJavaObject ___nativeJ = this.___contextStrokeStyleAsObject as org.mozilla.javascript.NativeJavaObject;
-                            object ___unwrapped = ___nativeJ.unwrap();
-                                if (___unwrapped is CHtmlCanvasContextExtenstionObject)
-                                {
-                                    __ext = ___unwrapped as CHtmlCanvasContextExtenstionObject;
-                                }
-                            }
+
                     ExtObtained:
                         if (__ext != null)
                         {

@@ -37,7 +37,6 @@ namespace MultiversalRenderer.Core
             return;
         }
 
-        [org.mozilla.javascript.annotations.JSFunction]
         public void replaceState(object __State, object ___TitleObject, object ___UrlObject)
         {
             string ___Title = commonHTML.GetStringValue(___TitleObject);
@@ -53,7 +52,7 @@ namespace MultiversalRenderer.Core
                 foundHistory.State = __State;
             }
         }
-        [org.mozilla.javascript.annotations.JSFunction]
+
         public void pushState(object __State, object ___TitleObject, object ___UrlObject)
         {
             string ___Title = commonHTML.GetStringValue(___TitleObject);
@@ -79,7 +78,7 @@ namespace MultiversalRenderer.Core
         {
             return null;
         }
-        [org.mozilla.javascript.annotations.JSFunction]
+
         public void back()
         {
             if (this.___WebHistoryBackward != null)
@@ -90,7 +89,7 @@ namespace MultiversalRenderer.Core
                 }
             }
         }
-         [org.mozilla.javascript.annotations.JSFunction]
+
          public void forward()
          {
              if (this.___WebHistoryForeward != null)
@@ -101,7 +100,7 @@ namespace MultiversalRenderer.Core
                  }
              }
          }
-         [org.mozilla.javascript.annotations.JSFunction]
+
          public void go(object ___goParam)
          {
              if (this.___WebHistoryGo != null)

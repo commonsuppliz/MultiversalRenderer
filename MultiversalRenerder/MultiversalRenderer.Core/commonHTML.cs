@@ -9,11 +9,8 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Runtime.CompilerServices;
-using org.mozilla.javascript;
 using System.Drawing;
-using com.sun.org.apache.xml.@internal.resolver.helpers;
-using javax.swing.text.html;
-using sun.management.counter;
+
 
 #if DEBUG
 using System.Diagnostics;
@@ -3421,10 +3418,7 @@ namespace MultiversalRenderer.Core
         public static System.Collections.Generic.Dictionary<System.RuntimeTypeHandle, IntHandler> createIntWrapSwitcher()
         {
             System.Collections.Generic.Dictionary<System.RuntimeTypeHandle, IntHandler> list = new System.Collections.Generic.Dictionary<RuntimeTypeHandle, IntHandler>();
-            list[typeof(org.mozilla.javascript.Undefined).TypeHandle] = new IntHandler(___intNonConverter);
-            list[typeof(org.mozilla.javascript.UniqueTag).TypeHandle] = new IntHandler(___intNonConverter);
-            list[typeof(java.lang.Integer).TypeHandle] = new IntHandler(___intConvertFromJavaLangInt);
-            list[typeof(java.lang.Number).TypeHandle] = new IntHandler(___intConvertFromJavaLangNumber);
+
 
             // numeric type is below
             list[typeof(double).TypeHandle] = new IntHandler(___intNonConverter);
@@ -3458,16 +3452,7 @@ namespace MultiversalRenderer.Core
         {
             return (int)o;
         }
-        public static int ___intConvertFromJavaLangInt(object o, int defaultValue)
-        {
-            java.lang.Integer jInt = (java.lang.Integer)o;
-            return jInt.intValue();
-        }
-        public static int ___intConvertFromJavaLangNumber(object o, int defaultValue)
-        {
-            java.lang.Number jNumber = (java.lang.Number)o;
-            return jNumber.intValue();
-        }
+
         public static int ___intConvertFromFloat(object o, int defaultValue)
         {
             return (int)o;
@@ -3520,11 +3505,7 @@ namespace MultiversalRenderer.Core
             if (___o == null)
                 return 0;
             // This Section is requried because we frequently calls rhino objects 
-            java.lang.Double ___javaDouble = ___o as java.lang.Double;
-            if (___javaDouble != null)
-            {
-                return ___javaDouble.intValue();
-            }
+
             int ___defaultInt = (int)___defaultValue;
             int resultInt = 0;
             IntHandler handler;
@@ -3566,7 +3547,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public static bool isObjectNullOrUndefined(object ___o)
         {
-            if (___o == null || ___o is org.mozilla.javascript.Undefined)
+            if (___o == null)
             {
                 return true;
             } else
@@ -3586,16 +3567,8 @@ namespace MultiversalRenderer.Core
             return (double)o;
         }
 
-        public static double ___doubleConvertFromJavaLangDouble(object o)
-        {
-            java.lang.Double jDouble = (java.lang.Double)o;
-            return jDouble.doubleValue();
-        }
-        public static double ___doubleConvertFromJavaLangNumber(object o)
-        {
-            java.lang.Number jNumber = (java.lang.Number)o;
-            return jNumber.doubleValue();
-        }
+
+
 
         public static double ___doubleConvertFromInt(object o)
         {
@@ -17053,7 +17026,6 @@ namespace MultiversalRenderer.Core
             svgDoc.___charset = __charset;
             svgDoc.___IsHtmlCharSetDetectionCompleted = true;
             svgDoc.___IsHtmlResponseCompleted = true;
-            svgDoc.___startDOMParseThreadAndWaitOne();
             return svgDoc;
         }
         /// <summary>
@@ -18130,30 +18102,11 @@ namespace MultiversalRenderer.Core
    
         public static bool IsObjectStringType(object __objString)
         {
-            switch(__objString)
-            {
-                case org.mozilla.javascript.ConsString consjsstr: return true;
-                case string str: return true;
-                default:
-                return false;
-            }
+  
+            return false;
 
         }
-        public static byte[] ConvertConsStringToBytes(object ___rhnoConsStringObject)
-        {
-            org.mozilla.javascript.ConsString jString = ___rhnoConsStringObject as org.mozilla.javascript.ConsString;
-            if (jString == null)
-            {
-                return new byte[0];
-            }
-            byte[] bytesArray = new byte[jString.length()];
-            int jStringLength = bytesArray.Length;
-            for (int i = 0; i < jStringLength; i++)
-            {
-                bytesArray[i] = System.Convert.ToByte(jString.charAt(i));
-            }
-            return bytesArray;
-        }
+
         /// <summary>
         /// Convert 1 length string value to string True or False(string Must Be 1 Length)
         /// </summary>
@@ -18172,11 +18125,7 @@ namespace MultiversalRenderer.Core
         {
             System.Collections.Generic.Dictionary<System.RuntimeTypeHandle, StringTypeHandler> list = new System.Collections.Generic.Dictionary<RuntimeTypeHandle, StringTypeHandler>();
             list[typeof(string).GetType().TypeHandle] = new StringTypeHandler(____stringConverter);
-            list[typeof(java.lang.String).GetType().TypeHandle] = new StringTypeHandler(___javaLangStringConverter);
-            list[typeof(org.mozilla.javascript.Undefined).GetType().TypeHandle] = new StringTypeHandler(____stringUndedefinedConverter);
-            list[typeof(java.lang.Double).GetType().TypeHandle] = new StringTypeHandler(____stringJavaLangDoubleConverter);
-            list[typeof(java.lang.Boolean).GetType().TypeHandle] = new StringTypeHandler(____stringJavaLangBooleanConverter);
-            list[typeof(org.mozilla.javascript.ConsString).GetType().TypeHandle] = new StringTypeHandler(____stringConsStringConverter);
+
             list[typeof(double).GetType().TypeHandle] = new StringTypeHandler(____stringDoubleConverter);
             list[typeof(System.Double).GetType().TypeHandle] = new StringTypeHandler(____stringDoubleConverter);
             list[typeof(float).GetType().TypeHandle] = new StringTypeHandler(____stringFloatConverter);
@@ -18184,9 +18133,7 @@ namespace MultiversalRenderer.Core
             list[typeof(short).GetType().TypeHandle] = new StringTypeHandler(____stringIntConverter);
             list[typeof(sbyte).GetType().TypeHandle] = new StringTypeHandler(____stringIntConverter);
             list[typeof(byte).GetType().TypeHandle] = new StringTypeHandler(____stringIntConverter);
-            list[typeof(org.mozilla.javascript.NativeFunction).GetType().TypeHandle] = new StringTypeHandler(___stringJavaFunctionConverter);
-            list[typeof(org.mozilla.javascript.Function).GetType().TypeHandle] = new StringTypeHandler(___stringJavaFunctionConverter);
-            list[typeof(org.mozilla.javascript.NativeArray).GetType().TypeHandle] = new StringTypeHandler(___stringJavaNativeArrayConverter);
+
             list[typeof(CHtmlElement).GetType().TypeHandle] = new StringTypeHandler(___stringCHtmlElementConverter);
             return list;
         }
@@ -18204,11 +18151,7 @@ namespace MultiversalRenderer.Core
             bool val = (bool)node;
             return val.ToString();
         }
-        public static string ____stringJavaLangBooleanConverter(object node)
-        {
-            java.lang.Boolean val = node as java.lang.Boolean;
-            return val.toString();
-        }
+
         public static string ____stringDoubleConverter(object node)
         {
             double  val = (double)node;
@@ -18224,16 +18167,8 @@ namespace MultiversalRenderer.Core
             int val = (int)node;
             return val.ToString();
         }
-        public static string ____stringJavaLangDoubleConverter(object node)
-        {
-            java.lang.Double ___javaDouble = node as java.lang.Double;
-            return ___javaDouble.toString();
-        }
-        public static string ____stringConsStringConverter(object node)
-        {
-            org.mozilla.javascript.ConsString conString = node as org.mozilla.javascript.ConsString;
-            return conString.toString();
-        }
+
+
         public static string ___javaLangStringConverter(object node)
         {
             // We can not use java.lang.String 
@@ -18248,22 +18183,7 @@ namespace MultiversalRenderer.Core
             CHtmlElement ___elem = node as CHtmlElement;
             return ___elem.ToString();
         }
-        public static string ___stringJavaNativeArrayConverter(object node)
-        {
-            org.mozilla.javascript.NativeArray nativeArray = (org.mozilla.javascript.NativeArray)node;
-            System.Text.StringBuilder sbValue = new StringBuilder();
-            int arrayLen = (int)nativeArray.getLength();
-            for(int i = 0; i < arrayLen; i ++)
-            {
-                sbValue.Append(nativeArray.get(i));
-                sbValue.Append(',');
-            }
-            if (sbValue.Length > 0)
-            {
-                sbValue.Remove(sbValue.Length - 1, 1);
-            }
-            return sbValue.ToString();
-        }
+
         #endregion
 
 
@@ -18296,36 +18216,8 @@ namespace MultiversalRenderer.Core
                 commonLog.LogEntry("Creating Blob Array from {0} as {1}", ___arrayobject, ___targetType);
             }
             System.Collections.Generic.List<object> __list = new System.Collections.Generic.List<object>();
-            if (___arrayobject is org.mozilla.javascript.NativeArray)
-            {
-                org.mozilla.javascript.NativeArray __javaArray = ___arrayobject as org.mozilla.javascript.NativeArray;
-                int len = (int)__javaArray.getLength();
-                for (int i = 0; i < len; i++)
-                {
-                    object ___objectInArray = __javaArray.get(i);
-                    if (___objectInArray is org.mozilla.javascript.NativeArray)
-                    {
-                        org.mozilla.javascript.NativeArray ___javaArray = ___objectInArray as org.mozilla.javascript.NativeArray;
-                        long ___javaArrayLen = __javaArray.getLength();
-                        for (int x = 0; x < ___javaArrayLen; x++)
-                        {
-                            __list.Add(__javaArray.get(x));
-                        }
-                        continue;
 
-                    }
-                    else if (___objectInArray is org.mozilla.javascript.typedarrays.NativeTypedArrayView)
-                    {
-                        ___convertNativeTypedArrayViewIntoGenericArrayList(___objectInArray, __list, ___targetType);
-                        continue;
-                    }
-                    else
-                    {
-                        __list.Add(___objectInArray);
-                    }
-                }
-            }
-            else if (___arrayobject is System.Array)
+            if (___arrayobject is System.Array)
             {
                 System.Array ___nativeArray = ___arrayobject as System.Array;
                 foreach(object ___obj in ___nativeArray)
@@ -18340,13 +18232,9 @@ namespace MultiversalRenderer.Core
             try
             {
 
-                org.mozilla.javascript.typedarrays.NativeTypedArrayView __nativeView = ___arrayView as org.mozilla.javascript.typedarrays.NativeTypedArrayView;
 
-                int ___byteLength = __nativeView.getByteLength();
-                for (int i = 0; i < ___byteLength; i++)
-                {
-                    ___list.Add(__nativeView.get(i));
-                }
+
+
 
             }
             catch (Exception ex)
@@ -18374,7 +18262,7 @@ namespace MultiversalRenderer.Core
    
         public static bool GetBooleanForSelectedAttribute(object _boolObj)
         {
-            if (_boolObj is bool || _boolObj is java.lang.Boolean)
+            if (_boolObj is bool )
             {
             return commonData.convertObjectToBoolean(_boolObj);
             }else{
@@ -19512,11 +19400,7 @@ namespace MultiversalRenderer.Core
             {
                 return (bool)attr.___value;
             }
-            else if (attr.___value is java.lang.Boolean)
-            {
-                java.lang.Boolean javaBool = (java.lang.Boolean)attr.___value;
-                return javaBool.booleanValue();
-            }
+
             string strValue = commonHTML.GetStringValue(attr.___value);
 
             switch (strValue)
@@ -20451,7 +20335,7 @@ namespace MultiversalRenderer.Core
         /// </returns>
         internal static int isPrototypeOf_precheck(object ___owner, object ___protoObject)
         {
-            if (___protoObject == null || ___protoObject is org.mozilla.javascript.Undefined)
+            if (___protoObject == null)
             {
                 return 2;
             }

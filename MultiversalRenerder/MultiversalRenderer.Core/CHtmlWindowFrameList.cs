@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using org.mozilla.javascript;
+
 
 namespace MultiversalRenderer.Core
 {
     /// <summary>
     /// window.frames List
     /// </summary>
-    public sealed class CHtmlWindowFrameList : org.mozilla.javascript.Scriptable
+    public sealed class CHtmlWindowFrameList 
     {
         private System.Collections.Generic.SortedList<string, System.WeakReference> ____windowFrameInternalList = null;
         private int ___frameCount = 0;
@@ -59,7 +59,7 @@ namespace MultiversalRenderer.Core
         public void delete(string str)
         {
         }
-        public object get(int i, Scriptable s)
+        public object get(int i, object  s)
         {
             object ___returnObject = null;
             if (i >= 0 && i < this.___frameCount)
@@ -88,7 +88,7 @@ namespace MultiversalRenderer.Core
             }
             return ___returnObject;
         }
-        public object get(string str, Scriptable s)
+        public object get(string str, object  s)
         {
             object ___returnObject = null;
             System.WeakReference ___elemRef = null;
@@ -130,23 +130,13 @@ namespace MultiversalRenderer.Core
 
    
 
-        public object getDefaultValue(java.lang.Class c)
-        {
-            return null;
-        }
+
         public object[] getIds()
         {
             return null;
         }
-        public Scriptable getParentScope()
-        {
-            return null;
-        }
-        public Scriptable getPrototype()
-        {
-            return null;
-        }
-        public bool has(int i, Scriptable s)
+
+        public bool has(int i, object  s)
         {
             if (i >= 0 && i < this.___frameCount)
             {
@@ -154,24 +144,24 @@ namespace MultiversalRenderer.Core
             }
             return false;
         }
-        public bool has(string str, Scriptable s)
+        public bool has(string str, object s)
         {
             return this.____windowFrameInternalList.ContainsKey(str);
         }
-        public bool hasInstance(Scriptable s)
+        public bool hasInstance(object  s)
         {
             return false;
         }
-        public void put(int i, Scriptable s, object obj)
+        public void put(int i, object  s, object obj)
         {
         }
-        public void put(string str, Scriptable s, object obj)
+        public void put(string str, object  s, object obj)
         {
         }
-        public void setParentScope(Scriptable s)
+        public void setParentScope(object s)
         {
         }
-        public void setPrototype(Scriptable s)
+        public void setPrototype(object  s)
         { }
 
         #endregion

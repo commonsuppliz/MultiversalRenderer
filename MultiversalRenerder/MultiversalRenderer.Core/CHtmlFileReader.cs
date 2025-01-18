@@ -176,26 +176,7 @@ namespace MultiversalRenderer.Core
                 }
                 return newArray;
             }
-            if(___blobobject is org.mozilla.javascript.typedarrays.NativeUint16Array )
-            {
-                org.mozilla.javascript.typedarrays.NativeUint16Array unit16Array = ___blobobject as org.mozilla.javascript.typedarrays.NativeUint16Array;
-                org.mozilla.javascript.typedarrays.NativeArrayBuffer buffer = unit16Array.getBuffer();
-                return buffer;
-                
-            }else if (___blobobject is org.mozilla.javascript.typedarrays.NativeUint8Array)
-            {
-                org.mozilla.javascript.typedarrays.NativeUint8Array unit8Array = ___blobobject as org.mozilla.javascript.typedarrays.NativeUint8Array;
-                org.mozilla.javascript.typedarrays.NativeArrayBuffer buffer = unit8Array.getBuffer();
-                return buffer;
 
-            }
-            else if (___blobobject is org.mozilla.javascript.typedarrays.NativeInt8Array)
-            {
-                org.mozilla.javascript.typedarrays.NativeInt8Array init8Array = ___blobobject as org.mozilla.javascript.typedarrays.NativeInt8Array;
-                org.mozilla.javascript.typedarrays.NativeArrayBuffer buffer = init8Array.getBuffer();
-                return buffer;
-
-            }
             throw new NotSupportedException("ArrayType is not supported :" + ___blobobject.GetType().ToString());
 
             //return null;

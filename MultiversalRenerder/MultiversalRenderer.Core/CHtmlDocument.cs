@@ -136,10 +136,17 @@ namespace MultiversalRenderer.Core
         //
         //private AutoResetEvent ThreadParseCharSetDetectCompleteEvent = null;
         
+        /// <summary>
+        /// absolute 
+        /// </summary>
         internal AutoResetEvent ___ThreadParseSuspendEvent = null;
-        
+        /// <summary>
+        /// absolute
+        /// </summary>
         internal AutoResetEvent ___ThreadParseCompleteEvent = null;
-        
+        /// <summary>
+        /// absolute
+        /// </summary>
         internal AutoResetEvent ___ThreadStylesheetCompleteEvent = null;
 
 
@@ -1209,7 +1216,7 @@ namespace MultiversalRenderer.Core
                             }
                             this.___BadQueryList = new System.Collections.Generic.Dictionary<string, int>(StringComparer.Ordinal);
                             //return CreateDummyElement("META", __sid);
-                            throw new java.lang.RuntimeException(sbError.ToString());
+                            throw new Exception(sbError.ToString());
                         }
                         else
                         {
@@ -2590,21 +2597,7 @@ namespace MultiversalRenderer.Core
                                 this.___locationBase.___setHrefDirect(string.Copy(commonHTML.DOCUMENT_URL_FOR_DYNAMIC_CONTENT));
                                 this.___URL = string.Copy(commonHTML.DOCUMENT_URL_FOR_DYNAMIC_CONTENT);
                                 DateTime documentWriteFullParseStartTime = DateTime.Now;
-                                this.___startDOMParseThread();
-                                if (this.___ThreadParseCompleteEvent != null)
-                                {
-                                    try
-                                    {
-                                        this.___ThreadParseCompleteEvent.WaitOne(30000, false);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-                                        {
-                                            commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
-                                        }
-                                    }
-                                }
+
                                 if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
                                 {
                                     TimeSpan tpSpan = DateTime.Now.Subtract(documentWriteFullParseStartTime);
@@ -6234,20 +6227,7 @@ namespace MultiversalRenderer.Core
             
             if (this.___StyleQueue != null)
             {
-                if (this.___StyleQueue.___StyleEvent != null)
-                {
-                    try
-                    {
-                        this.___StyleQueue.___StyleEvent.Set();
-                    }
-                    catch (Exception exEvent)
-                    {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-                        {
-                            commonLog.LogEntry("__FinishStyleQueueEvent", exEvent);
-                        }
-                    }
-                }
+
                 this.___StyleQueue.IsAllCSSComplete = true;
             }
 
@@ -6271,150 +6251,10 @@ namespace MultiversalRenderer.Core
 		}
         internal void ___run_prefetch_element_src_thread()
         {
-            if (commonHTML.UsePrefetchThread == true && this.___TagPrefetchThread == null)
-            {
-                // Only uses prefetch thread for main top window. Child is not matter.
 
-                // Windows Handle is assigned. It seems gui mode
-                System.Threading.ThreadStart prefechFunction = new ThreadStart(this.___prefetch_element_src_with_prefetch_thread);
-                this.___TagPrefetchThread = new Thread(prefechFunction);
-                this.___TagPrefetchThread.Name = "DOMPrefechThread-For-" + this.___UrlShortName;
-                
-                this.___TagPrefetchThread.ApartmentState = System.Threading.ApartmentState.MTA;
-                this.___TagPrefetchThread.IsBackground = true;
-                // Note)
-                //         Keep this BelowNormal, not Normal.  
-                //   
-                this.___TagPrefetchThread.Priority = System.Threading.ThreadPriority.Normal;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
-                {
-                    commonLog.LogEntry("{0}.___run_prefeth_element_src() will start {1}", this.___MultiversalWindow, this.___TagPrefetchThread.Name);
-                }
-                this.___TagPrefetchThread.Start();
-                this.___isPrefetchThreadStarted = true;
-
-            }
-            this.___isPrefetchThreadStarted = true;
         }
 		
-		internal void ___startDOMParseThread()
-		{
 
-            if (this.___Disposing == true || this.___IsThreadAbortOccurred == true)
-			{
-				return;
-			}
-			bool __IsEntered = false;
-			try
-			{
-				if(System.Threading.Monitor.TryEnter(this.___DocumentLockingObject, 1000))
-				{
-					__IsEntered = true;
-
-				
-					if(this.___threadDOMParse != null)
-					{
-						this.___threadDOMParse = null;
-					}
-					this.___ThreadParseCompleteEvent = commonHTML.CreateRegisterResetEvent(false);
-					___ThreadParseSuspendEvent = commonHTML.CreateRegisterResetEvent(false);
-					//ThreadParseCharSetDetectCompleteEvent = commonHTML.CreateRegisterResetEvent(false);
-					System.Threading.ThreadStart st = new System.Threading.ThreadStart(___parseDocument);
-                    // ===========================
-                    // Note) phase.js may may throw stack overflow exception if DOMThread is normal.
-                    //          If it is ver 1250000, it can be compiled nicely.
-                    //          .NET, creating a new thread nomally has narrow stack size than UI thread, which may cause
-                    //          stack overflow exception.
-                    //          Scripts are nommay compiled in DOM Thread or thread, so we have to increase thread size. 
-                    // 1000000 = 1MB
-                    //  1000000 = X
-                    //  1250000 = O
-                    //  1500000 = O
-                    //  2000000 = O
-                    //  3000000 = O 
-                    //  4000000 = O <= Current Set
-                    //  6000000 = O
-                    // ===========================
-                    ___threadDOMParse = new System.Threading.Thread(st, 4000000);
-
-                    ___threadDOMParse.Name = string.Concat("DOMParseThread['", this.___URL, "']");
-                    int ___owerMultiversalWindowLevel = -1;
-                    
-                    if (this.___documentDomType == CHtmlDomModeType.HTMLDOM)
-                    {
-                        if (this.___MultiversalWindowWeakReference != null)
-                        {
-                            CHtmlMultiversalWindow ___ownerMulti = this.___MultiversalWindowWeakReference.Target as CHtmlMultiversalWindow;
-                            if (___ownerMulti != null)
-                            {
-                                ___owerMultiversalWindowLevel = ___ownerMulti.___getMultiversalWindowLevel();
-                            }
-                        }
-                    }
-                    if (___owerMultiversalWindowLevel == 1)
-                    {
-                        this.___isMultiversalTopLevelDocument = true;
-                        ___threadDOMParse.Priority = System.Threading.ThreadPriority.AboveNormal;
-                    }
-                    else
-                    {
-                        this.___isMultiversalTopLevelDocument = false;
-                        ___threadDOMParse.Priority = System.Threading.ThreadPriority.Normal;
-                    }
-
-                    if (this.___isMultiversalTopLevelDocument == true)
-                    {
-                        ___threadDOMParse.IsBackground = false;
-
-                    }
-                    else
-                    {
-                        ___threadDOMParse.IsBackground = true;
-
-                    }
-                    ___threadDOMParse.ApartmentState = System.Threading.ApartmentState.MTA;
-					___threadDOMParse.Start();
-                    this.___isDOMParseThreadStarted = true;
-				
-				}
-				else
-				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-					{
-						commonLog.LogEntry("RunParseThread Lock Failed.");
-					}
-
-				}	
-			}
-			finally
-			{
-				if(__IsEntered == true)
-				{
-					System.Threading.Monitor.Exit(this.___DocumentLockingObject);
-				}
-			}
-
-		}
-		internal void ResumeParseThread()
-		{
-            if (this.___IsHtmlParseCompleted == false && this.___Disposing == false)
-			{
-				try
-				{
-					if(this.___ThreadParseSuspendEvent != null)
-					{
-						this.___ThreadParseSuspendEvent.Set();
-					}
-				} 
-				catch
-				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-					{
-						commonLog.LogEntry("___ThreadParseSuspendEvent already null, it is ok");
-					}
-				}
-			}
-		}
 		/// <summary>
 		/// Detect Content Encoding
 		/// </summary>
@@ -7106,7 +6946,15 @@ namespace MultiversalRenderer.Core
                 }
             }
         }
-		
+		public void ___parseDocument(string html, string charset)
+        {
+            this.___charset = charset;
+            this.___IsHtmlResponseCompleted = true;
+
+            this.___HtmlBuilder.Append(html);
+            this.___ContentLength = this.___HtmlBuilder.Length;
+            ___parseDocument();
+        }
 		internal void ___parseDocument() 
 		{
             
@@ -7314,7 +7162,7 @@ namespace MultiversalRenderer.Core
                     this.___StyleQueue = new CHtmlCSSRuleMergeQueue();
                     this.___StyleQueue.___parentDocument = this;
                     this.___StyleQueue.ShortName = string.Copy(this.___UrlShortName);
-                    this.___StyleQueue.InitalizeMeargeThread();
+                    this.___StyleQueue.MergeCompleted += OnCHtmlCSSRuleMergeQueueCompleted;
                 }
 			
 			
@@ -25635,37 +25483,13 @@ namespace MultiversalRenderer.Core
                 if (this.___IsMultiversalDocument == true )
                 {
 
-                    if (objFunction is string || objFunction is org.mozilla.javascript.ConsString)
+                    if (objFunction is string)
                     {
                         this.___MultiversalWindow.execute(commonHTML.GetStringValue(objFunction), "");
                         script.result = 200;
                         script.resultText = "success";
                     }
-                    else if (objFunction is org.mozilla.javascript.Function)
-                    {
-                            IMultiversalScriptProcessor ___processor = this.___MultiversalWindow.getMultiversalScriptProcessorByScriptType("javascript");
-                         if (___processor != null)
-                         {
-                             if (string.Equals(___eventName, "DomContentLoaded", StringComparison.Ordinal) == false)
-                             {
-                                 ___processor.callfunction(objFunction, ___processor.multiversalscope, ___eventSource, new object[] { ___eventObject });
-                             }
-                             else
-                             {
-                                 if (___eventSource != null)
-                                 {
-                                     ___processor.callfunction(objFunction, ___processor.multiversalscope, ___eventSource, new object[] { ___eventObject });
-                                 }
-                                 else
-                                 {
-                                     ___processor.callfunction(objFunction, ___processor.multiversalscope, ___eventSource, new object[] { ___eventObject });
-                                 }
-
-                             }
-                             script.result = 200;
-                             script.resultText = "success";
-                         }
-                    }
+     
                 }
             }
             catch (Exception ex)
@@ -26723,86 +26547,14 @@ namespace MultiversalRenderer.Core
 			}
 		}
 #endif
-	    internal void ___startDOMParseThreadAndWaitOne(bool __Async)
-		{
-			try
-			{
-				this.___IsHtmlCharSetDetectionCompleted = true;
-				this.___IsHtmlResponseCompleted = true;
-				if(__Async)
-				{
-                    
-					this.___startDOMParseThread();
-					if(this.___ThreadParseSuspendEvent != null)
-					{
-						this.___ThreadParseSuspendEvent.Set();
-					}
-					if(this.___ThreadParseCompleteEvent != null)
-					{
-                        if (this.___ThreadParseCompleteEvent != null)
-                        {
-                            this.___ThreadParseCompleteEvent.WaitOne(5000);
-                        }
-                        TimeSpan ___WaitSpan = DateTime.Now.Subtract(this.___responseStartTime);
-                        while(this.___IsHtmlParseCompleted == false)
-                        {
-                            ___WaitSpan = DateTime.Now.Subtract(this.___responseStartTime);
-                            if (___WaitSpan.TotalMilliseconds > commonHTML.MAXIMUM_MANUAL_PARSE_DOCUMENT_WAIT)
-                            {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-                                {
-                                    commonLog.LogEntry("Manual Parse Document will be aborted due to timeout");
-                                }
-                                this.___threadDOMParse.Abort();
-                                break;
-                            }
-
-                        }
-					}
-				}
-				else
-				{
-					this.___parseDocument();
-				}
-			}
-			catch(Exception ex)
-			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
-				{
-                    commonLog.LogEntry("___startDOMParseThreadAndWaitOne Exception 1st stage.", ex);
-				}
-			}
-			try
-			{
-				if(this.___ThreadParseCompleteEvent !=null)
-				{
-					commonData.DisposeObject(this.___ThreadParseCompleteEvent);
-					this.___ThreadParseCompleteEvent =null;
-				}
-				if(this.___ThreadParseSuspendEvent !=null)
-				{
-					commonData.DisposeObject(this.___ThreadParseSuspendEvent);
-					this.___ThreadParseSuspendEvent =null;
-				}
-			}
-            catch (Exception ex)
-            {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-                {
-                    commonLog.LogEntry("___startDOMParseThreadAndWaitOne Exception 2nd stage",ex);
-                }
-            }
-		}
+	 
 		
 		public bool hasOwnProperty(object _oname)
 		{
 
             return this.___hasPropertyByName(commonHTML.GetStringValue(_oname));
 		}
-        public void ___startDOMParseThreadAndWaitOne()
-		{
-            this.___startDOMParseThreadAndWaitOne(false);
-		}
+
 
 
 
@@ -26897,15 +26649,7 @@ namespace MultiversalRenderer.Core
                                             {
 
                                             }
-                                            else if (attrAction.value is org.mozilla.javascript.Script)
-                                            {
-                                                script.result = 200;
-                                                ___processor.callfunction(attrAction.value,___processor.multiversalscope, eventElement,  new object[] { this.___event });
-                                                if (attrAction.value != null)
-                                                {
-                                                    script.resultText = "Call Function Success : "  + attrAction.value.ToString();
-                                                }
-                                            }
+
                                         }
                                     }
                                 }
@@ -27124,7 +26868,7 @@ namespace MultiversalRenderer.Core
             doc.___IsHtm1stHttpResponseCompleted = true;
             doc.___IsHtmlResponseCompleted = true;
             doc.___ContentLength = doc.___HtmlBuilder.Length;
-            doc.___startDOMParseThreadAndWaitOne(__Async);
+
 			return doc;
 		}
 
@@ -27145,7 +26889,7 @@ namespace MultiversalRenderer.Core
             this.___HtmlBuilder.Append(strXML);
             this.___HtmlBuilderLength = this.___HtmlBuilder.Length;
             this.___IsHtmlResponseCompleted = true;
-			this.___startDOMParseThread();
+
 
 
 			
@@ -29552,12 +29296,20 @@ namespace MultiversalRenderer.Core
                 }
             }
         }
-		/// <summary>
-		/// Call This method after added
-		/// </summary>
-		/// <param name="child"></param>
-		
-		internal void ___postprocessDynamicElementCHtmlElement(CHtmlElement child, ref int __StackDepth)
+        private void OnCHtmlCSSRuleMergeQueueCompleted(object sendr, EventArgs e)
+        {
+            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            {
+                commonLog.LogEntry("OnCHtmlCSSRuleMergeQueueCompleted is called");
+            }
+
+        }
+        /// <summary>
+        /// Call This method after added
+        /// </summary>
+        /// <param name="child"></param>
+
+        internal void ___postprocessDynamicElementCHtmlElement(CHtmlElement child, ref int __StackDepth)
 		{
             if (child == null)
                 return;
@@ -30634,10 +30386,7 @@ namespace MultiversalRenderer.Core
                         {
                             ___processor.execute(commonHTML.GetStringValue(objFunction));
                         }
-                        else if (objFunction is org.mozilla.javascript.Script)
-                        {
-                            ___processor.callfunction(objFunction);
-                        }
+
                     }
                 }
                 else
@@ -31364,7 +31113,7 @@ namespace MultiversalRenderer.Core
                 }
 
                 this.___responseStartTime = DateTime.Now;
-                this.___startDOMParseThread();
+
 
                 this.___IsHtm1stHttpResponseCompleted = true;
 				this.___IsHtmlResponseCompleted = true;
@@ -31924,30 +31673,7 @@ namespace MultiversalRenderer.Core
 			{
                 commonLog.LogEntry("calling {0}.___setPropertyByIndex({1}, {2})", this, ___name, val);
 			}
-            if (val is org.mozilla.javascript.Function)
-            {
-                if (___name.Length > 2)
-                {
-                    if (___name[0] == 'o' && ___name[1] == 'n')
-                    {
-                        goto FunctionPreCheckDone;
-                    }
-                }
-                if (commonHTML.PropertyNamesDisallowsFunctionObjectSortedList.ContainsKey(___name) == true)
-                {
-                    if(string.Equals(___name, "id", StringComparison.OrdinalIgnoreCase) == true)
-                    {
-                        // Some functions use id to store Functions. Do not conver to document
-                        goto  FunctionPreCheckDone;
-                    }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
-                    {
-                        commonLog.LogEntry("setting value for document is special feild {0}", ___name);
-                    }
-             
 
-                }
-            }
             FunctionPreCheckDone:
 			switch(___name)
 			{
@@ -32876,7 +32602,7 @@ namespace MultiversalRenderer.Core
 			int  ___timerHash = -99999999;
 			if(timerID != null)
 			{
-				if(timerID is String || timerID is org.mozilla.javascript.ConsString)
+				if(timerID is String)
 				{
 					string sValue = commonHTML.GetStringValue(timerID);
 					if(sValue.Length == 0)
@@ -32885,10 +32611,7 @@ namespace MultiversalRenderer.Core
 
 					}
                 }
-                else if (timerID is org.mozilla.javascript.Undefined)
-                {
-                    goto LookUpEvents;
-                }
+
 				___timerHash =	commonHTML.GetIntFromObject(timerID, -99999999);
 			}
 

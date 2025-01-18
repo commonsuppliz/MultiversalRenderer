@@ -123,7 +123,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object key(object  ___indexObject)
 		{
-            if (___indexObject is string || ___indexObject is java.lang.String)
+            if (___indexObject is string)
             {
                 if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
                 {

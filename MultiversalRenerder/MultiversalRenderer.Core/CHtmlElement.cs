@@ -4,7 +4,7 @@ using System.Collections;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using MultiversalRenderer.Interfaces;
-using MultiversalRenderer.Interfaces;
+
 namespace MultiversalRenderer.Core
 {
 	/// <summary>
@@ -1777,14 +1777,7 @@ namespace MultiversalRenderer.Core
                     return null;
                 }
             }
-            else if (___returnValue is org.mozilla.javascript.ConsString)
-            {
-                string strValue = commonHTML.GetStringValue(___returnValue);
-                if (string.IsNullOrEmpty(strValue) == true)
-                {
-                    return null;
-                }
-            }
+
             return ___returnValue;
         }
 		/// <summary>
@@ -2222,11 +2215,7 @@ namespace MultiversalRenderer.Core
                         {
                             nAttr.value = __attrValue;
                         }
-                        else
-                        if (__attrValue is org.mozilla.javascript.ConsString)
-                        {
-                            nAttr.value = commonHTML.GetStringValue(__attrValue);
-                        }
+                       
                         else
                         {
                             nAttr.value = __attrValue;
@@ -2245,14 +2234,9 @@ namespace MultiversalRenderer.Core
                         nAttr = new CHtmlAttribute();
                         nAttr.name = string.Copy(__attrName);
                         nAttr.___tagName = nAttr.name;
-                        if (__attrValue is org.mozilla.javascript.ConsString)
-                        {
-                            nAttr.value = commonHTML.GetStringValue(__attrValue);
-                        }
-                        else
-                        {
-                            nAttr.value = __attrValue;
-                        }
+
+                        nAttr.value = __attrValue;
+                        
                         nAttr.___tagName = string.Copy(__attrName);
                         nAttr.parentNode = this;
                         goto FinalCheck;
@@ -2274,11 +2258,7 @@ namespace MultiversalRenderer.Core
                         {
                             nAttr.value = __attrValue;
                         }
-                        else
-                            if (__attrValue is org.mozilla.javascript.ConsString)
-                        {
-                            nAttr.value = commonHTML.GetStringValue(__attrValue);
-                        }
+                        
                         else
                         {
                             nAttr.value = __attrValue;
@@ -10863,35 +10843,8 @@ namespace MultiversalRenderer.Core
                             }
                             goto ReturnObjet;
                         }
-                        if (objWindow is org.mozilla.javascript.ScriptableObject)
-                        {
-                            org.mozilla.javascript.ScriptableObject __scriptableWindow = objWindow as org.mozilla.javascript.ScriptableObject;
-                            if (__scriptableWindow != null)
-                            {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
-                                {
-                                   commonLog.LogEntry("{0} can see Scriptable Scope as {1}", this, __scriptableWindow);
-                                }
-                                object ___objDocument = null;
-                                ___objDocument = __scriptableWindow.get("document");
-                                if (___objDocument is CHtmlDocument)
-                                {
-                                    ___contentDocumentResult = ___objDocument as CHtmlDocument;
-                                    goto ReturnObjet;
-                                }
-                                else
-                                {
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
-                                    {
-                                       commonLog.LogEntry("{0} can see, but there is no document instance exists. returns null. {1}", this, ___objDocument);
-                                    }
-                                    goto ReturnObjet;
-                                }
-
-
-                            }
-                        }
                     }
+               
                     ___contentDocumentResult = null;
                     goto ReturnObjet;
                 }
@@ -11595,64 +11548,8 @@ namespace MultiversalRenderer.Core
                     {
                         newContext.___contextAttributes = new CHtmlCanvasContextAttributes();
                         newContext.___contextAttributes.___canvasContextWeakReference = new WeakReference(newContext, false);
-                        if (___param is org.mozilla.javascript.IdScriptableObject)
-                        {
-                            org.mozilla.javascript.IdScriptableObject ___scriptableObject = ___param as org.mozilla.javascript.IdScriptableObject;
-                            if (___scriptableObject != null)
-                            {
-                                int __propLen = CHtmlCanvasContext.____Context_Attribute_Name_Array.Length;
-                                for (int i = 0; i < __propLen; i++)
-                                {
-                                    object ___propValue = ___scriptableObject.get(CHtmlCanvasContext.____Context_Attribute_Name_Array[i]);
-                                    /*
-                                      alpha	yes	true or false.
-                                      depth	yes	true or false.
-                                      stencil	no	 IE always behaves like false is set.
-                                      antialias	no	 IE always behaves like false is set.
-                                      premultipliedAlpha	yes	true or false.
-                                      preserveDrawingBuffer	yes	 Itrue or false.
-                                     */
-                                    if (___propValue != null)
-                                    {
-                                        try
-                                        {
-                                            switch (CHtmlCanvasContext.____Context_Attribute_Name_Array[i])
-                                            {
-                                                case "alpha":
-                                                    newContext.alpha = commonData.convertObjectToBoolean(___propValue);
-                                                    break;
-                                                case "depth":
-                                                    newContext.depth = commonData.convertObjectToBoolean(___propValue);
-                                                    break;
-                                                case "stencil":
-                                                    newContext.stencil = commonData.convertObjectToBoolean(___propValue);
-                                                    break;
-                                                case "antialias":
-                                                    newContext.antialias = commonData.convertObjectToBoolean(___propValue);
-                                                    break;
-                                                case "premultipliedAlpha":
-                                                    newContext.premultipliedAlpha = commonData.convertObjectToBoolean(___propValue);
-                                                    break;
-                                                case "preserveDrawingBuffer":
-                                                    newContext.premultipliedAlpha = commonData.convertObjectToBoolean(___propValue);
-                                                    break;
-                                                default:
-                                                    break;
-
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
-                                            {
-                                               commonLog.LogEntry("getContext() ScriptableObject Conversion", ex);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        else if (___param is System.Array)
+                  
+                        if (___param is System.Array)
                         {
 
                         }
@@ -14167,17 +14064,7 @@ namespace MultiversalRenderer.Core
                 {
                    commonLog.LogEntry("set : {0}  {1} = {2}", this.toLogString(), ___name, val);
                 }
-                if (val is org.mozilla.javascript.Function)
-                {
-                    if (___name.Length > 2)
-                    {
-                        if (___name[0] == 'o' && ___name[1] == 'n')
-                        {
-                            goto FunctionPreCheckDone;
-                        }
-                    }
 
-                }
                 FunctionPreCheckDone:
                 switch (___name)
 				{
@@ -14411,11 +14298,6 @@ namespace MultiversalRenderer.Core
                             {
                                 this.@checked = (bool)val;
                             }
-                            else if (val is java.lang.Boolean)
-                            {
-                                java.lang.Boolean boolValue = val as java.lang.Boolean;
-                                this.@checked = boolValue.booleanValue();
-                            }
                             else 
                             {
                                 string strChecked = commonHTML.GetStringValue(val);
@@ -14641,7 +14523,7 @@ namespace MultiversalRenderer.Core
                         }
 						goto ExitSet;
                     case "location":
-                        if (val is string || val is org.mozilla.javascript.ConsString)
+                        if (val is string)
                         {
                             if (this.___elementTagType == CHtmlElementType.IFRAME || this.___elementTagType == CHtmlElementType.FRAME)
                             {

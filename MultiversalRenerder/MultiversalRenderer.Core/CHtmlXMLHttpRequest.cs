@@ -23,7 +23,7 @@ namespace MultiversalRenderer.Core
 
 
         internal string ___baseThreadURL = null;
-        internal org.mozilla.javascript.Scriptable ___scope = null;
+        internal MultiversalRenderer.Interfaces.IMultiversalScope ___scope = null;
         internal string ___sessionGUID = null;
         public long OwnerHostHandle = 0;
         internal object ___loadfunctionobject = null;
@@ -181,41 +181,6 @@ namespace MultiversalRenderer.Core
          */
 
 
-        // Constroctor 2012/21
-        public static object jsConstructor(org.mozilla.javascript.Context cx, Object[] args, org.mozilla.javascript.Function functionObject, bool isNewExpr)
-        {
-
-            CHtmlXMLHttpRequest req = new CHtmlXMLHttpRequest();
-            
-            try
-            {
-                req.GetInstance();
-
-            }
-            catch { }
-            string strURL = "";
-
-       
-
-
-            try
-            {
-                
-                if (string.IsNullOrEmpty(strURL) != false)
-                {
-                    req.___baseThreadURL =    strURL ;
-
-
-                }
-            }
-            catch { }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel  >= 10)
-            {
-               commonLog.LogEntry("XmlHttpRequest has created {0} {1} {2} Context: {3}", req.OwnerHostHandle, req.___baseThreadURL, req.___sessionGUID, cx);
-            }
-
-            return req;
-        }
 
 
 

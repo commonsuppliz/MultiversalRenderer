@@ -27,8 +27,9 @@ namespace MultiversalRenderer.Core
     /// </summary>
     public sealed class CHtmlCSSRuleGroundList : ArrayList
 	{
-		
-		private enum CssParseModeType : byte
+		internal bool __IsMergeQueueCompleted = false;
+
+        private enum CssParseModeType : byte
         {
             Name=0, Suffix=2, Prefix =3, CssClass = 4, CssID=5, AttibuteLookup=10
         };

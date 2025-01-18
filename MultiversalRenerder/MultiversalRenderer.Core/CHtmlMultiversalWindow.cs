@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MultiversalRenderer.Interfaces;
-using MultiversalRenderer.ClearScriptV8Processor;
-using MultiversalRenderer.RhinoNetProcessor;
+
 
 
 namespace MultiversalRenderer.Core
@@ -1891,6 +1890,7 @@ namespace MultiversalRenderer.Core
             }
             return null;
         }
+#if use_rhino
         /// <summary>
         /// This function is copy interpreted function property 
         /// specially used for setting 'caller' in Jquery 1.7.2 StorageManager
@@ -1921,6 +1921,7 @@ namespace MultiversalRenderer.Core
                 }
             }
         }
+#endif
         public object get(string ___name)
         {
 
@@ -3395,6 +3396,8 @@ namespace MultiversalRenderer.Core
                             ___objFunction = ___processor.compile(___strFunction);
                             if (___objFunction != null)
                             {
+                                /*
+
                                 if (___objFunction is org.mozilla.javascript.Function)
                                 {
 
@@ -3408,6 +3411,7 @@ namespace MultiversalRenderer.Core
                                         ___processor.callfunction(___objFunction, ___processor.multiversalscope, ___element, new Object[] { this.___event });
                                     }
                                 }
+                                */
                             }
                         }
 
@@ -3417,6 +3421,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
+                    /*
                     if (___objFunction is org.mozilla.javascript.Function)
                     {
                         IMultiversalScriptProcessor ___processor = this.getMultiversalScriptProcessorByScriptType("javascript");
@@ -3430,6 +3435,7 @@ namespace MultiversalRenderer.Core
                            // ___processor.callfunction(___objFunction, ___processor.multiversalscope, this, new Object[] { this.___event });
                         }
                     }
+                    */
 
                 }
             }
@@ -3512,23 +3518,7 @@ namespace MultiversalRenderer.Core
                     }
                     else
                     {
-                        if (___function_object is org.mozilla.javascript.Function)
-                        {
 
-                            if (___multiWindow != null)
-                            {
-                                ___processor = ___multiWindow.getMultiversalScriptProcessorByScriptType("");
-                                if (___processor != null)
-                                {
-                                    ___processor.callfunction(___function_object, ___processor.multiversalscope, this, __args);
-                                    if (_scriptElement != null)
-                                    {
-                                        _scriptElement.result = 200;
-                                        _scriptElement.resultText = "Exec " + ___functionName + " processed successfully";
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
                 catch (Exception ex)
@@ -3607,23 +3597,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (___function_object is org.mozilla.javascript.Function)
-                            {
 
-                                if (___multiWindow != null)
-                                {
-                                    ___processor = ___multiWindow.getMultiversalScriptProcessorByScriptType("");
-                                    if (___processor != null)
-                                    {
-                                        ___processor.callfunction(___function_object, ___processor.multiversalscope, this, null);
-                                        if (_scriptElement != null)
-                                        {
-                                            _scriptElement.result = 200;
-                                            _scriptElement.resultText = "Exec " + ___functionName + " processed successfully";
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                     catch (Exception ex)
@@ -3861,7 +3835,7 @@ s               else
             this.___isWindowNavigating = false;
         }
 #endif
-        #region General Methods
+#region General Methods
         public object unescape(Object[] args)
         {
             if (args == null || args.Length == 0)
@@ -3877,16 +3851,8 @@ s               else
                 return "";
             }
             byte[] byteArray;
-            if (args[0] is org.mozilla.javascript.ConsString)
-            {
-                // Note) ConsString has problem to convert to string bytes
-                //          this is precise way.
-                byteArray = commonHTML.ConvertConsStringToBytes(args[0]);
-            }
-            else
-            {
-                byteArray = System.Convert.FromBase64String(commonHTML.GetStringValue(args[0]));
-            }
+ byteArray = System.Convert.FromBase64String(commonHTML.GetStringValue(args[0]));
+            
 
             string result = System.Text.Encoding.UTF8.GetString(byteArray);
 
@@ -3899,16 +3865,9 @@ s               else
                 return "";
             }
             byte[] bytesD;
-            if (args[0] is org.mozilla.javascript.ConsString)
-            {
-                // Note) ConsString has problem to convert to string bytes
-                //          this is precise way.
-                bytesD = commonHTML.ConvertConsStringToBytes(args[0]);
-            }
-            else
-            {
+
                 bytesD = System.Text.Encoding.UTF8.GetBytes(commonHTML.GetStringValue(args[0]));
-            }
+            
 
             string result;
             result = System.Convert.ToBase64String(bytesD);
@@ -4427,28 +4386,7 @@ s               else
                 ___messageArgumentEvent.origin = ___originStr;
                 ___messageArgumentEvent.___sourceObjectWeakReference = new WeakReference(___senderWindow, false);
 
-                if (___documentWindowMessageFunction is org.mozilla.javascript.Script)
-                {
-                    try
-                    {
-                        IMultiversalScope iscope = this.getMultiversalScopeByScriptType("javascript");
-                        if (iscope != null)
-                        {
-                            IMultiversalScriptProcessor processor = iscope.___getMultiversalScriptProcessor();
-                            if (processor != null)
-                            {
-                                processor.callfunction(___documentWindowMessageFunction, iscope, null, new object[] { ___messageArgumentEvent });
-                            }
-                        }
-                    }
-                    catch (Exception exMessage)
-                    {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
-                        {
-                            commonLog.LogEntry("postMessage() Exception", exMessage);
-                        }
-                    }
-                }
+
                 ___messageArgumentEvent = null;
             }
             return null;
@@ -4958,6 +4896,7 @@ s               else
                 if (this.___WindowsPropertiesList.TryGetValue(___instanceName, out __winprop))
                 {
 
+                    /*
                     if (__winprop is org.mozilla.javascript.BaseFunction)
                     {
                         try
@@ -4981,6 +4920,8 @@ s               else
                             }
                         }
                     }
+                    */
+
                 }
             }
             if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
@@ -5015,16 +4956,7 @@ s               else
                         }
                         __arrayBase = new CHtmlNativeArray(numType, (int)___arrayLength);
                     }
-                    else if (args[0] is org.mozilla.javascript.NativeArray)
-                    {
-                        org.mozilla.javascript.NativeArray ___nativeArray = args[0] as org.mozilla.javascript.NativeArray;
-                        if (___nativeArray != null)
-                        {
 
-                            float[] floatArray = commonData.convertObjectIntoFloatArray(___nativeArray, -1, -1);
-                            __arrayBase = new CHtmlNativeArray(numType, floatArray);
-                        }
-                    }
                     else if (args[0] is CHtmlNativeArray)
                     {
                         CHtmlNativeArray ___numericArrayBase = args[0] as CHtmlNativeArray;
@@ -5039,10 +4971,7 @@ s               else
                     {
                         __arrayBase = new CHtmlNativeArray(numType, (int)args[0]);
                     }
-                    else if (args[0] is java.lang.Double)
-                    {
-                        __arrayBase = new CHtmlNativeArray(numType, (int)commonData.GetDoubleFromObject(args[0], 0));
-                    }
+                    /*
                     else if (args[0] is RhinoNetProcessor.MultiversalWrapperObject)
                     {
                         RhinoNetProcessor.MultiversalWrapperObject nativeObject = args[0] as RhinoNetProcessor.MultiversalWrapperObject;
@@ -5059,6 +4988,7 @@ s               else
                             }
                         }
                     }
+                    */
                 }
             }
             if (__arrayBase == null)

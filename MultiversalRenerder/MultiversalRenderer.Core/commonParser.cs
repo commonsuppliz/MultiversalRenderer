@@ -1,10 +1,10 @@
-﻿using javax.swing.text.html;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MultiversalRenderer.Core;
 namespace MultiversalRenderer.Core
 {
     internal class commonParser
@@ -14,9 +14,9 @@ namespace MultiversalRenderer.Core
         /// </summary>
         /// <param name="url">string of url</param>
         /// <returns>HTMMLDocument</returns>
-        public HTMLDocument load(string url)
+        public CHtmlDocument load(string url)
         {
-            var htmldoc = new HTMLDocument();
+            var htmldoc = new CHtmlDocument( CHtmlDomModeType.HTMLDOM);
 
             return htmldoc;
         }

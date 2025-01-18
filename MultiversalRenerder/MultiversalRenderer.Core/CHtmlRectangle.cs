@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using com.sun.org.apache.bcel.@internal.generic;
 using MultiversalRenderer.Interfaces;
 namespace MultiversalRenderer.Core
 {
