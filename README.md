@@ -38,9 +38,9 @@ HTML Rendering Library for .NET 6 and above [WIP]
 <img src='ScreenShootofMultiversalRenderer_DotnetFrameworkWindows.jpg' width="600" height="700" alt="Screen image on Windows 11 and .NET Framework 1.1 and above">
 
 ## Curent Status
-  - The previous project was designed for .NET Framework 1.1 and above and Winforms
+  - The previous project was designed for .NET Framework 1.1 and Mono Project above and Winforms
   - The migration for Dotnet 6, 7, 8 and above (dotnetcore) is under progress
-  - Implement NiL Javascript Engine, instead of Rhino JS Engine
+  - NiLJs Javascript Engine has been implemented instead of Rhino JS Engine
   - WIP is appproximately 50%.
 
 ## TODO
