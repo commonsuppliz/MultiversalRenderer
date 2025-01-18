@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 using MultiversalRenderer.Interfaces;
 using NiL.JS.Core;
 namespace NilJsProcessor
@@ -32,26 +34,37 @@ namespace NilJsProcessor
 
         public object execute(string script)
         {
-            try
+            return ExecuteWithTimeout(script, TimeSpan.FromSeconds(30)).GetAwaiter().GetResult();
+        }
+
+        private async Task<object> ExecuteWithTimeout(string script, TimeSpan timeout)
+        {
+            using (var cts = new CancellationTokenSource())
             {
-                return scope.context.Eval(script);
-            }
-            catch (NiL.JS.Core.JSException ex)
-            {
-                // Log the exception details
-                Console.WriteLine($"JSException: {ex.Message}");
-                throw;
+                var task = Task.Run(() => scope.context.Eval(script), cts.Token);
+
+                if (await Task.WhenAny(task, Task.Delay(timeout, cts.Token)) == task)
+                {
+                    // スクリプトの評価が完了した場合
+                    return task.Result;
+                }
+                else
+                {
+                    // タイムアウトが発生した場合
+                    cts.Cancel();
+                    throw new TimeoutException("スクリプトの評価がタイムアウトしました。");
+                }
             }
         }
 
         public object get(string name)
         {
-            throw new NotImplementedException();
+            return scope.context.GetVariable(name);
         }
 
         public void put(string name, object val)
         {
-            throw new NotImplementedException();
+            scope.context.DefineVariable(name).Assign(JSValue.Marshal(val));
         }
 
     }

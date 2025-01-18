@@ -24,4 +24,8 @@
 		<PackageReference Include="NiL.JS" Version="2.5.1684" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="js\" />
+	</ItemGroup>
+
 </Project>

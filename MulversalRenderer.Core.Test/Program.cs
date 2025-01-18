@@ -14,19 +14,26 @@ using NiL.JS.Core;
 using NilJsProcessor;
 using System.IO.Pipes;
 using System.Threading.Tasks;
+using System.Data;
+using NiL.JS;
 namespace Core.Test
 {
     internal class Program
     {
+        static CHtmlDocument localdocument = null;
         static void Main(string[] args)
         {
             var window = new CHtmlMultiversalWindow();
+            MultiversalRenderer.Core.commonLog.LoggingEnabled = true;
+            MultiversalRenderer.Core.commonLog.LogLevel = 10;
             var scope = new NilJsScope();
             scope.___initScriptEngine();
             scope.___setMultiversalWindow(window);
             var processor = scope.___getMultiversalScriptProcessor();
             var @delegate = new Action<string>(text => Debug.WriteLine(text));
             scope.context.DefineVariable("window").Assign(scope.context.GlobalContext.ProxyValue(window));
+
+            
             // scope.context.DefineVariable("alert").Assign(scope.context.GlobalContext.ProxyValue(@delegate));
 
             // Create a function to set `this` to `window`
@@ -67,8 +74,13 @@ namespace Core.Test
                 throw new Exception("globalThis is not IMultiversalWindow");
 
             }
-            var url = @"https://xtech.nikkei.com/top/it/";
+            var url = @"http://localhost/";
              LoadUrl(url).Wait();
+
+            Debug.WriteLine("LoadUrl completed.");
+            processor.put("document", localdocument);
+   
+            
 
 
         }
@@ -218,9 +230,9 @@ namespace Core.Test
                             }
                             Encoding encoding = Encoding.GetEncoding(charset);
                             string content = encoding.GetString(ms.ToArray(), 0, ___bytesReead);
-                            CHtmlDocument document = new CHtmlDocument(CHtmlDomModeType.HTMLDOM);
-                            document.___parseDocument(content, charset);
-                            showDomTree(document, 10);
+                            localdocument = new CHtmlDocument(CHtmlDomModeType.HTMLDOM);
+                            localdocument.___parseDocument(content, charset);
+                 
                             await File.WriteAllTextAsync(contentDataPath, content, encoding);
                             sbRsponseReporter.Append($"コンテンツがテキストファイル {contentData.FileLocation} に保存されました。\r");
                             
@@ -267,23 +279,17 @@ namespace Core.Test
                     sbRsponseReporter.Append($"リクエストエラー: {e.Message}\r");
                 }
                 sw.Stop();
-                Console.WriteLine($"処理時間: {sw.ElapsedMilliseconds} ミリ秒 ");
+                Debug.WriteLine($"処理時間: {sw.ElapsedMilliseconds} ミリ秒 ");
                 var sbList = sbRsponseReporter.ToString().Split("\r");
                 foreach (var item in sbList)
                 {
-                    Console.WriteLine(item);
+                    Debug.WriteLine(item);
                 }
-                Console.ReadLine();
+
             }
 
         }
-        public static void showDomTree(CHtmlDocument document, int depth)
-        {
-            var rootElement = document.documentElement;
 
-            Console.WriteLine($"{rootElement}   Depth: {depth} ");
-
-        }
  
         
     }

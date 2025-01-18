@@ -40,7 +40,8 @@ HTML Rendering Library for .NET 6 and above [WIP]
 ## Curent Status
   - The previous project was designed for .NET Framework 1.1 and above and Winforms
   - The migration for Dotnet 6, 7, 8 and above (dotnetcore) is under progress
-  - WIP is appproximately 35%.
+  - Implement NiL Javascript Engine, instead of Rhino JS Engine
+  - WIP is appproximately 50%.
 
 ## TODO
 
@@ -49,5 +50,4 @@ HTML Rendering Library for .NET 6 and above [WIP]
 3. HTML layout engine needs a lot of work for improvement. 
 4. Impliment better HTML layout scheme.
 5. Implement other GUI support other than  Winforms GUI.
-6. Beside Rhino JS engine, support Javascript V8 engine if possible
 
