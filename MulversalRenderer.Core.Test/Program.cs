@@ -27,7 +27,12 @@ namespace Core.Test
             var window = new CHtmlMultiversalWindow();
             MultiversalRenderer.Core.commonLog.LoggingEnabled = true;
             MultiversalRenderer.Core.commonLog.CommonLogLevel = 2;
-            var scope = new NilJsScope();
+            if (MultiversalWebCache.TrustedWebAuthority.Count == 0)
+            {
+                MultiversalWebCache.LoadTrustedWebsites(@"""google.com"",""microsoft.com"", ""apple.com"", ""blogger.com"", ""youtube.com"", ""linkedin.com"", ""support.google.com"", ""mozilla.org"", ""en.wikipedia.org"", ""github.com"", ""amazon.com"", ""search.google.com"",""wordpress.org""");
+                MultiversalWebCache.SaveTrustedWebAuthority();
+            }
+                var scope = new NilJsScope();
             scope.___initScriptEngine();
             scope.___setMultiversalWindow(window);
             var processor = scope.___getMultiversalScriptProcessor();

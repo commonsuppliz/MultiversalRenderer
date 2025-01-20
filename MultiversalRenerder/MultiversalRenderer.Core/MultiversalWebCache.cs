@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using System.Reflection.PortableExecutable;
 
 namespace MultiversalRenderer.Core
 {
@@ -19,18 +20,21 @@ namespace MultiversalRenderer.Core
         public string Authority { get; set; }
         public string HtmlContent { get; set; }
         public string Charset { get; set; }
-        public int ContentLength { get; set; }  
+        public int ContentLength { get; set; }
         public MultivasalContentData() { }
-   
-    }
-        public static class MultiversalWebCache
 
-         {
+    }
+    public static class MultiversalWebCache
+
+    {
         internal static string CachedData = "Cachedata.json";
         internal static string TrustedWenAuthorityData = "TrustedWenAuthority.json";
         public static List<string> TrustedWebAuthority = new List<string>();
-        public static string StoregePath { get
-            ; set; }
+        public static string StoregePath
+        {
+            get
+            ; set;
+        }
         public static Dictionary<string, MultivasalContentData> CacheData = new Dictionary<string, MultivasalContentData>();
         internal static void initHTMLDataStorePath()
         {
@@ -65,7 +69,7 @@ namespace MultiversalRenderer.Core
         {
             string _trustedWenAuthorityData = JsonSerializer.Serialize(TrustedWebAuthority);
             System.IO.File.WriteAllText(StoregePath + System.IO.Path.DirectorySeparatorChar + TrustedWenAuthorityData, _trustedWenAuthorityData);
-        }   
+        }
 
 
         public static MultivasalContentData CreateUrlContentDataPath(string _url, string _contentType)
@@ -84,16 +88,16 @@ namespace MultiversalRenderer.Core
             _sbFileLocation.Append(authority);
             _sbFileLocation.Append(System.IO.Path.DirectorySeparatorChar);
             _sbFileLocation.Append(dirname);
-            string curdirname =  MultiversalWebCache.StoregePath + _sbFileLocation;
+            string curdirname = MultiversalWebCache.StoregePath + _sbFileLocation;
             if (System.IO.Directory.Exists(curdirname))
-             { 
+            {
                 dirname = Guid.NewGuid().ToString();
                 _sbFileLocation.Append(System.IO.Path.DirectorySeparatorChar);
                 _sbFileLocation.Append(authority);
                 _sbFileLocation.Append(System.IO.Path.DirectorySeparatorChar);
                 _sbFileLocation.Append(dirname);
             }
-     
+
             _sbFileLocation.Append(System.IO.Path.DirectorySeparatorChar);
             string _fileextension = System.IO.Path.GetExtension(uri.LocalPath).ToLower();
             string _fileName = System.IO.Path.GetFileName(uri.LocalPath);
@@ -160,11 +164,12 @@ namespace MultiversalRenderer.Core
                         if (_contentType.IndexOf(';') > -1)
                         {
                             _contentTypeExt = _contentType.Remove(_contentType.IndexOf(';')).ToLower();
-                        }else
+                        }
+                        else
                         {
                             _contentTypeExt = _contentType.ToLower();
                         }
-                     
+
                         switch (_contentTypeExt)
                         {
                             case "text/html":
@@ -183,7 +188,7 @@ namespace MultiversalRenderer.Core
                     {
                         _sbFileLocation.Append("web.bin");
                     }
-              
+
                     break;
             }
             httpContentData.FileLocation = _sbFileLocation.ToString();
@@ -214,9 +219,9 @@ namespace MultiversalRenderer.Core
             {
 
                 int pos = r.Next(passwordChars.Length);
-            
+
                 char c = passwordChars[pos];
-              
+
                 sb.Append(c);
             }
 
@@ -227,7 +232,7 @@ namespace MultiversalRenderer.Core
             string _prototol = string.Empty; ;
             return GetFileExtentionByContentType(_url, _prototol);
         }
-        private static string GetFileExtentionByContentType(string _s,  string ___prototol)
+        private static string GetFileExtentionByContentType(string _s, string ___prototol)
         {
             switch (_s)
             {
@@ -273,5 +278,62 @@ namespace MultiversalRenderer.Core
             }
 
         }
+        public static void LoadTrustedWebsites(string trustedWebWites)
+        {
+            var lines = trustedWebWites.Split("\n");
+            if (lines.Length == 1)
+            {
+                var dataValues = lines[0].Split(",");
+                foreach (var valuesplit in dataValues)
+                {
+                    if (valuesplit.Contains("."))
+                    {
+                        var _authority = valuesplit.Replace("\"", "").Trim();
+                        if (_authority.Length > 5)
+                        {
+                            char fistLetter = _authority[0];
+                            char lastLetter = _authority[_authority.Length - 1];
+                            if (char.IsLetter(fistLetter) && char.IsLetter(lastLetter))
+                            {
+                                if (!TrustedWebAuthority.Contains(_authority))
+                                    TrustedWebAuthority.Add(_authority);
+                            }
+                        }
+                    }
+                }
+            }
+
+            else
+                foreach (var line in lines)
+                {
+                    var eachLine = line.Trim();
+                    var dataValues = eachLine.Split(",");
+                    foreach (var valuesplit in dataValues)
+                    {
+                        if (valuesplit.Contains("."))
+                        {
+                            var _authority = valuesplit.Replace("\"", "").Trim();
+                            if (_authority.Length > 5)
+                            {
+                                char fistLetter = _authority[0];
+                                char lastLetter = _authority[_authority.Length - 1];
+                                if (char.IsLetter(fistLetter) && char.IsLetter(lastLetter))
+                                {
+                                    if (!TrustedWebAuthority.Contains(_authority))
+                                        TrustedWebAuthority.Add(_authority);
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+
+
+
+
+        }
     }
 }
+
+    
