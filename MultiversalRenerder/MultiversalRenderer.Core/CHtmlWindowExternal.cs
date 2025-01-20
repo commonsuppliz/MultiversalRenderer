@@ -28,7 +28,7 @@ namespace MultiversalRenderer.Core
 		/// <param name="s"></param>
 		public void AddChannel(string s)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("window.external.AddChanncel({0}) is called", s);
 			}
@@ -39,7 +39,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void AddDesktopComponent(string sURL,string  sType, int iLeft , int iTop, int iWidth,int iHeight)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("window.external.AddDesktopComponent({0}) is called", sURL);
 			}
@@ -55,7 +55,7 @@ namespace MultiversalRenderer.Core
         }
         private void ___msSiteModeSetIconOverlay_Inner(object ___iconUrl, object ___descriptionObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.___msSiteModeSetIconOverlay({0}, {1}) is called", ___iconUrl, ___descriptionObject);
             }
@@ -66,7 +66,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objHeader"></param>
         public void msSiteModeCreateJumpList(object ___objHeader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.msSiteModeCreateJumpList({0}) is called. do nothing.", ___objHeader);
             }
@@ -77,7 +77,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objHeader"></param>
         public void msSiteModeCreateJumplist(object ___objHeader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.msSiteModeCreateJumplist({0}) is called. do nothing.", ___objHeader);
             }
@@ -104,7 +104,7 @@ namespace MultiversalRenderer.Core
         }
         private  void ___msSiteModeAddJumpListItem_Inner(object ___p1, object ___p2, object ___p3, object ___p4)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.msSiteModeAddJumpListItem() is called. do nothing.");
             }
@@ -115,7 +115,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public bool InPrivateFilteringEnabled()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.InPrivateFilteringEnabled()() is called. return false.");
             }
@@ -123,7 +123,7 @@ namespace MultiversalRenderer.Core
         }
         public bool msTrackingProtectionEnabled()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.msTrackingProtectionEnabled()() is called. return true.");
             }
@@ -136,7 +136,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public double IsSearchProviderInstalled(string ___str)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.IsSearchProviderInstalled({0}) is called. returns 0.", ___str);
             }
@@ -144,7 +144,7 @@ namespace MultiversalRenderer.Core
         }
         public bool isGoogleHomePage()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.isGoogleHomePage()() is called. returns true");
             }
@@ -152,7 +152,7 @@ namespace MultiversalRenderer.Core
         }
         public void msSiteModeClearIconOverlay()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("window.external.msSiteModeClearIconOverlay() is called");
             }
@@ -164,7 +164,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void AddFavorite(string sURL ,string sTitle)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("window.external.AddFavorite({0}) is called", sURL);
 			}
@@ -175,7 +175,7 @@ namespace MultiversalRenderer.Core
 		/// <param name="oForm"></param>
 		public void AutoCompleteSaveForm(CHtmlElement oForm)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("window.external.AutoCompleteSaveForm({0}) is called", oForm);
 			}
@@ -186,7 +186,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void AutoScan(string sUserQuery,string  sURL ,string sTarget)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("window.external.AutoScan({0}) is called",  sURL);
 			}
@@ -207,7 +207,7 @@ namespace MultiversalRenderer.Core
 		/// <returns></returns>
 		public bool IsSubscribed(string sURLToCDF)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("window.external.IsSubscribed({0}) is called", sURLToCDF);
 			}
@@ -245,7 +245,7 @@ namespace MultiversalRenderer.Core
 		{
 			get
 			{
-				if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+				if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 				{
 					commonLog.LogEntry("window.external.menuArguments is called, but returns null. TODO:");
 				}
@@ -273,7 +273,7 @@ namespace MultiversalRenderer.Core
 					
 					break;
 			}
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("GetPropertyValue for {0} {1} {2} failed",this.GetType(), this, ___name);
 
@@ -300,7 +300,7 @@ namespace MultiversalRenderer.Core
 
 						
 					}
-					if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+					if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 					{
 						commonLog.LogEntry("SetPropertyValue for {0} {1}  {2} = {3} Success : {4}",this.GetType(), this, ___name, val, ___ValueStored );
 					}
@@ -309,7 +309,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setPropertyByIndex(int ___index, object val)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("SetPropertyValueIndex for {0} \'{1}\' {2} = {3} failed",this.GetType(), this, ___index, val);
 			}
@@ -317,7 +317,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getPropertyByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("___getPropertyByName by index {0} {1} {2} failed",this.GetType(), this, ___index);
 			}
@@ -335,7 +335,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___common_object_clone()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("x__Clone {0} {1} called",this.GetType(), this);
 			}
@@ -343,14 +343,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___deleteByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}",this.GetType(), this, ___index);
 			}
 		}
 		public void ___deleteByName(string ___name)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByName {0} {1} called : {2}",this.GetType(), this, ___name);
 			}
@@ -358,7 +358,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object[] ___getByIds()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getByIds() {0} {1} called",this.GetType(), this);
 			}
@@ -367,7 +367,7 @@ namespace MultiversalRenderer.Core
 		}
 		public string ___getClassName()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getClassName {0} {1} called",this.GetType(), this);
 			}
@@ -375,7 +375,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getDefaultValue()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getDefaultValue {0} {1} called",this.GetType(), this);
 			}
@@ -383,7 +383,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getParentScope()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getParentScope {0} {1} called",this.GetType(), this);
 			}
@@ -391,14 +391,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setParentScope(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setParentScope {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
 		}
 		public object ___getProtoType()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getProtoType {0} {1} called",this.GetType(), this);
 			}
@@ -406,7 +406,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___hasInstance(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___hasInstance {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -414,7 +414,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___instanceEquals(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___instanceEquals {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -422,7 +422,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setProtoType(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setProtoType {0} {1} called : {2}",this.GetType(), this, ___object);
 			}

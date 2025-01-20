@@ -1393,7 +1393,7 @@ return CSSAttributeType.counterincrement;
                     return CSSAttributeType.undefined;
             }
             /*
-            if (commonLog.LoggingEnabled  && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled  && commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetStyleAttributeType(" + rName + ") Failed");
             }

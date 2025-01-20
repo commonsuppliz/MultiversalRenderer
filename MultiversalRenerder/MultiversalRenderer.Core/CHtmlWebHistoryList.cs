@@ -41,7 +41,7 @@ namespace MultiversalRenderer.Core
         {
             string ___Title = commonHTML.GetStringValue(___TitleObject);
             string ___Url = commonHTML.GetStringValue(___UrlObject);
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: replaceState({0}, {1} , {2})", __State, ___Title, ___Url);
             }
@@ -57,7 +57,7 @@ namespace MultiversalRenderer.Core
         {
             string ___Title = commonHTML.GetStringValue(___TitleObject);
             string ___Url = commonHTML.GetStringValue(___UrlObject);
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("pushState({0}, {1} , {2})", __State, ___Title, ___Url);
             }
@@ -83,7 +83,7 @@ namespace MultiversalRenderer.Core
         {
             if (this.___WebHistoryBackward != null)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("TODO : {0}.backward() called", this);
                 }
@@ -94,7 +94,7 @@ namespace MultiversalRenderer.Core
          {
              if (this.___WebHistoryForeward != null)
              {
-                 if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                 if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                  {
                     commonLog.LogEntry("TODO : {0}.foward() called", this);
                  }
@@ -105,7 +105,7 @@ namespace MultiversalRenderer.Core
          {
              if (this.___WebHistoryGo != null)
              {
-                 if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                 if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                  {
                     commonLog.LogEntry("TODO : {0}.go() called", this);
                  }

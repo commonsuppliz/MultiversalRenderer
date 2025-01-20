@@ -68,7 +68,7 @@ namespace MultiversalRenderer.Core
 
 		public override void ___setPropertyByName(string ___name, object val)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("set : {0} = {1} for {2}", ___name, val , this);
             }
@@ -77,7 +77,7 @@ namespace MultiversalRenderer.Core
 
 		public override  bool ___hasPropertyByIndex(int ___index)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("set : {0}  for {1}", ___index,  this);
             }
@@ -93,7 +93,7 @@ namespace MultiversalRenderer.Core
 
         public override object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("get : {0} for {1}", ___index, this);
             }
@@ -104,7 +104,7 @@ namespace MultiversalRenderer.Core
         public override object ___getPropertyByName(string ___name)
 		{
 			// TODO:  CHtmlSVGElement.Prototype.IPropertBox.___getPropertyByName ŽÀ‘•‚ð’Ç‰Á‚µ‚Ü‚·B
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("get : {0} for {1}", ___name,   this);
             }
@@ -406,7 +406,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exSVGElementDraw)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___drawSVGElementWithContext exception : " + ___svgElement.toLogString(), exSVGElementDraw);
                 }
@@ -674,7 +674,7 @@ namespace MultiversalRenderer.Core
                             ___svgContext.closePath();
                             break;
                         default:
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("TODO: ___drawSVGPathElement needs to draw : {0}  ", pathinfo.commandType);
                             }
@@ -697,7 +697,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception expath)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___drawSVGPathElement exception.. ", expath);
                 }
@@ -948,7 +948,7 @@ namespace MultiversalRenderer.Core
                     case ',':
                         break;
                     default:
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                         {
                             if (char.IsLetter(c))
                             {
@@ -996,7 +996,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exSVGElementDraw)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___setSVGElementFillStrokeWithCSSTyle :exception : " + ___svgElement.toLogString(), exSVGElementDraw);
                 }
@@ -1061,7 +1061,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     if (!___targetObjectFound)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                         {
                                             commonLog.LogEntry(" ___setSVGElementFillStyleWithCSSStyle() object search not found. but ok... " + strInnerUrl);
                                         }
@@ -1069,7 +1069,7 @@ namespace MultiversalRenderer.Core
 
                                     return;
                                 default:
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                     {
                                         commonLog.LogEntry("TODO: ___setSVGElementFillStyleWithCSSStyle(): " + strInnerUrl);
                                     }
@@ -1086,7 +1086,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exSVGElementDraw)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___setSVGElementFillStrokeWithCSSTyle :exception : " + ___svgElement.toLogString(), exSVGElementDraw);
                 }
@@ -1259,7 +1259,7 @@ namespace MultiversalRenderer.Core
                                                                                 CHtmlSVGElement.___drawSVGElementWithContext(___childSVGElem_i16, ___svgContext, ___svgImageCreationTime);
                                                                                 int ___childLength_i17 = ___childSVGElem_i16.___childNodes.length;
 
-                                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                                                 {
                                                                                     commonLog.LogEntry("TODO : ___drawSVGElement : {0} has more child nodes", ___childSVGElem_i16.toLogString());
                                                                                 }
@@ -1290,7 +1290,7 @@ namespace MultiversalRenderer.Core
                 {
                     _grCon.Graphic.DrawImageUnscaledAndClipped(___svgRoot.___C2DImage, Rectangle.Round(elementBounds));
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                 {
 
                     commonLog.LogEntry("___drawSVGElement({0}) has been completed in {1} ms...", ___svgRoot.toLogString(), ___svgStopWatch.ElapsedMilliseconds);
@@ -1300,7 +1300,7 @@ namespace MultiversalRenderer.Core
             catch (Exception exSVGDrawException)
             {
                 ___svgRoot.___isSVGImageNeedsToCreate = false;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___drawSVGElement exception. ", exSVGDrawException);
                 }

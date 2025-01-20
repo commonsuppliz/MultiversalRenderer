@@ -124,7 +124,7 @@ namespace MultiversalRenderer.Core
         {
             string findString = commonHTML.GetStringValue(__find);
             int r = this._href.IndexOf(findString, StringComparison.OrdinalIgnoreCase);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("Location IndexOf({0}) retuns {1} from {2}", __find, r, this._href);
             }
@@ -178,7 +178,7 @@ namespace MultiversalRenderer.Core
 
         public object valueOf()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("Location.valueOf() returns location itself" );
             }
@@ -196,14 +196,14 @@ namespace MultiversalRenderer.Core
 		}
 		private  void ___reloadInner(bool option)
 		{
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {  
                    commonLog.LogEntry("calling {0}.reaload({1})", this, option);
                 
             }
             if (option == true)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("TODO : needs to reload from server {0}.reaload({1})", this, option);
                 }
@@ -228,7 +228,7 @@ namespace MultiversalRenderer.Core
                     {
                         string strOld = s;
                         s = commonHTML.GetAbsoluteUri(this._href, null, s);
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("location.replace('{0}') is changed to {1} ", strOld, s);
                         }
@@ -236,7 +236,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("location.replace('{0}') is partical url but no full url ",  s);
                     }
@@ -325,7 +325,7 @@ namespace MultiversalRenderer.Core
                     CHtmlDocument doc = this.ownerElement as CHtmlDocument;
                     if (doc != null)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                         {
                             commonLog.LogEntry("Via Location Object, Document  location changed. redirection using metarefresh : {0} 3 seconds", this._href);
                         }
@@ -348,7 +348,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("Location", ex);
                 }
@@ -473,7 +473,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch (Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 				{
 					commonLog.LogEntry("Analyze Location Faild :{0} {1} ", this._href, ex.Message );
 				}
@@ -524,7 +524,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("TODO: Location is creating 0 length ancestorOrigins List ");
                 }
@@ -646,7 +646,7 @@ namespace MultiversalRenderer.Core
 
 		public object ___getPropertyByName(string ___name)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling ___getPropertyByName for {0} {1} {2} ", this.GetType(), this, ___name);
             }
@@ -683,7 +683,7 @@ namespace MultiversalRenderer.Core
                     }
 				case "host":
                 case "Host":
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                         if (this._host == null)
                         {
@@ -693,7 +693,7 @@ namespace MultiversalRenderer.Core
 					return commonHTML.___convertNullToEmpty(this._host);
 				case "hostname":
                 case "Hostname":
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                         if (this._hostname == null)
                         {
@@ -735,14 +735,14 @@ namespace MultiversalRenderer.Core
             {
                 if (___propertyObject != null)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("GetPropertyValue for {0} {1} {2} returns {3}", this.GetType(), this, ___name, ___propertyObject);
                     }
                     return ___propertyObject;
                 }
             }
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("GetPropertyValue for {0} {1} {2} failed", this.GetType(), this, ___name);
 			}
@@ -752,7 +752,7 @@ namespace MultiversalRenderer.Core
 
 		public void ___setPropertyByName(string ___name, object val)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling SetPropertyValue for {0} {1}  {2} = {3} ", this.GetType(), this, ___name, val);
             }
@@ -776,7 +776,7 @@ namespace MultiversalRenderer.Core
                 case "host":
                 case "prort":
                 case "query":
-					if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+					if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 					{
 						commonLog.LogEntry("SetPropertyValue for {0} {1}  {2} = {3} failed",this.GetType(), this, ___name, val);
 					}
@@ -788,14 +788,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setPropertyByIndex(int ___index, object val)		
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("SetPropertyValueIndex for {0} {1}  {2} = {3} failed",this.GetType(), this, ___index, val);
 			}
 		}
 		public object ___getPropertyByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("GetPropertyValueInex for {0} {1} {2} failed",this.GetType(), this, ___index);
 			}
@@ -812,7 +812,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___common_object_clone()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("x__Clone {0} {1} called",this.GetType(), this);
 			}
@@ -820,14 +820,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___deleteByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}",this.GetType(), this, ___index);
 			}
 		}
 		public void ___deleteByName(string ___name)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByName {0} {1} called : {2}",this.GetType(), this, ___name);
 			}
@@ -835,7 +835,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object[] ___getByIds()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getByIds() {0} {1} called",this.GetType(), this);
 			}
@@ -844,7 +844,7 @@ namespace MultiversalRenderer.Core
 		}
 		public string ___getClassName()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getClassName {0} {1} called",this.GetType(), this);
 			}
@@ -852,7 +852,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getDefaultValue()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getDefaultValue {0} {1} called",this.GetType(), this);
 			}
@@ -860,7 +860,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getParentScope()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getParentScope {0} {1} called",this.GetType(), this);
 			}
@@ -868,14 +868,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setParentScope(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setParentScope {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
 		}
 		public object ___getProtoType()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getProtoType {0} {1} called",this.GetType(), this);
 			}
@@ -883,7 +883,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___hasInstance(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___hasInstance {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -891,7 +891,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___instanceEquals(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___instanceEquals {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -899,7 +899,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setProtoType(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setProtoType {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -918,7 +918,7 @@ namespace MultiversalRenderer.Core
 		}
 		public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("CanConvertFrom Called...");
 			}

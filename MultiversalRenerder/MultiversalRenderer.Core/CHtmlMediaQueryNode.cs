@@ -356,7 +356,7 @@ namespace MultiversalRenderer.Core
                 case "-KHTML-transform-3d":
                     return CHtmlMediaQueryResult.OK;
 				default:
-					if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("Unknown Media Query Parameter Name {0} : {1} Returns : {2}", this.Name, this.Value,  DefaultUnknownParameterResult);
 					}

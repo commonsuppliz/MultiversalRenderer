@@ -240,7 +240,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("CleanUp Timer Error. but cont...", ex.Message);
                 }
@@ -302,7 +302,7 @@ namespace MultiversalRenderer.Core
                      }
                      catch (Exception ex)
                      {
-                         if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                         if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                          {
                              commonLog.LogEntry("___startCreationChildControlBaseduponPendingList() Exception. " + ex.Message);
                          }
@@ -1191,7 +1191,7 @@ namespace MultiversalRenderer.Core
                             try
                             {
 
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                 {
                                     commonLog.LogEntry("DocumentTimer has found Queued Script Process Now...");
                                 }
@@ -1325,7 +1325,7 @@ namespace MultiversalRenderer.Core
                                 {
                                     if (___IsEventHasBeenFromLiveList == false)
                                     {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+                                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
                                         {
                                            commonLog.LogEntry("DocumentTimerLiveList Removing : {0}", ___timerkey);
                                         }
@@ -1399,7 +1399,7 @@ namespace MultiversalRenderer.Core
                                         this.___document.___DocumentTimerCompleteList.RemoveAt(0);
                                     }
                                     this.___document.___DocumentTimerCompleteList.Add(timerEvt);
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
                                     {
                                        commonLog.LogEntry("DocumentTimerLiveList Removing : {0}", ___timerkey);
                                     }
@@ -1414,7 +1414,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("DocumentTimer_Elapsed Error. ", ex);
                     }
@@ -1431,7 +1431,7 @@ namespace MultiversalRenderer.Core
                         {
                             goto TimerProcessDone;
                         }
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                         {
                             commonLog.LogEntry("No Event DocumentTimer should process...");
                         }
@@ -1450,7 +1450,7 @@ namespace MultiversalRenderer.Core
                     TimeSpan tpSpan = DateTime.Now.Subtract(___dtStart);
                     if (tpSpan.TotalSeconds >= commonHTML.MAX_DOCUMENT_TIMER_TIMEOUT_SECONDS)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("DocumentTimer tooks long to complete. Disable Doucument Timer From now on...");
                         }
@@ -1496,13 +1496,13 @@ namespace MultiversalRenderer.Core
             {
                 if (ex is System.Threading.ThreadAbortException)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                     {
                         commonLog.LogEntry("DocumentTimerThread_Elapsed Thread Abort. It is ok!");
                     }
 
                 }
-                else if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                else if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("DocumentTimerThread_Elapsed", ex);
                 }
@@ -1583,7 +1583,7 @@ namespace MultiversalRenderer.Core
                         if (this.___ChildWindowControlCreationPendingList != null)
                         {
                             ___TimerControlCreatingPendingCount++;
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("There are {0} multiversal windows needs to be created", this.___ChildWindowControlCreationPendingList.Count);
                             }
@@ -1618,7 +1618,7 @@ namespace MultiversalRenderer.Core
                                                             {
                                                                 if (___iframeElement.___IsDisposing == true)
                                                                 {
-                                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                                     {
                                                                         commonLog.LogEntry("child element is disposing {0}. skipping now.", ___iframeElement);
                                                                     }
@@ -1664,7 +1664,7 @@ namespace MultiversalRenderer.Core
                                                                                 {
                                                                                     if (___doc.___ManagedControlPendingElementList != null && ___doc.___ManagedControlPendingElementList.Count > 0)
                                                                                     {
-                                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                                                         {
                                                                                             commonLog.LogEntry("IFrame Window is created for {0} contains document {1} needs to create sub controls {2}", ___childMultiversalWindow, ___doc, ___doc.___ManagedControlPendingElementList.Count);
                                                                                         }
@@ -1687,7 +1687,7 @@ namespace MultiversalRenderer.Core
                                             }
                                             catch (Exception exControlAdd)
                                             {
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                                 {
                                                     commonLog.LogEntry("MultiversalTimer_Tick Control Add Operation Exception", exControlAdd);
                                                     // it may failed to next operation. so remove it from list
@@ -1705,7 +1705,7 @@ namespace MultiversalRenderer.Core
 
                                     catch (Exception exLoop)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                         {
                                             commonLog.LogEntry("MultiversalTimer_Tick Control Add Loop Exception", exLoop);
                                             // it may failed to next operation. so remove it from list
@@ -1749,7 +1749,7 @@ namespace MultiversalRenderer.Core
                                 if (___TimerControlCreatingPendingCount > CHtmlMultiversalWindow.___MultiversalTimerControlIntervalArray.Length - 1)
                                 {
 
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                     {
                                         commonLog.LogEntry("Multiversal Control Create Timer has been expired. Dispose Timer...");
                                         // it may failed to next operation. so remove it from list
@@ -1784,7 +1784,7 @@ namespace MultiversalRenderer.Core
 
                 catch (Exception exFinal)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("Multiversal Control Create Timer final exception. ", exFinal);
                         // it may failed to next operation. so remove it from list
@@ -1867,7 +1867,7 @@ namespace MultiversalRenderer.Core
                         ___LookupCount++;
                         if (___LookupCount > 16)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 0)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 0)
                             {
                                 commonLog.LogEntry("there is top Multiversal Widnow may be too deep. returns {0}", ___parentWindow);
                             }
@@ -1928,7 +1928,7 @@ namespace MultiversalRenderer.Core
             object __objectInList;
 
 #if DEBUG
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 50)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 50)
             {
                commonLog.LogEntry("CHtmlMultiversalWindow entering {0}.get(\'{1}\')", this, ___name);
 
@@ -1941,7 +1941,7 @@ namespace MultiversalRenderer.Core
                 {
                    
                     /*
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
                         {
                            commonLog.LogEntry("{0}.get(\'{1}\') found {2}", this, ___name, __objectInList);
                         }
@@ -1959,7 +1959,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 3)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 3)
                 {
                    commonLog.LogEntry("CHtmlMultiversalWindow get error ", ex);
                 }
@@ -2033,7 +2033,7 @@ namespace MultiversalRenderer.Core
                     }
                     else
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 1000)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1000)
                         {
                             commonLog.LogEntry("BUGBUG! there is no top Multiversal Widnow. Return this as ad hoc.");
                         }
@@ -2153,7 +2153,7 @@ namespace MultiversalRenderer.Core
                 case "personalbar":
                 case "statusbar":
                 case "toolbar":
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("TODO: CHtmlMutiversalWindow {0}.get(\'{1}\') returns null", this, ___name);
                     }
@@ -2197,7 +2197,7 @@ namespace MultiversalRenderer.Core
                 if (this.___document.___DocumentElementIDList != null && this.___document.___DocumentElementIDList.Count > 0 && this.___document.___DocumentElementIDList.TryGetValue(___name, out ___elementInDocID) == true)
                 {
 
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("window {0}.get(\'{1}\') found {2} in document", this, ___name, ___elementInDocID);
                     }
@@ -2205,7 +2205,7 @@ namespace MultiversalRenderer.Core
                 }
             }
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("called {0}.get(\'{1}\') returns null...", this, ___name);
             }
@@ -2236,7 +2236,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("CHtmlMultiversalWindow.delete({0}) skip because there is no container.", ___name);
                     }
@@ -2244,7 +2244,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exDelete)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("CHtmlMultiversalWindow.delete() exception", exDelete);
                 }
@@ -2267,14 +2267,14 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exDelete)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("CHtmlMultiversalWindow.delete() exception", exDelete);
                 }
             }
             if (___isDeleteByIndexSuccess == false)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("CHtmlMultiversalWindow.delete({0}) skipped.", ___index);
                 }
@@ -2287,7 +2287,7 @@ namespace MultiversalRenderer.Core
             {
                 argsLen = args.Length;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("CHtmlMultiversalWindow.hasOwnProperty({0}:len:{1}) called", args, argsLen);
             }
@@ -2436,7 +2436,7 @@ namespace MultiversalRenderer.Core
                 case "top":
                 case "event":
                 case "history":
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("stange. trying {0}.put(\'{1}\') = {2}", this, ___name, ___val);
                     }
@@ -2445,7 +2445,7 @@ namespace MultiversalRenderer.Core
                     break;
 
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.put(\'{1}\') = {2}", this, ___name, ___val);
             }
@@ -2489,7 +2489,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                             {
                                commonLog.LogEntry("___WindowsPropertiesList{0}.put(\'{1}\') = {2} error", ex);
                             }
@@ -2503,7 +2503,7 @@ namespace MultiversalRenderer.Core
                     {
                         
                         this.___WindowsPropertiesList[___name] = ___val;
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                         {
                            commonLog.LogEntry("___WindowsPropertiesList{0}.put(\'{1}\') = {2} lock failed", this, ___name, ___val);
                         }
@@ -2511,7 +2511,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                     {
                        commonLog.LogEntry("___WindowsPropertiesList{0}.put(\'{1}\') = {2} sored object not found", this, ___name, ___val);
                     }
@@ -2521,7 +2521,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exPut)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                 {
                    commonLog.LogEntry("put() Excpetion", exPut);
                 }
@@ -2553,7 +2553,7 @@ namespace MultiversalRenderer.Core
                     {
                 
                         this.___WindowsPropertiesList.Values[___index] = ___val;
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                         {
                            commonLog.LogEntry("___WindowsPropertiesList{0}.put(\'{1}\') = {2} lock failed", this, ___index, ___val);
                         }
@@ -2561,7 +2561,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                     {
                        commonLog.LogEntry("___WindowsPropertiesList{0}.put(\'{1}\') = {2} sored object not found", this, ___index, ___val);
                     }
@@ -2575,12 +2575,12 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex2)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                     {
                        commonLog.LogEntry("put() Excpetion", ex2);
                     }
                 }
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1)
                 {
                    commonLog.LogEntry("put() Excpetion", exPut);
                 }
@@ -2650,7 +2650,7 @@ namespace MultiversalRenderer.Core
                 if (commonLog.LoggingEnabled == true)
                 {
                   //  iscope.___enableLogging(true);
-                  //  iscope.___setLoggingLevel(commonLog.LogLevel);
+                  //  iscope.___setLoggingLevel(commonLog.CommonLogLevel);
                 }
                 if (strCallingNames != null)
                 {
@@ -3004,7 +3004,7 @@ namespace MultiversalRenderer.Core
                 return;
             }
 
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
             {
                 commonLog.LogEntry("registerPrototypeObject(" + ___protoFunction.name + ") prototype is not assigned");
             }
@@ -3037,7 +3037,7 @@ namespace MultiversalRenderer.Core
             }
             if (MAX_WINDOW_LEVEL_PERFORM_NAVIGATE < this.___WindowLevel)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("CHtmlMultiversalWindow.navigate(" + __url + ") cancelled due to  this window level" + this.___WindowLevel.ToString());
 
@@ -3052,7 +3052,7 @@ namespace MultiversalRenderer.Core
             {
                 if (string.Equals(this.___URL_WIP, __url, StringComparison.Ordinal) == true)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("CHtmlMultiversalWindow.navigate(" + __url + ") is called multiple times for WIP URL. cancell");
 
@@ -3069,7 +3069,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (__parentDocument.___IsDisposing == true)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                         {
                             commonLog.LogEntry("Navigation will be cancelled due to owner Document is disposing...");
                         }
@@ -3079,7 +3079,7 @@ namespace MultiversalRenderer.Core
                     {
                         if (string.Equals(__parentDocument.___URL, __url, StringComparison.Ordinal) == true)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                             {
                                 commonLog.LogEntry("{0}.navigateUrl({1}) is same url of parentDocument URL. Abort!", this, __url);
                             }
@@ -3100,7 +3100,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 if (string.IsNullOrEmpty(diffUrl) == false && diffUrl.Length < 3)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                     {
                                         commonLog.LogEntry("=============[Akin URL]===================== ");
                                         commonLog.LogEntry("Owner Document URL : {0} ", __parentDocument.___URL);
@@ -3132,7 +3132,7 @@ namespace MultiversalRenderer.Core
             CHtmlUri ___uriObject = new CHtmlUri(__url);
             if (___uriObject.ProtocolType == CHtmlUriProtocolType.javascript)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
 
                     commonLog.LogEntry("Navigation will be cancelled due : " + __url);
@@ -3143,7 +3143,7 @@ namespace MultiversalRenderer.Core
             {
 
                 __url = string.Concat(___uriObject.Protocol, "//", ___uriObject.Hostname, ___uriObject.Pathname);
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
 
                     commonLog.LogEntry("RequestedUrl Contains Port 80. removed one : {0}", __url);
@@ -3209,7 +3209,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception exNavigationg)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
 
                         commonLog.LogEntry("___setChildMultiversalWindowNavigatingStatus() has exception. but cont...", exNavigationg);
@@ -3334,7 +3334,7 @@ namespace MultiversalRenderer.Core
             ___setEventSrcElement(this.___event, ___element, ___element);
             if (___objFunction == null)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel > 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel > 8)
                 {
                    commonLog.LogEntry("strange... executeEventFunction() is entered, but function is null. {0} escaping.... ", ___objFunction);
                 }
@@ -3379,7 +3379,7 @@ namespace MultiversalRenderer.Core
                     ExecuteStringFunction:
                     if (string.IsNullOrEmpty(___strFunction) == false)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel > 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel > 8)
                         {
                            commonLog.LogEntry(" executeEventFunction() is executing {0} {1}  for {2}", ___strFunction, ___strScriptTypeName, ___element);
                         }
@@ -3389,30 +3389,11 @@ namespace MultiversalRenderer.Core
                         IMultiversalScriptProcessor ___processor = this.getMultiversalScriptProcessorByScriptType("javascript");
                         if (___processor != null)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel > 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel > 8)
                             {
                                commonLog.LogEntry(" executeEventFunction() is executing {0} {1}  for {2}", ___objFunction, ___args, ___element);
                             }
-                            ___objFunction = ___processor.compile(___strFunction);
-                            if (___objFunction != null)
-                            {
-                                /*
 
-                                if (___objFunction is org.mozilla.javascript.Function)
-                                {
-
-                                    if (___processor != null)
-                                    {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel > 8)
-                                        {
-                                           commonLog.LogEntry(" executeEventFunction() is executing {0} {1}  for {2}", ___objFunction, ___args, ___element);
-                                        }
-                                        //___processor.callfunction(___objFunction, ___processor.multiversalscope, ___element, new Object[] { this.___event });
-                                        ___processor.callfunction(___objFunction, ___processor.multiversalscope, ___element, new Object[] { this.___event });
-                                    }
-                                }
-                                */
-                            }
                         }
 
                     }
@@ -3427,7 +3408,7 @@ namespace MultiversalRenderer.Core
                         IMultiversalScriptProcessor ___processor = this.getMultiversalScriptProcessorByScriptType("javascript");
                         if (___processor != null)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel > 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel > 8)
                             {
                                commonLog.LogEntry(" executeEventFunction() is executing {0} {1}  for {2}", ___objFunction, ___args, ___element);
                             }
@@ -3449,7 +3430,7 @@ namespace MultiversalRenderer.Core
                 }
                 if (commonLog.LoggingEnabled)
                 {
-                    if (commonLog.LogLevel <= 3)
+                    if (commonLog.CommonLogLevel <= 3)
                     {
                        commonLog.LogEntry("executeEventFunction()  has an exception : " + ex.Message);
                     }
@@ -3534,7 +3515,7 @@ namespace MultiversalRenderer.Core
 
                         }
                     }
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("___execute___functionObject exception", ex);
                     }
@@ -3613,7 +3594,7 @@ namespace MultiversalRenderer.Core
 
                             }
                         }
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("___execute___functionObject exception", ex);
                         }
@@ -3634,7 +3615,7 @@ namespace MultiversalRenderer.Core
 
             this.___document = ___doc;
             this.___WindowsPropertiesList = ___doc.___WindowPropertiesList;
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
 
                 commonLog.LogEntry("{0} obtained {1} as main document using proprylist {2}", this, ___doc, this.___WindowsPropertiesList);
@@ -3949,7 +3930,7 @@ s               else
         }
         public object requestFileSystem(Object[] args)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("TODO: {0}.requestFileSystem() needs to be processed", this);
             }
@@ -3964,7 +3945,7 @@ s               else
             string strURL = commonHTML.GetStringValue(args[0]);
             if (strURL.Length != 0)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("TODO: CHtmlMultiversalWindow.navigate(" + strURL + ") needs to be processed");
 
@@ -3984,7 +3965,7 @@ s               else
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("TODO: CHtmlMultiversalWindow.open(" + string.Concat(args) + ") needs to be processed");
 
@@ -4024,7 +4005,7 @@ s               else
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("TODO: CHtmlMultiversalWindow.alert(" + string.Concat(args) + ") needs to be processed");
 
@@ -4140,7 +4121,7 @@ s               else
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("TODO: CHtmlMultiversalWindow.showModalDialog(" + string.Concat(args) + ") needs to be processed");
 
@@ -4161,7 +4142,7 @@ s               else
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("TODO: CHtmlMultiversalWindow.prompt(" + string.Concat(args) + ") needs to be processed");
 
@@ -4178,7 +4159,7 @@ s               else
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("TODO: CHtmlMultiversalWindow.confirm(" + string.Concat(args) + ") needs to be processed");
 
@@ -4308,7 +4289,7 @@ s               else
                     }
                 }
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
             {
                 commonLog.LogEntry("Strange getComputedStyle() argument is 0 length...");
             }
@@ -4316,7 +4297,7 @@ s               else
         }
         public object postMessage(Object[] args)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
             {
                 if (args != null)
                 {
@@ -4470,7 +4451,7 @@ s               else
                         break;
                 }
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("calling Multiverasal.___createAsActiveXObject({0}) = {1}", strTypeId, activeType);
             }
@@ -4508,7 +4489,7 @@ s               else
         }
         public object ___createObject(string ___instanceName, params object[] __args)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 if (__args != null && __args.Length > 0)
                 {
@@ -4565,7 +4546,7 @@ s               else
                             }
                             catch (Exception exImage)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                 {
                                     commonLog.LogEntry("createObject Image Size Error. ", exImage);
                                 }
@@ -4704,7 +4685,7 @@ s               else
                         ___newElem.___documentWeakRef = new WeakReference(this.___document);
                         this.___document.___ElementDynamicallyCreatedList.Add(___newElem);
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___newElem);
                     }
@@ -4718,7 +4699,7 @@ s               else
                         ___speechgrammer.___ownerDocumentWeakReference = new WeakReference(this.___document);
                         
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechgrammer);
                     }
@@ -4731,7 +4712,7 @@ s               else
                         ___speechgrammerlist.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechgrammerlist);
                     }
@@ -4745,7 +4726,7 @@ s               else
                         ___speechRecognition.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechRecognition);
                     }
@@ -4759,7 +4740,7 @@ s               else
                         ___speechRecognitionAlternative.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechRecognitionAlternative);
                     }
@@ -4773,7 +4754,7 @@ s               else
                         ___speechRecognitionError.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechRecognitionError);
                     }
@@ -4787,7 +4768,7 @@ s               else
                         ___speechRecognitionEvent.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechRecognitionEvent);
                     }
@@ -4799,7 +4780,7 @@ s               else
                         ___speechRecognitionResult.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechRecognitionResult);
                     }
@@ -4812,7 +4793,7 @@ s               else
                         ___speechRecognitionResultList.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechRecognitionResultList);
                     }
@@ -4825,7 +4806,7 @@ s               else
                         ___speechSynthehesis.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechSynthehesis);
                     }
@@ -4838,7 +4819,7 @@ s               else
                         ___speechSynthehesisErrorEvent.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechSynthehesisErrorEvent);
                     }
@@ -4852,7 +4833,7 @@ s               else
                         ___speechSynthehesisEvent.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechSynthehesisEvent);
                     }
@@ -4866,7 +4847,7 @@ s               else
                         ___sppechUtterrance.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___sppechUtterrance );
                     }
@@ -4880,7 +4861,7 @@ s               else
                         ___speechSynthehesisVoice.___ownerDocumentWeakReference = new WeakReference(this.___document);
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("MultiversalWindow.___createObject({0}) will create Element as \"{1}\"", ___instanceName, ___speechSynthehesisVoice);
                     }
@@ -4904,7 +4885,7 @@ s               else
                             org.mozilla.javascript.BaseFunction __funcObject = __winprop as org.mozilla.javascript.BaseFunction;
                             if (__funcObject != null)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                 {
                                     commonLog.LogEntry("CHtmlMutilversalWindow found function which seems to be constructor. invoking : {0} {1}", ___instanceName, __funcObject);
                                 }
@@ -4914,7 +4895,7 @@ s               else
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("___createObject constuctor failed.", ex);
                             }
@@ -4924,7 +4905,7 @@ s               else
 
                 }
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("TODO: {0}.___createObject({1}) created nothing", this, ___instanceName);
             }
@@ -4950,7 +4931,7 @@ s               else
                     {
                         System.Array __argArray = args[0] as System.Array;
                         ___arrayLength = __argArray.Length;
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                         {
                            commonLog.LogEntry("TODO: System.Array Convertion to float is required " + numType.ToString() + " : ");
                         }
@@ -4993,7 +4974,7 @@ s               else
             }
             if (__arrayBase == null)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("TODO: createNumericArray needs to process " + numType.ToString() + " : ");
                 }

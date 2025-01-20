@@ -74,7 +74,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("CHtmlAttributeList Add Failed : {0} {1} {2} ",  key, value, ex.Message);
 				}
@@ -90,7 +90,7 @@ namespace MultiversalRenderer.Core
 		}
         public CHtmlAttribute getNamedItemNS(string ___p1, string ___p2)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: entering {0}.getNamedItemNS({1}) ", this, ___p1, ___p2);
             }
@@ -118,7 +118,7 @@ namespace MultiversalRenderer.Core
        
         public CHtmlAttribute getNamedItem(string _sName)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("entering {0}.getNamedItem({1}) ", this, _sName);
             }
@@ -139,7 +139,7 @@ namespace MultiversalRenderer.Core
         }
         private void ___setNamedItemInner(string ___nameSpane, string ___name, object ___valueAttr)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("entering {0}.setNamedItem({1}, {2}, {3}) ", this, ___nameSpane, ___name, ___valueAttr);
             }
@@ -151,7 +151,7 @@ namespace MultiversalRenderer.Core
             if (__attrNew != null)
             {
                 base[__attrNew.___name] = __attrNew;
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("{0}.setNamedItem({1}, {2}, {3}) success", this, ___nameSpane, ___name, ___valueAttr);
                 }
@@ -159,7 +159,7 @@ namespace MultiversalRenderer.Core
             }
             else
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("BUGBUG! {0}.setNamedItemInner({1}, {2}, {3}) failed ", this, ___nameSpane, ___name, ___valueAttr);
                 }
@@ -227,7 +227,7 @@ namespace MultiversalRenderer.Core
 			get
 			{
                 CHtmlAttribute objReturn = null;
-				if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("trying get item[{0}] value from '{1}' ", key, this);
 				}
@@ -255,7 +255,7 @@ namespace MultiversalRenderer.Core
 
                 else
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("CHtmlAttributeList Unknown type indexer {0}, return null.", key);
                     }
@@ -266,7 +266,7 @@ namespace MultiversalRenderer.Core
 			{
 				try
 				{
-					if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 150)
+					if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 150)
 					{
 						commonLog.LogEntry("trying set item[{0}] value from '{1}' ", key, this);
 					}
@@ -288,7 +288,7 @@ namespace MultiversalRenderer.Core
 					}
 					else if(commonHTML.isClrNumeric(key) == true)
 					{
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                         {
                            commonLog.LogEntry("TODO {0} failed to set value '{1}' = {2}", this, key, value);
                         }
@@ -297,7 +297,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+					if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 					{
 						commonLog.LogEntry("{0} failed to set value '{1}' = {2} {3}", this, key, value, ex.Message);
 					}
@@ -306,7 +306,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object item(object _key)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 500)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 500)
             {
                commonLog.LogEntry("calling item({0}) to get value '{1}' ", _key, this);
             }
@@ -321,7 +321,7 @@ namespace MultiversalRenderer.Core
             }
 
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.item({1}) has failed. may be unkown type... ", this, _key);
             }
@@ -348,7 +348,7 @@ namespace MultiversalRenderer.Core
 
 		public object ___getPropertyByName(string ___name)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("calling {0}.GetPropertyValue for  \'{1}\'", this, ___name);
 			}
@@ -374,7 +374,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (___objReturn != null)
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                                 {
                                    commonLog.LogEntry("{0}.GetPropertyValue({1}) will returns {2}", this, ___name, ___objReturn);
                                 }
@@ -384,14 +384,14 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                         {
                            commonLog.LogEntry("{0} has error {1}", this,commonData.GetExceptionAsString(ex));
                         }
                     }
 					break;
 			}
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("{0}.GetPropertyValue({1})' retuns null....",this, ___name);
 			}
@@ -412,7 +412,7 @@ namespace MultiversalRenderer.Core
 				newAttr.value = val;
 				this[___name] = newAttr;
 			}
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel>= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel>= 10)
 			{
 				commonLog.LogEntry("{0} SetPropertyValue by Name {1}={2}", this.GetType(), ___name, val);
 			}
@@ -434,7 +434,7 @@ namespace MultiversalRenderer.Core
 					CHtmlAttribute retAttr = this.GetByIndex(___index) as CHtmlAttribute;
                     if (retAttr != null)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                         {
                            commonLog.LogEntry("{0}.GetPropertyValueByIndex({1}) returns {2}.", this, ___index, retAttr);
                         }
@@ -444,12 +444,12 @@ namespace MultiversalRenderer.Core
 			}
 			catch (Exception ex)
 			{
-				if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 3)
+				if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 3)
 				{
 					commonLog.LogEntry("___getPropertyByName by index has exception", ex);
 				}
 			}
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.GetPropertyValueByIndex({1}) returns null.", this, ___index);
             }
@@ -459,14 +459,14 @@ namespace MultiversalRenderer.Core
 		{
 			try
 			{
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("TODO: SetPropertyValue {0} {1} : {2}", this, ___index, val);
                 }
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("SetPropertyValue {0} {1} : {2}", ___index, val, ex.Message);
 				}
@@ -491,7 +491,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___common_object_clone()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("x__Clone {0} {1} called",this.GetType(), this);
 			}
@@ -499,14 +499,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___deleteByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}",this.GetType(), this, ___index);
 			}
 		}
 		public void ___deleteByName(string ___name)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByName {0} {1} called : {2}",this.GetType(), this, ___name);
 			}
@@ -514,7 +514,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object[] ___getByIds()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getByIds() {0} {1} called",this.GetType(), this);
 			}
@@ -523,7 +523,7 @@ namespace MultiversalRenderer.Core
 		}
 		public string ___getClassName()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getClassName {0} {1} called",this.GetType(), this);
 			}
@@ -531,7 +531,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getDefaultValue()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getDefaultValue {0} {1} called",this.GetType(), this);
 			}
@@ -539,7 +539,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getParentScope()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getParentScope {0} {1} called",this.GetType(), this);
 			}
@@ -547,14 +547,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setParentScope(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setParentScope {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
 		}
 		public object ___getProtoType()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getProtoType {0} {1} called",this.GetType(), this);
 			}
@@ -562,7 +562,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___hasInstance(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___hasInstance {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -570,7 +570,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___instanceEquals(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___instanceEquals {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -578,7 +578,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setProtoType(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setProtoType {0} {1} called : {2}",this.GetType(), this, ___object);
 			}

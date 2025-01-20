@@ -358,7 +358,7 @@ namespace MultiversalRenderer.Core
 						
 
 						
-						if(commonLog.LogLevel > 8)
+						if(commonLog.CommonLogLevel > 8)
 						{
 							commonLog.LogEntry("'{0}' has * at begining. Remove 1st one", __SelectorID);
 							
@@ -417,7 +417,7 @@ namespace MultiversalRenderer.Core
 			
             CHtmlStopWatch ___ListLoolupWatch = null;
             System.Collections.Generic.Dictionary<int, int> srStyleGuidList = new System.Collections.Generic.Dictionary<int, int>();
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 			{
 				___ListLoolupWatch = new CHtmlStopWatch();
 			}
@@ -474,7 +474,7 @@ namespace MultiversalRenderer.Core
 
 			if(___ListLoolupWatch != null)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					___ListLoolupWatch.Stop();
 					if(__element.___documentWeakRef  != null)
@@ -492,7 +492,7 @@ namespace MultiversalRenderer.Core
 			if(__parentElement != null)
 			{
 				CHtmlStopWatch ___CSSParentLookupWatch = null;
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					___CSSParentLookupWatch = new CHtmlStopWatch();
 				}
@@ -565,7 +565,7 @@ namespace MultiversalRenderer.Core
 							__WhileLoopCount++;
 							if(__WhileLoopCount >= 500)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 								{
 									commonLog.LogEntry("GetCHtmlStyleElementCandidateArrayList cancelled due to 500 : "  + __element.ToString());
 									break;
@@ -636,7 +636,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 									}
 									catch(Exception ex)
 									{
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 										{
 											commonLog.LogEntry("PerformElementStyleListsBinarySearchComposingArrayListWithString for parent Element Error ", ex);
 										}
@@ -701,7 +701,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 								___CurrentLoop ++;
 								if(___CurrentLoop > 100)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 									{
 										commonLog.LogEntry("BUGBUG Adjacent Sibling Enters Infinite Loop");
 									}
@@ -747,7 +747,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 										}
 										catch(Exception ex)
 										{
-											if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+											if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 											{
 												commonLog.LogEntry("PerformElementStyleListsBinarySearchComposingArrayListWithString for parent Element Error ", ex);
 											}
@@ -773,7 +773,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("GetCHtmlStyleElementCandidateArrayList AdjacentSibing Error", ex);
 					}
@@ -836,7 +836,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 								}
 								catch(Exception ex)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 									{
 										commonLog.LogEntry("PerformElementStyleListsBinarySearchComposingArrayListWithString for Indirect Ajdacent Combinator Search Error ", ex);
 									}
@@ -853,7 +853,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("GetCHtmlStyleElementCandidateArrayList Indirect Adjacent Combinator Error", ex);
 					}
@@ -861,7 +861,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 			IndirectAdjacentCombinatorDone:
 				if(___CSSParentLookupWatch != null)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 					{
 						___CSSParentLookupWatch.Stop();
 						if(__element.___documentWeakRef  != null)
@@ -981,7 +981,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 							else
 							{
 								copyPart.___ReCreateWorkingKeyIntoCHtmlStyleElement();
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 								{
 									commonLog.LogEntry("Strange Style Selector ID '{0}'", copyPart.SelectorID);
 								}
@@ -1101,7 +1101,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 								else
 								{
 									copyPart.___ReCreateWorkingKeyIntoCHtmlStyleElement();
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 									{
 										commonLog.LogEntry("Strange Style Selector ID '{0}'", copyPart.SelectorID);
 									}
@@ -1305,7 +1305,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 							else
 							{
 								copyPart.___ReCreateWorkingKeyIntoCHtmlStyleElement();
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 								{
 									commonLog.LogEntry("Strange Style Selector ID '{0}'", copyPart.SelectorID);
 								}
@@ -1333,7 +1333,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 							
 							if(__element.___stylesheetsForNextNodeList.Count > STYLE_GROUND_SEARCH_NODE_ITEM_COUNT_LIMIT)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
 								{
 									commonLog.LogEntry("CSS Ground Search Has Found {0} items for Elment {1}. abort.", __element.___stylesheetsForNextNodeList.Count, __element);
 								}
@@ -1435,7 +1435,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 								else
 								{
 									copyPart.___ReCreateWorkingKeyIntoCHtmlStyleElement();
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 									{
 										commonLog.LogEntry("Strange Style Selector ID '{0}'", copyPart.SelectorID);
 									}
@@ -1464,7 +1464,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 								}
 								if(__element.___stylesheetsForNextNodeList.Count > STYLE_GROUND_SEARCH_NODE_ITEM_COUNT_LIMIT)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
 									{
 										commonLog.LogEntry("CSS Ground Search Has Found {0} items for Elment {1}. abort.", __element.___stylesheetsForNextNodeList, __element);
 									}
@@ -1979,7 +1979,7 @@ if ((__currentParent.___stylesheetsForNextNodeListNextLevelTopSelectorKeyClassTy
 			}
 			catch (Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >5)
 				{
 					commonLog.LogEntry("IsCHtmlStyleElementMatchesSurelyAsNormalMode Error: ",ex);
 				}

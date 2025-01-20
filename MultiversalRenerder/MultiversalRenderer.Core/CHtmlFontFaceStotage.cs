@@ -125,7 +125,7 @@ namespace MultiversalRenderer.Core
                     }
                     if(___isFontFamilyFound == false)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("CHtmlFontFaceStogage loadFontFaceFont() Font-Family entry is missiing ");
                         }
@@ -201,7 +201,7 @@ namespace MultiversalRenderer.Core
                                 {
                                     System.Drawing.FontFamily newFontFamily = this.___getNewFontFamiyEntry(fontFamilyLow);
                                     this.loadedFontList[fontFamilyLow] = newFontFamily;
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                     {
                                        commonLog.LogEntry("CHtmlFontFaceStogage has load font {0} : {1} ", fontFamilyLow, newFontFamily);
                                     }
@@ -217,7 +217,7 @@ namespace MultiversalRenderer.Core
                     }
                 }catch(Exception ex)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("CHtmlFontFaceStogage loadFontFaceFont() Exception. ", ex);
                     }
@@ -290,7 +290,7 @@ namespace MultiversalRenderer.Core
                                     
                                     }catch (Exception exPrimary)
                                     {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                         {
                                            commonLog.LogEntry("CHtmlFontFaceStogage ___convertDocumentAdHocFontIntoWebFont Exception. ", exPrimary);
                                         }
@@ -308,13 +308,13 @@ namespace MultiversalRenderer.Core
                     }
                 }catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("CHtmlFontFaceStogage ___convertDocumentAdHocFontIntoWebFont Exception. ", ex);
                     }
 
                 }
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlFontFaceStogage ___convertDocumentAdHocFontIntoWebFont converted {0} fonts for {1} ", refreshedFontCount, fontFamilyLow);
                 }
@@ -483,7 +483,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                             {
                                commonLog.LogEntry("CHtmlFontFaceStogage tempFileDelete minor error. but count..." + ex.Message);
                             }

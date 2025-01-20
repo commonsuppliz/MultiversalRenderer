@@ -110,7 +110,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (___StyleStatus == 0)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 100)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 100)
                         {
                             ___StyleStatus++;
                             commonLog.LogEntry("Style will be must be mearged as JIT afterword.");
@@ -134,7 +134,7 @@ namespace MultiversalRenderer.Core
             if (this.___QueueTask == null)
             {
                 this.___QueueTask = Task.Run(() => PerformStyleGroudMeargeToGroundList(_cancellationToken), _cancellationToken);
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 1)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1)
                 {
                     commonLog.LogEntry("StyleMeargeTaskFor" + this.ShortName + " has started");
                 }
@@ -145,7 +145,7 @@ namespace MultiversalRenderer.Core
         {
             this.IsAllCSSComplete = true;
             _cancellationTokenSource.Cancel();
-            if (commonLog.LoggingEnabled && commonLog.LogLevel > 1)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1)
             {
                 if (this.Count > 0)
                 {
@@ -156,7 +156,7 @@ namespace MultiversalRenderer.Core
 
         private string ConvertStyleUrlIntoFullUrl(string _cssUrl, string ___baseUrl, string _partUri, int _mode)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("Need to convert partial url to full url: {0} mode: {1} css: {2}", _partUri, _mode, _cssUrl);
             }
@@ -334,7 +334,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         catch (Exception exInsert)
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                             {
                                                 commonLog.LogEntry("CSSRuleMeargeQueue Insert or Merge Exception. ", exInsert);
                                             }
@@ -350,7 +350,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     else
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                         {
                                             commonLog.LogEntry("Style Merge Monitor List Lock Failed");
                                         }
@@ -374,7 +374,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch (Exception exBinarySearch)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                 {
                                     commonLog.LogEntry(" Style Merge Queue BinarySearch Failed. ", exBinarySearch.Message);
                                 }
@@ -404,7 +404,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception exStyle)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 1)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1)
                             {
                                 commonLog.LogEntry("PerformStyleGroudMeargeToGroundList() Style Level", exStyle);
                             }
@@ -413,7 +413,7 @@ namespace MultiversalRenderer.Core
                 }
 
             CompletePhase:
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 1 && this.___needsExitFunctionIfQueueZero == false)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1 && this.___needsExitFunctionIfQueueZero == false)
                 {
                     TimeSpan tpSpanPerformStyleGroudMeargeToGroundList = DateTime.Now.Subtract(dtPerformStyleGroudMeargeToGroundList);
                     commonLog.LogEntry("CSS PerformStyleGroudMeargeToGroundList() Thread completed with {0} items.  Short Wait : {1} Long Wait : {2} Elapsed : {3} ms...", this.MergedCount, this.___StyleShortWaitOneCount, this.___StyleLongWaitOneCount, tpSpanPerformStyleGroudMeargeToGroundList);
@@ -424,7 +424,7 @@ namespace MultiversalRenderer.Core
             }
             catch (OperationCanceledException)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
                 {
                     commonLog.LogEntry("PerformStyleGroudMeargeToGroundList() was canceled.");
                 }
@@ -433,12 +433,12 @@ namespace MultiversalRenderer.Core
             {
                 if (ex is System.Threading.ThreadAbortException)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
                     {
                         commonLog.LogEntry("PerformStyleGroudMeargeToGroundList() encounters ThreadAbort. Cont..");
                     }
                 }
-                else if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+                else if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
                 {
                     commonLog.LogEntry("PerformStyleGroudMeargeToGroundList() exception", ex);
                 }

@@ -226,7 +226,7 @@ namespace MultiversalRenderer.Core
                         }
                         break;
                     default:
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                         {
                            commonLog.LogEntry("Strange Combinator in selector : {0}" , cCombinatorCharacter);
                         }
@@ -1205,7 +1205,7 @@ namespace MultiversalRenderer.Core
                     __pseudoValue = __pseudoValueNullable.Value;
                     __pseudoValueValueType = __pseudoValue.ValueType;
                 }
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 50)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 50)
                 {
                    commonLog.LogEntry("CSS last-of-x analysis enter {0} : {1} : {2}", element, ___pseuduType, __pseudoValueNullable);
                 }
@@ -1237,7 +1237,7 @@ namespace MultiversalRenderer.Core
                     CHtmlDocument ___baseDoc = element.___Document;
                     if (___baseDoc == null || ___baseDoc.___documentDomType != CHtmlDomModeType.HTMLDOM)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                         {
                            commonLog.LogEntry("CSS analysis fails due to inappropiate document");
                         }
@@ -1248,7 +1248,7 @@ namespace MultiversalRenderer.Core
 
                         if (___baseDoc.___HtmlBuilder == null)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                             {
                                commonLog.LogEntry("CSS analysis fails due to inappropiate HTMLBuilder");
                             }
@@ -1385,7 +1385,7 @@ namespace MultiversalRenderer.Core
                                 int TagCount = ___ChildList.___TagTypeCountList[(int)element.___elementTagType];
                                 if (((int)__pseudoValueValueType >= (int)CHtmlStyleElementPseudoClassValueType.Num_0 && (int)__pseudoValueValueType <= (int)CHtmlStyleElementPseudoClassValueType.Num_36) == false)
                                 {
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                                     {
                                        commonLog.LogEntry("TODO : nth-last-of-type analysis required");
                                     }
@@ -1415,7 +1415,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (((int)__pseudoValueValueType >= (int)CHtmlStyleElementPseudoClassValueType.Num_0 && (int)__pseudoValueValueType <= (int)CHtmlStyleElementPseudoClassValueType.Num_36) == false)
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                                 {
                                    commonLog.LogEntry("TODO : nth-last-child analysis required");
                                 }
@@ -1433,7 +1433,7 @@ namespace MultiversalRenderer.Core
                         }
                   
                     default:
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                         {
                            commonLog.LogEntry("TODO : IsElementMatchesCSSLastNthXAnalysis required");
                         }
@@ -1442,7 +1442,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                 {
                    commonLog.LogEntry("IsElementMatchesCSSLastNthXAnalysis", ex);
                 }
@@ -2011,7 +2011,7 @@ namespace MultiversalRenderer.Core
 					default:
 					{
 						// Any Pseudo Not defined code above are treated as non-applyable pseudo class
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 50)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 50)
                         {
                            commonLog.LogEntry("CSS : " + pseudoType.ToString() + " pseudo class ignored...");
                         }
@@ -2161,7 +2161,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                 {
                    commonLog.LogEntry("CreateSubStyleSelectorKeyClass Exception : " + pseudoClass.value.ToString(), ex);
                 }
@@ -2267,7 +2267,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("reatePsudoValueClass Exception " + val + " Pos: " + valPos.ToString() + " Msg:" + ex.Message );
 				}

@@ -91,7 +91,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 7)
+                                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 7)
                                         {
                                            commonLog.LogEntry("XMLDOM parse bool error", ex);
                                         }
@@ -106,7 +106,7 @@ namespace MultiversalRenderer.Core
                         this.___locationBase.___setHrefDirect(___fullURLString);
                         this.___locationBase.___AnalyzeLocation();
                         this.___locationBase.___DisableHrefNavigate = false;
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 7)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 7)
                         {
                            commonLog.LogEntry("XMLDOM is start processing url: {0} async: {1}", ___fullURLString, __IsAsync);
                         }
@@ -140,7 +140,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 7)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 7)
                 {
                    commonLog.LogEntry("CHTMLDOMParser_AsyncReadComplete Exception : " , ex);
                 }

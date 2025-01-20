@@ -841,22 +841,63 @@ namespace MultiversalRenderer.Core
             */
             this.___fontfaceDocumentStorage.loadFontFaceFont(strFileLocation, format, ___rule);
         }
-  
-
-
-
-        public CHtmlDocument(CHtmlDomModeType __DocumentType)
+        public CHtmlDocument(CHtmlDomModeType _docType, string url) : this(_docType, url, null)
         {
+            this.___documentDomType = _docType;
+
+        }
+
+
+        public CHtmlDocument(CHtmlDomModeType _docType) : this(_docType, null, null)
+        {
+            this.___documentDomType = _docType;
+
+        }
+        
+        public static CHtmlDocument createDocument(CHtmlDomModeType _docType, string url, string html, CHtmlMultiversalWindow win, MultivasalContentData contentData)
+        {
+            CHtmlDocument doc = new CHtmlDocument(_docType, url, html);
+            doc.___ownerWindowWeakReference = new WeakReference(win, false);
+            doc.___HtmlBuilder.Append(html);
+            doc.___ContentLength = contentData.ContentLength;
+            if(commonHTML.IsNotNull(contentData.LastModified))
+                doc.___lastModified = contentData.LastModified.Value.DateTime.ToString();
+            doc.___IsHtmlResponseCompleted = true;  
+            doc.___contentType = contentData.ContentType; 
+            doc.___MultiversalWindow = win;
+            doc.___parseDocument();
+            return doc;
+        }
+
+
+        public CHtmlDocument(CHtmlDomModeType _docType, string url, string html) 
+        {
+            this.___documentDomType = _docType;
+            if (url != null)
+            {
+                this.___URL = url;
+            }
+            else
+            {
+                this.___URL = "about:blank";
+            }
             this.___locationBase.___ownerObjectType = this.GetType();
             this.___event = new CHtmlWindowEvent();
             this.___event.___eventSourceType = CHtmlWindowEvent.CHtmlWindowEventEventType.staticwindow;
             this.___BackgroundSysColor = Color.White;
             this.___ForegroundSysColor = Color.Black;
-            this.___documentDomType = __DocumentType;
+            this.___documentDomType = _docType;
             this.___ImageArrivalLatestTime = DateTime.Now;
  
             this.___HtmlBuilder = new System.Text.StringBuilder(1000);
-
+            if(html != null)
+            {
+                this.___HtmlBuilder.Append(html);
+                this.___ContentLength = html.Length;
+                this.___IsHtmlResponseCompleted = true;
+                
+            }
+           
 
             if (this.___PageRequestedUrlList == null)
             {
@@ -1020,7 +1061,7 @@ namespace MultiversalRenderer.Core
                 ___HasCleaned = true;
             }
             this.___cleanUp();
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("document : {0}  {1} Finalizer called...", this.toLogString(), commonHTML.GetBoolToString(___HasCleaned));
             }
@@ -1044,7 +1085,7 @@ namespace MultiversalRenderer.Core
                         CHtmlAttribute attr = this.___attributes[__id] as CHtmlAttribute;
                         if (attr != null)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("CHtmlDocumet {0} has access by indexer {1} = {2}", this, __id, attr);
                             }
@@ -1053,7 +1094,7 @@ namespace MultiversalRenderer.Core
                     }
 
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("CHtmlDocumet {0} did not fond attributes or element \'{1}\' returns null", this, __id);
                 }
@@ -1069,7 +1110,7 @@ namespace MultiversalRenderer.Core
                 newAttr.parentNode = this;
                 newAttr.value = value;
                 this.___attributes[keyLow] = newAttr;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("CHtmlDocumet {0} Created New Attributes  {1} = {2}", this, __id, value);
                 }
@@ -1087,14 +1128,14 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public object getElementById(string ___sid, object ___objp1)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("using document.getElementById({0}, {1})....", ___sid, ___objp1);
             }
             CHtmlElement ___element = this.___getElementById_Inner(___sid, false);
             if (___element == null)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("document.getElementById({0}, {1}) retuns null.", ___sid, ___objp1);
                 }
@@ -1108,7 +1149,7 @@ namespace MultiversalRenderer.Core
             CHtmlElement ___element = this.___getElementById_Inner(___sid, false);
             if (___element == null)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("document.getElementById({0}) retuns null.", ___sid);
                 }
@@ -1125,7 +1166,7 @@ namespace MultiversalRenderer.Core
         internal CHtmlElement ___getElementById_Inner(string __sid, bool ___NoBadQueryCheck)
         {
 
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("calling document.getElementById_inner({0}, {1})", __sid, ___NoBadQueryCheck);
             }
@@ -1144,7 +1185,7 @@ namespace MultiversalRenderer.Core
                     {
                         this.___BadQueryList = null;
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("document.getElementById({0}) returns {1}", __sid , elem.toLogString());
                     }
@@ -1169,7 +1210,7 @@ namespace MultiversalRenderer.Core
             }
             catch
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("document.getElementById({0}) Binary Search Failed. Bad data. cant continue", __sid);
                 }
@@ -1210,7 +1251,7 @@ namespace MultiversalRenderer.Core
                                 ///  sbError.Append(this._BadQueryList[__last]);
                                 sbError.Append("\r\n");
                             }
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry(sbError.ToString());
                             }
@@ -1239,7 +1280,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("Bad Query Handling", ex);
                     }
@@ -1336,21 +1377,21 @@ namespace MultiversalRenderer.Core
         }
         public void defineProperty(object ___p1, object ___p2, object ___p3, object ___p4)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("{0}.defineProperty({1}, {2}), {3}", this, ___p1, ___p2, ___p3);
             }
         }
         public void defineProperty(object ___p1, object ___p2, object ___p3)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("{0}.defineProperty({1}, {2}), {3}", this, ___p1, ___p2, ___p3);
             }
         }
         public void defineProperty(object ___p1, object ___p2)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("{0}.defineProperty({1}, {2})", this, ___p1, ___p2);
             }
@@ -1368,7 +1409,7 @@ namespace MultiversalRenderer.Core
                 element.___IsElementVisible = false;
             }
             this.___registerElementDocumentElementID(element);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("Dummy Element has created  : {0}", element);
             }
@@ -1381,13 +1422,13 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("entering scrollingElement  : {0}", this.toLogString());
                 }
                 if(this.___body != null)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry(" scrollingElement  returns : {0}", this.___body.toLogString());
                     }
@@ -1395,7 +1436,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("scrollingElement  returns fails : null");
                     }
@@ -1546,7 +1587,7 @@ namespace MultiversalRenderer.Core
         /// <returns>XPathNSResolver</returns>
         public CHtmlXPathNSResolver createNSResolver(object ___elementObject)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("document.createNSResolver({0}) is called", ___elementObject);
             }
@@ -1554,7 +1595,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlXPathNavigator createNavigator()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("document.createNavigator() is called");
             }
@@ -1582,7 +1623,7 @@ namespace MultiversalRenderer.Core
             CHtmlXPathNSResolver ___nameResolver = null;
             int ___resultTypeAsInt = -1;
             string ___xpathExpressionString = commonHTML.GetStringValue(xpathExpressionObject);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("performing document.evaluate({0}, {1}, {2}, {3}, {4})... it will retuns xpath result.", xpathExpressionObject, contextNodeObject, namespaceResolverObject, resultTypeObject, resultObject);
             }
@@ -1628,7 +1669,7 @@ namespace MultiversalRenderer.Core
             {
                 ___isEvaluateSuccess = false;
                 ___evaluateMessage = eXPathEvaluateException.Message;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("ERROR! document.evaluate() exception...", eXPathEvaluateException);
                 }
@@ -1637,7 +1678,7 @@ namespace MultiversalRenderer.Core
 
             if (__isLoggedInXPathFile == false || __isLoggedInXPathFile == true)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     TimeSpan tpEvaluate = DateTime.Now.Subtract(dtEvaluateStart);
                     commonLog.LogEntry("done! {0}.evaluate(\"{1}\", \"{2}\" , \"{3}\" \"{4}\", \"{5}\") execution completed... result : {6} elapsed: {7} ms...", this, ___xpathExpressionString, ___contextNode, ___nameResolver, ___resultTypeAsInt, resultObject, ___evaluateMessage, tpEvaluate.TotalMilliseconds);
@@ -1664,7 +1705,7 @@ namespace MultiversalRenderer.Core
         }
         private void ___exitPointerLock_inner()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("TODO : ___exitPoinerLock() is called");
             }
@@ -1725,7 +1766,7 @@ namespace MultiversalRenderer.Core
         
         private void ___cancelFullScreen_Inner()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("TODO : ___CancelFullScreen_Inner() is called");
             }
@@ -1770,7 +1811,7 @@ namespace MultiversalRenderer.Core
             {
                 this.___assignHTMLCollectionPrototype(ref arReturn);
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("TODO: {0}.getItems({1}) is not supported yet. just returns empty collection....", this, __itemName);
             }
@@ -2086,7 +2127,7 @@ namespace MultiversalRenderer.Core
             {
                 if (this.___head != null)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("getElementsByTagName Script returns 0. but create one now.");
                     }
@@ -2101,7 +2142,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("TODO: Strange! getElementsByTagName Script returns 0. but no head element");
                     }
@@ -2119,7 +2160,7 @@ namespace MultiversalRenderer.Core
         
         public CHtmlCollection getElementsByClassName(string __className)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("calling document.getElementsByClassName(\"{0}\")", __className);
             }
@@ -2162,12 +2203,12 @@ namespace MultiversalRenderer.Core
             }
             catch
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                 {
                     commonLog.LogEntry("Enumrating all error");
                 }
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("document.getElementsByClassName(\"{0}\") returns {1}...", __className, arReturn.Count);
             }
@@ -2202,7 +2243,7 @@ namespace MultiversalRenderer.Core
             }
             catch
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                 {
                     commonLog.LogEntry("Enumrating all error");
                 }
@@ -2286,7 +2327,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("Get Cookie", ex);
                     }
@@ -2402,7 +2443,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled == true && commonLog.LogLevel >= 5)
+                                        if (commonLog.LoggingEnabled == true && commonLog.CommonLogLevel >= 5)
                                         {
                                             commonLog.LogEntry("Cookie ParseDate Failed {0} '{1}' Original: {2}", ex.Message, sValue, _strCookieValue);
                                         }
@@ -2418,7 +2459,7 @@ namespace MultiversalRenderer.Core
                                     _htmlCookie.Domain = sValue;
                                     break;
                                 default:
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                     {
                                         commonLog.LogEntry("Unknown Properties in cookie name: {0} value: {1}", sName, sValue);
                                     }
@@ -2446,7 +2487,7 @@ namespace MultiversalRenderer.Core
                     }
                     // Use Add method to store cookie
                     this.___storeCookie(_htmlCookie);
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("Set Cookie is called : \'{0}\' {1} {2} {3}", value, _htmlCookie.Name, _htmlCookie.Value, _htmlCookie.Path);
                     }
@@ -2454,7 +2495,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("[Cookie Handling Error]\r\n" + value + "\r\n" + commonData.GetExceptionAsString(ex));
                     }
@@ -2536,7 +2577,7 @@ namespace MultiversalRenderer.Core
             if (this.___isParseDocumentEntered == false)
             {
                 bool isCompleteDoc = false;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("document.write() is called but while parseDocument() is not called : {0} Startup Length : {1}                             CurrentLength : {2} ", this.___DocumentWriteBuilder.ToString(), ____beginingHTMLBuilderLength, this.___DocumentWriteBuilder.Length);
                 }
@@ -2547,7 +2588,7 @@ namespace MultiversalRenderer.Core
 
                     isCompleteDoc = commonHTML.___isStringBuilderContainedHTMLCompleteDocument(ref this.___DocumentWriteBuilder, ref __HTMLStartStartPos, ref __HTMLEndStartPos);
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("StringBuilder HTML entity check result : {0} Start : {1} End : {2}", isCompleteDoc, __HTMLStartStartPos, __HTMLEndStartPos);
                 }
@@ -2565,7 +2606,7 @@ namespace MultiversalRenderer.Core
                     {
                         if (this.___MultiversalWindow.___WindowLevel >= 2)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("Strange HTMLBuilder contains some HTML but cont...");
                             }
@@ -2581,7 +2622,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (this.___MultiversalWindow.___WindowLevel >= 2)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry(" ___documentwrite_processor merged document.write() data into html for window :{0}", this.___MultiversalWindow);
                                 }
@@ -2598,10 +2639,10 @@ namespace MultiversalRenderer.Core
                                 this.___URL = string.Copy(commonHTML.DOCUMENT_URL_FOR_DYNAMIC_CONTENT);
                                 DateTime documentWriteFullParseStartTime = DateTime.Now;
 
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     TimeSpan tpSpan = DateTime.Now.Subtract(documentWriteFullParseStartTime);
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("document creation process done of ___document_processor() in {0} ms...", tpSpan.TotalMilliseconds);
                                     }
@@ -2609,7 +2650,7 @@ namespace MultiversalRenderer.Core
                             }
                             else
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("Strange... ___documentwrite_processor merged document.write() data into html, but ownerWindow Level is less than 2. Skip....");
                                 }
@@ -2700,7 +2741,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("MergeDocumentWriteBuilder Precheck", ex);
                             }
@@ -2708,7 +2749,7 @@ namespace MultiversalRenderer.Core
                     HeadCheckDone:
                         if (__IsDocumentWriteContentsShouldWrittenAfterBody == true && this.___IsHtmlBodyTagPassed == false)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                             {
                                 commonLog.LogEntry("document.write content \"{0}\" non-head tag written before body [{1}] Reason : {2}", this.___DocumentWriteBuilder.ToString(), __FirstTag, ___ReasonString);
                                 commonLog.LogEntry("Inserting Postion : {0} HTMLBuilder Length {1}", __pos, this.___HtmlBuilder.Length);
@@ -2732,7 +2773,7 @@ namespace MultiversalRenderer.Core
                     }
                     else
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                         {
                             commonLog.LogEntry("Unable to obtain HTMLBuilder Lock Object");
                         }
@@ -2744,7 +2785,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                     {
                         commonLog.LogEntry("MergeDocumentWriteBuilder Exception ", ex);
                     }
@@ -2760,7 +2801,7 @@ namespace MultiversalRenderer.Core
             this.___DocumentWriteBuilder = null;
         }
         /// <summary>
-        /// If document.write string exists create element based upon written data
+        /// If document.write string exists create element based upon written html
         /// Note) Some script line adgngo script, does search element just right after
         /// document.write("div id=hogehoge); document.getlementbyid....)
         /// it may cause trouble for scripts
@@ -2795,7 +2836,7 @@ namespace MultiversalRenderer.Core
                         // ========================================================================
                     }
 
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("-------------------[Current document.write]-------\r\n");
                         commonLog.LogEntry(____strTempHTML);
@@ -2823,7 +2864,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (___targetParentElement != null && ___targetParentElement.___parentWeakRef == null)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                 {
                                     commonLog.LogEntry("CreateElementImmediatelyFromDocumentWrittenStringData() found target seems be removed  : {0}", ___targetParentElement);
                                 }
@@ -2840,7 +2881,7 @@ namespace MultiversalRenderer.Core
                                             {
                                                 if (___stackElement.___elementTagType != CHtmlElementType.SCRIPT || ___stackElement.___elementTagType != CHtmlElementType.COMMENT)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                     {
                                                         commonLog.LogEntry("CreateElementImmediatelyFromDocumentWrittenStringData()  picked up \"{0}\" as Target Element ", ___stackElement);
                                                     }
@@ -2878,7 +2919,7 @@ namespace MultiversalRenderer.Core
 
                         if (___targetParentElement == null)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("CreateElementImmediatelyFromDocumentWrittenStringData could find parent");
                             }
@@ -2902,14 +2943,14 @@ namespace MultiversalRenderer.Core
                     {
 
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                     {
                         commonLog.LogEntry("CreateElementImmediatelyFromDocumentWrittenStringData created {0} in {1}", __count, ___targetParentElement);
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                     {
                         commonLog.LogEntry("CreateElementImmediatelyFromDocumentWrittenStringData", ex);
                     }
@@ -2931,7 +2972,7 @@ namespace MultiversalRenderer.Core
             else
             {
                 /*
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 11)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 11)
 				{
 					commonLog.LogEntry("documet.write was empty");
 				}
@@ -2973,7 +3014,7 @@ namespace MultiversalRenderer.Core
         public CHtmlDocument ___open_inner(object ___mimeType, object ___replace)
         {
             this.___IsDocumentWriteOpen = true;
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
             {
                 commonLog.LogEntry("{0}.open({1}, {2}) called", this, ___mimeType, ___replace);
             }
@@ -3021,7 +3062,7 @@ namespace MultiversalRenderer.Core
         
         public void close()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
             {
                 commonLog.LogEntry("{0}.close() called", this);
             }
@@ -3039,7 +3080,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (___isParseDocumentEntered == false)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                         {
                             commonLog.LogEntry("{0}.close() called, but parseDocument is not called. run it now.: {1}", this, this.___DocumentWriteBuilder.ToString());
                         }
@@ -3051,7 +3092,7 @@ namespace MultiversalRenderer.Core
                     }
                     else
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                         {
                             commonLog.LogEntry("TODO: {0}.close() called, but parseDocument has been called.", this, this.___DocumentWriteBuilder.ToString());
                         }
@@ -3103,7 +3144,7 @@ namespace MultiversalRenderer.Core
         
         public bool dispatchEvent(object __eventObject)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("Document.dispatchEvent  {0} : {1} is enter", this, __eventObject);
             }
@@ -3118,7 +3159,7 @@ namespace MultiversalRenderer.Core
                     }
                     if (this.___Disposing == false)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("TODO; Document.dispatchEvent {0} is about to calling Title : {1} Type : {2}", this, __dispEvent.EventTitle, __dispEvent.type);
                         }
@@ -3128,7 +3169,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("TODO : Document.dispatchEvent  {0} : {1} is unexptected Type", this, __eventObject);
                     }
@@ -3136,7 +3177,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("Document.dispatchEvent Error", ex);
                 }
@@ -3275,7 +3316,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___CreateElementTagNameAndAttributeList", ex);
                 }
@@ -3290,7 +3331,7 @@ namespace MultiversalRenderer.Core
             System.Collections.SortedList ___srAttributesList = null;
             try
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                 {
                     commonLog.LogEntry("calling createElementInner(\'{0}\' , \'{1}\')", _sNS, _newname);
                 }
@@ -3412,7 +3453,7 @@ namespace MultiversalRenderer.Core
                         newElement.___iframeMultiversalWindow = commonHTML.createIFrameMultiversalWindow(this.___MultiversalWindow, this, newElement);
                     }
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("createElementInner(\'{0}\')", _newname);
                 }
@@ -3448,7 +3489,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("CHtmlDocument.createElementInner() Exception...", ex);
                 }
@@ -3488,7 +3529,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("__PreCreateManagedControl", ex);
                 }
@@ -3497,7 +3538,7 @@ namespace MultiversalRenderer.Core
         
         public CHtmlAttribute createAttribute(string __name)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("calling createAttribute({0})...", __name);
             }
@@ -3515,7 +3556,7 @@ namespace MultiversalRenderer.Core
         
         public CHtmlTextElement createComment(object _otext)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("calling createComment({0})...", _otext);
             }
@@ -3567,7 +3608,7 @@ namespace MultiversalRenderer.Core
 			*/
             //textElement.___DocumentElementIndex = -1;
             textElement.___IsDynamicElement = true;
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 commonLog.LogEntry("createTextNodeInner(\'{0}\')", ___InnerText);
             }
@@ -3577,7 +3618,7 @@ namespace MultiversalRenderer.Core
         
         public CHtmlRange createRange()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 commonLog.LogEntry("entering {0}.createRange()...", this);
             }
@@ -3593,7 +3634,7 @@ namespace MultiversalRenderer.Core
         
         public CHtmlElement createDocumentFragment()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 commonLog.LogEntry("entering {0}.createDocumentFragment()...", this);
             }
@@ -4411,7 +4452,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("Error Duraing Cleanup ParseThread on CHTMLDocument, but cont...");
                     }
@@ -4426,7 +4467,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -4530,7 +4571,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("CSS Search Exection Thread abrot Exception. it is ok....");
                     }
@@ -4545,7 +4586,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -4560,7 +4601,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -4581,7 +4622,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -4601,7 +4642,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -4685,7 +4726,7 @@ namespace MultiversalRenderer.Core
                     {
                         if (this.___TagPrefetchThread.ThreadState == ThreadState.Running)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("CHtmlDocument.CleanUp() found ___TagPrefetchThread is running..");
                             }
@@ -4698,7 +4739,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("CHtmlDocument.CleanUp() abort ___tagPrefechThread. Ignore...");
                         }
@@ -4719,7 +4760,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -4753,7 +4794,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("HtmlGraphics Dispose", ex.Message);
                         }
@@ -4837,7 +4878,7 @@ namespace MultiversalRenderer.Core
                      }
                      catch (Exception ex)
                      {
-                         if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                         if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                          {
                              commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                          }
@@ -4887,7 +4928,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("Clear Image", ex);
                             }
@@ -4895,7 +4936,7 @@ namespace MultiversalRenderer.Core
                     }
                     if (this.___images.Count > 0)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Strange... disponse imageList found {0} images in list. it may be not disposed...", ___images.Count);
                         }
@@ -4919,7 +4960,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Clear Opacity Image Cache List Error", ex);
                         }
@@ -4961,7 +5002,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception exPArgb)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Document.CleanUp PArgb List Dispose Exception... but cont...", exPArgb);
                         }
@@ -4970,17 +5011,7 @@ namespace MultiversalRenderer.Core
                     this.___pargbConvertedBitmapList = null;
                 }
                 if (this.___cssRuleBlackList != null)
-                {
-                    int _sCount = this.___cssRuleGourndItemsCount;
-                    if (_sCount > 0)
-                    {
-
-                        this.___cssRuleGroundList.Clear();
-                    }
-                    else
-                    {
-                        // this.___cssRuleGroundList.Clear();
-                    }
+                { 
                     this.___cssRuleGroundList = null;
                 }
                 if (this.___tagStyles != null)
@@ -5055,10 +5086,7 @@ namespace MultiversalRenderer.Core
                  */
                 if (this.___cssRuleBlackList != null)
                 {
-                    if (this.___cssRuleBlackList.Count > 0)
-                    {
-                        this.___cssRuleBlackList.Clear();
-                    }
+
                     this.___cssRuleBlackList = null;
                 }
 
@@ -5121,7 +5149,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("CleanUp  ___ElementDynamicallyCreatedList", ex);
                         }
@@ -5136,10 +5164,7 @@ namespace MultiversalRenderer.Core
 
                     this.___HtmlBuilder = null;
                 }
-                if (this.___docTypeElement != null)
-                {
-                    this.___docTypeElement = null;
-                }
+
 
                 if (this.___DocumentWriteBuilderLockObject != null)
                 {
@@ -5195,7 +5220,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("CleanUp TempBitmap", ex);
                         }
@@ -5225,7 +5250,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                 {
                     commonLog.LogEntry("CHtmlDocument CleanUp()", ex);
                 }
@@ -5298,7 +5323,7 @@ namespace MultiversalRenderer.Core
 
                         targetElement.___HasMapInfo = true;
 
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                         {
                             commonLog.LogEntry("Map Tag Found : {0} -> {1}", mapElement, targetElement);
                         }
@@ -5308,7 +5333,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("ProcessElementMapInfomation", ex);
                 }
@@ -5370,7 +5395,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("AbortParseThread called '{0}' {1}", this.___UrlShortName, ex.Message);
                 }
@@ -5441,7 +5466,7 @@ namespace MultiversalRenderer.Core
                         {
                             this.___TemporayBitmap = new Bitmap(100, 50);
 
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("CHtmlDocument CreateGraphicContainer using Bitmap Graphics : {0} ", this.___TemporayBitmap.Size);
                             }
@@ -5469,7 +5494,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -5478,7 +5503,7 @@ namespace MultiversalRenderer.Core
                         {
                             this.___TemporayBitmap = new Bitmap(100, 50);
 
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("Retrying CHtmlDocument CreateGraphicContainer using Bitmap Graphics : {0} ", this.___TemporayBitmap.Size);
                             }
@@ -5498,7 +5523,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("CHtmlDocument CreateGraphicContainer", ex);
                 }
@@ -5583,7 +5608,7 @@ namespace MultiversalRenderer.Core
                     }
                     else
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                         {
                             commonLog.LogEntry("Unnn. Script Access to document.body. but body not created yet. create it now");
                         }
@@ -5607,7 +5632,7 @@ namespace MultiversalRenderer.Core
 
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -5637,7 +5662,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("Unnn. Script Access to document.head. but body not created yet. create it now");
                     }
@@ -5680,7 +5705,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("___createImageBase64ImageIntoDocument() exception. ", ex);
                         }
@@ -5703,7 +5728,7 @@ namespace MultiversalRenderer.Core
                         double versionDouble = -1;
                         if (double.TryParse(CHtmlNavigator.___browserVersionShortName, out versionDouble) == true)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("document.documentMode returns : {0}", versionDouble);
                             }
@@ -5724,7 +5749,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("TODO: document.prefix returns empty");
                 }
@@ -5739,7 +5764,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("TODO: document.xmlEncoding returns empty");
                 }
@@ -5751,7 +5776,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("TODO: document.xmlStandalone returns empty");
                 }
@@ -5762,7 +5787,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("TODO: document.xmlVersion returns empty");
                 }
@@ -5773,7 +5798,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("TODO: document.localName returns empty");
                 }
@@ -5784,7 +5809,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("TODO: document.namespaceURI returns empty");
                 }
@@ -5802,7 +5827,7 @@ namespace MultiversalRenderer.Core
 				else
 				{
 
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("document.documentElement is not found");
 					}
@@ -5931,7 +5956,7 @@ namespace MultiversalRenderer.Core
 				}
 				else
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 					{
 						commonLog.LogEntry("document.selection = {0}", value);
 					}
@@ -5971,7 +5996,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -5990,7 +6015,7 @@ namespace MultiversalRenderer.Core
         }
         private void doScroll_Inner(object _args)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("skip document.doScroll : {0}", _args);
             }
@@ -6015,7 +6040,7 @@ namespace MultiversalRenderer.Core
             int _y = 0;
             _x = commonHTML.GetIntFromObject(xobj, 0);
             _y = commonHTML.GetIntFromObject(yobj, 0);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("calling elementFromPoint : {0}", _x, _y);
             }
@@ -6098,7 +6123,7 @@ namespace MultiversalRenderer.Core
 		}
 		private string ConvertStyleUrlIntoFullUrl(string _cssUrl, string _partUri, int _mode)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("Need to convert partial url to full url: {0} mode: {1} css: {2}", _partUri, _mode, _cssUrl);
 			}
@@ -6167,7 +6192,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
                         {
                             commonLog.LogEntry("MergeCHtmlStyleElementIntoDocumentStyleSheet .___CSSNthOfTypeTagTypesList Exception", ex);
                         }
@@ -6192,7 +6217,7 @@ namespace MultiversalRenderer.Core
 					}
 					else
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("Style Merge Monitor List Lock Failed");
 						}
@@ -6208,7 +6233,7 @@ namespace MultiversalRenderer.Core
 						}
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -6352,7 +6377,7 @@ namespace MultiversalRenderer.Core
             }
             if (___memoryStream.Length > commonHTML.CHARSET_LOOKUP_BYTES_LIMIT)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___isMemoryStringContainsMetaCharset()  is over {0}, but proceed to read...", commonHTML.CHARSET_LOOKUP_BYTES_LIMIT);
                 }
@@ -6471,7 +6496,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                         }
@@ -6566,7 +6591,7 @@ namespace MultiversalRenderer.Core
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                     {
                                                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                                     }
@@ -6638,7 +6663,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("DetectCharsetInMemoryStream()", ex);
                     }
@@ -6668,7 +6693,7 @@ namespace MultiversalRenderer.Core
                     this.___DBCSCharLength = 2;
                     break;
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
             {
                 commonLog.LogEntry("charset '{0}' detected at pos '{1}' no charset until body : {2}...", resultCharset, i, __noCharsetFoundByBodyTag);
 
@@ -6701,6 +6726,19 @@ namespace MultiversalRenderer.Core
 
             }
         }
+        public void setDocumentIntoMultiversalWindow(IMultiversalWindow window)
+        {
+            if (window != null)
+            {
+                this.___MultiversalWindow = window as CHtmlMultiversalWindow;
+                if (this.___MultiversalWindow != null)
+                {
+                    this.___MultiversalWindow.setDocumentGlobalMultiversalWindow(this);
+                }
+            }
+        }
+
+
 
         private void ___CreateTextNodeElement(CHtmlElement ___parentElement, System.Text.StringBuilder ___sbText, int ___StartPos, int ___EndPos, System.Collections.Generic.SortedList<int, char> ___NBSPList)
         {
@@ -6810,7 +6848,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                         {
                             commonLog.LogEntry("___calculateTextElementBounds for _newText", ex);
                         }
@@ -6829,7 +6867,7 @@ namespace MultiversalRenderer.Core
             ___checkBodyHeadExistanceInHTMLBuilderMethodEnterCount++;
             if (___checkBodyHeadExistanceInHTMLBuilderMethodEnterCount > 10 || this.___IsHtmlBodyTagPassed == true)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("___checkBodyHeadExistanceInHTMLBuilder() entered more than 10 times. escaping");
                 }
@@ -6846,7 +6884,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex1)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("___checkBodyHeadExistanceInHTMLBuilder() ToString() Or ToCharArray() Exception", ex1);
                     }
@@ -6950,7 +6988,11 @@ namespace MultiversalRenderer.Core
         {
             this.___charset = charset;
             this.___IsHtmlResponseCompleted = true;
-
+            this.___IsHtmlCharSetDetectionCompleted = true;
+            if (this.___HtmlBuilder == null)
+            {
+                this.___HtmlBuilder = new System.Text.StringBuilder();
+            }
             this.___HtmlBuilder.Append(html);
             this.___ContentLength = this.___HtmlBuilder.Length;
             ___parseDocument();
@@ -6967,15 +7009,13 @@ namespace MultiversalRenderer.Core
 			try
 			{
 
-
-                this.___IsHtmlBodyTagPassed = false;
                 switch (this.___documentDomType)
 				{
 					case CHtmlDomModeType.HTMLDOM:
                     case CHtmlDomModeType.HTMLDOM_NoGUI:
                         if (this.___IsMultiversalDocument == true)
                         {
-
+                            
                             // ===================================================================
                             // Multiversal Document Does not use ScriptHost
                             // it uses MultiversalWindow to process Scripts now.
@@ -7065,7 +7105,7 @@ namespace MultiversalRenderer.Core
                 }
                 if (string.IsNullOrEmpty(this.___URL) == true)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                     {
                         commonLog.LogEntry("Strange. Document.___URL is no assigned");
                     }
@@ -7086,7 +7126,7 @@ namespace MultiversalRenderer.Core
                     }else if( this.___HtmlGraphics == null)
 					{
                         
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 						{
 							commonLog.LogEntry("Unable to obtain Document.HtmlGrahpic with thread. Aborting...");
 						}
@@ -7095,7 +7135,7 @@ namespace MultiversalRenderer.Core
                     }
                     else if (this.___HtmlGraphics.Graphic == null)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Unable to obtain Document.HtmlGrahpic.Grahic with thread. Aborting...");
                         }
@@ -7220,7 +7260,7 @@ namespace MultiversalRenderer.Core
 						{
                             if (___curHTMLParsePosition == this.___HtmlBuilderLength)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 								{
 									commonLog.LogEntry("___parseDocument Loop over 100000 abort");
 								}
@@ -7351,7 +7391,7 @@ namespace MultiversalRenderer.Core
                                                             int findPoint = GetStringPositionInHtmlBuilder("]]>", this.___curHTMLParsePosition);
                                                             if (findPoint > -1)
                                                             {
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 20)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 20)
                                                                 {
                                                                     commonLog.LogEntry("<![CDATA[ Section found skip to {0}", findPoint + 2);
                                                                 }
@@ -7445,7 +7485,7 @@ namespace MultiversalRenderer.Core
                                                             }
                                                             else
                                                             {
-                                                                if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                 {
                                                                     commonLog.LogEntry("BUGBUGTEXT");
                                                                 }
@@ -7574,7 +7614,7 @@ namespace MultiversalRenderer.Core
                                                             if (lastChar == '\'' || lastChar == '\"')
                                                             {
                                                                 // it seems be there is other tag is appearing next. it should be end quote
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 20)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 20)
                                                                 {
                                                                     commonLog.LogEntry("Attributes character at {0} in quote but will timerminated due to just before character was ({1})", ___curHTMLParsePosition, lastChar);
                                                                 }
@@ -7605,7 +7645,7 @@ namespace MultiversalRenderer.Core
                                                     if (__CharN == '<')
                                                     {
                                                         // it seems be there is other tag is appearing next. it should be end quote
-                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 20)
+                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 20)
                                                         {
                                                             commonLog.LogEntry("Attributes character at {0} in quote but will timerminated due to {1}", ___curHTMLParsePosition, __CharN);
                                                         }
@@ -7725,7 +7765,7 @@ namespace MultiversalRenderer.Core
                                                                     int skipTagCount = this.___skipTagStack.Count;
                                                                     if (skipTagCount == 0)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                         {
 
                                                                             commonLog.LogEntry("BUGUBUG!!!! ___parseDocument() skiped tags \"{0}\" but top tags does not exist", __closingTagName);
@@ -7740,7 +7780,7 @@ namespace MultiversalRenderer.Core
                                                                         goto NextChar;
                                                                     }else if (skipTagCount == 1 && string.Equals(__closingTagName, this.___skipTagStack[0], StringComparison.Ordinal) == true)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                         {
                                                                             commonLog.LogEntry("___parseDocument() skiped tags \"{0}\" until position for  {1}", __closingTagName, ___curHTMLParsePosition);
                                                                         }
@@ -7754,7 +7794,7 @@ namespace MultiversalRenderer.Core
                                                                     }
                                                                     else
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                         {
                                                                             if (skipTagCount == 1)
                                                                             {
@@ -7801,7 +7841,7 @@ namespace MultiversalRenderer.Core
                                                     }
                                                     if (___DocumentWriteBuilder != null)
                                                     {
-                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 50)
+                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 50)
                                                         {
                                                             commonLog.LogEntry("calling MergeDocumentWriteBuilder({0}) with {1} char string", this.___curHTMLParsePosition.ToString(), ___DocumentWriteBuilder.Length);
                                                         }
@@ -7835,7 +7875,7 @@ namespace MultiversalRenderer.Core
                                                             }
                                                             if (IsMayBeCommentSection == true)
                                                             {
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 100)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 100)
                                                                 {
                                                                     commonLog.LogEntry("Conditional Comment is found. {0} is found skip to next...", _sbTagNameBuilder.ToString());
                                                                 }
@@ -7926,7 +7966,7 @@ namespace MultiversalRenderer.Core
                                                                         }
                                                                         else
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                             {
                                                                                 commonLog.LogEntry("Slash EndAttributes Check could not handle properly, treat it as no tag end. : " + _sbTagAttributesBuilder.ToString());
                                                                             }
@@ -7937,7 +7977,7 @@ namespace MultiversalRenderer.Core
                                                                 }
                                                                 catch (Exception ex)
                                                                 {
-                                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 50)
+                                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 50)
                                                                     {
                                                                         commonLog.LogEntry("Slash EndAttributes Check Error : ", ex);
                                                                     }
@@ -8067,7 +8107,7 @@ namespace MultiversalRenderer.Core
                                                                     {
                                                                         if (this.___body.___parent != null)
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                             {
                                                                                 commonLog.LogEntry("Found Dynamic Body Tag in {0}", ___tagNameTemp, this.___curHTMLParsePosition);
                                                                             }
@@ -8119,7 +8159,7 @@ namespace MultiversalRenderer.Core
                                                                 {
                                                                     if (((this.___tagSkipMode & CHtmlTagReadSkipModeType.skip_html) == CHtmlTagReadSkipModeType.skip_html) == false)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                         {
                                                                             commonLog.LogEntry("Found Strange Tag {0}. Start Skip to end...", ___tagNameTemp);
                                                                         }
@@ -8143,7 +8183,7 @@ namespace MultiversalRenderer.Core
                                                                 {
                                                                     if (((this.___tagSkipMode & CHtmlTagReadSkipModeType.skip_body) == CHtmlTagReadSkipModeType.skip_body) == false)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                         {
                                                                             commonLog.LogEntry("Found Strange Tag {0}. Start Skip to end...", ___tagNameTemp);
                                                                         }
@@ -8167,7 +8207,7 @@ namespace MultiversalRenderer.Core
                                                                 {
                                                                     if (((this.___tagSkipMode & CHtmlTagReadSkipModeType.skip_head) == CHtmlTagReadSkipModeType.skip_head) == false)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                         {
                                                                             commonLog.LogEntry("Found Strange Tag {0}. Start Skip to end...", ___tagNameTemp);
                                                                         }
@@ -8224,7 +8264,7 @@ namespace MultiversalRenderer.Core
                                                     {
                                                         if (tagElement.___elementTagType == CHtmlElementType.UNKNOWN)
                                                         {
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                             {
                                                                 commonLog.LogEntry("UNKOWN TAG <{0}> in {1}", ___tagNameTemp, this.___curHTMLParsePosition);
                                                             }
@@ -8239,7 +8279,7 @@ namespace MultiversalRenderer.Core
                                                         }
                                                         else
                                                         {
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                             {
                                                                 commonLog.LogEntry("BUGUBUG Document.___locatonBase has set to null, but recreate for now...");
                                                             }
@@ -8319,7 +8359,7 @@ namespace MultiversalRenderer.Core
                                                                     {
                                                                         if (this.___bodyDummyElement == null && this.___body == null)
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                             {
                                                                                 commonLog.LogEntry("<body> tag does not exists creat one from dummy body Element. Head EndPostion : {0} Current : {1} Element : {2}", this.___headEndTagPositionInHTMLBuilder, this.___curHTMLParsePosition, tagElement);
                                                                             }
@@ -8327,7 +8367,7 @@ namespace MultiversalRenderer.Core
                                                                         }
                                                                         else if(this.___bodyDummyElement != null)
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                             {
                                                                                 commonLog.LogEntry("<body> tag does not exists creat one from dummy body Element. Head EndPostion : {0} Current : {1} Element : {2}",  this.___headEndTagPositionInHTMLBuilder,this.___curHTMLParsePosition, tagElement);
                                                                             }
@@ -8384,7 +8424,7 @@ namespace MultiversalRenderer.Core
                                                                         }
                                                                         catch (Exception ex)
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                                                                             {
                                                                                 commonLog.LogEntry("WaitOne", ex);
                                                                             }
@@ -8393,7 +8433,7 @@ namespace MultiversalRenderer.Core
                                                                     }
                                                                     else
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                                                                         {
                                                                             commonLog.LogEntry("CSS Not Completed. Strange But Waiting...");
                                                                         }
@@ -8407,7 +8447,7 @@ namespace MultiversalRenderer.Core
                                                                     __tpSleep = DateTime.Now.Subtract(this.___responseStartTime);
                                                                     if (__tpSleep.TotalMilliseconds >= commonHTML.StylesheetMaximumWaitMilliseconds)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                                                         {
                                                                             commonLog.LogEntry("CSS Timeup!");
                                                                         }
@@ -8423,7 +8463,7 @@ namespace MultiversalRenderer.Core
                                                             }
                                                             if (this.___StyleQueue != null && this.___StyleQueue.Count > 0)
                                                             {
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                                                                 {
                                                                     commonLog.LogEntry("There is still some style remains on queue {0}...", this.___StyleQueue.Count);
                                                                 }
@@ -8437,7 +8477,7 @@ namespace MultiversalRenderer.Core
                                                                 ___DetectIdenticalStylePreviousSiblingCloningEnabled();
                                                                 this.___cssRuleGourndItemsCount = this.___cssRuleGroundList.Count;
                                                                 this.___CHtmlStyleElementListsCountAtBodyTagPassed = this.___cssRuleGourndItemsCount;
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                                 {
                                                                     TimeSpan tpStyleWaitResult = DateTime.Now.Subtract(this.___responseStartTime);
                                                                     commonLog.LogEntry("'{0}' <body> {1} started with all stylesheets obtained of {2}/{3} CSS Accu : {4} within {5} ms ...", this.___UrlShortName, this.___StylesheetProcessMode, this.___StyleSheetOnlyFileDownloadPendingCount, this.___StyleScriptFileDownloadRequestedTotalCount, (int)this.___CSSDocumentTotalPseudoClass, tpStyleWaitResult.TotalMilliseconds);
@@ -8476,7 +8516,7 @@ namespace MultiversalRenderer.Core
                                                                 ___DetectIdenticalStylePreviousSiblingCloningEnabled();
                                                                 this.___cssRuleGourndItemsCount = this.___cssRuleGroundList.Count;
                                                                
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                                 {
                                                                     TimeSpan tpStyleWaitResult = DateTime.Now.Subtract(this.___responseStartTime);
                                                                     commonLog.LogEntry("'{0}' <body> {1} started with some stylesheets not obtained of {2}:{3}/{4} CSS Acu: {5} within {6} ms...", this.___UrlShortName, this.___StylesheetProcessMode, this.___StyleSheetOnlyFileDownloadPendingCount, this.___StyleSheetOnlyFileDownloadPendingCount, this.___StyleScriptFileDownloadRequestedTotalCount, (int)this.___CSSDocumentTotalPseudoClass, tpStyleWaitResult.TotalMilliseconds);
@@ -8496,7 +8536,7 @@ namespace MultiversalRenderer.Core
                                                             }
                                                             this.___cssRuleGourndItemsCount = this.___cssRuleGroundList.Count;
                                                             this.___isStyleQueueShouldBeStopedAfterBodyTag = true;
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                             {
                                                                 TimeSpan tpStyleWaitResult = DateTime.Now.Subtract(this.___responseStartTime);
                                                                 commonLog.LogEntry("'{0}' <body> {1} started with zero stylesheets {2} within {3} ms...", this.___UrlShortName, this.___curHTMLParsePosition, this.___StylesheetProcessMode, tpStyleWaitResult.TotalMilliseconds);
@@ -8587,7 +8627,7 @@ namespace MultiversalRenderer.Core
                                                                             }
                                                                             catch
                                                                             {
-                                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                                                 {
                                                                                     commonLog.LogEntry("GetEncoding in body Failed : " + _newcharset);
                                                                                 }
@@ -8732,7 +8772,7 @@ namespace MultiversalRenderer.Core
                                                                                     string strCookieContent = commonHTML.GetElementAttributeInString(tagElement, "content");
                                                                                     if (strCookieContent.Length != 0)
                                                                                     {
-                                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 20)
+                                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 20)
                                                                                         {
                                                                                             commonLog.LogEntry("Meta Set-cookie : {0}", strCookieContent);
                                                                                         }
@@ -8761,7 +8801,7 @@ namespace MultiversalRenderer.Core
                                                                     {
                                                                         string _tempBase = this.___baseUrl;
                                                                         this.___baseUrl = commonHTML.GetAbsoluteUri(this.___URL, "", this.___baseUrl);
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                         {
                                                                             commonLog.LogEntry("Base Url Assigned as  {0} from  \"{1}\"", this.___baseUrl, _tempBase);
                                                                         }
@@ -9012,7 +9052,7 @@ namespace MultiversalRenderer.Core
                                                                         }
                                                                         catch (Exception ex)
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 1)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1)
                                                                             {
                                                                                 commonLog.LogEntry("PreviousNodeCheck", ex);
                                                                             }
@@ -9118,7 +9158,7 @@ namespace MultiversalRenderer.Core
                                                         {
                                                             if (tagElement.___isInactivativeElementNodeChild == true)
                                                             {
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                 {
                                                                     commonLog.LogEntry("{0}  element has inactive element. process skip....", tagElement);
                                                                 }
@@ -9128,7 +9168,7 @@ namespace MultiversalRenderer.Core
                                                             {
                                                                 if (commonHTML.IsLinkElementDisabledAttributTrue(tagElement) == true)
                                                                 {
-                                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                     {
                                                                         commonLog.LogEntry("{0} link element has disabled true '{1}'. Skip....", tagElement, tagElement.___href);
                                                                     }
@@ -9258,7 +9298,7 @@ namespace MultiversalRenderer.Core
                                                                                     Monitor.Exit(this.___ImageRawListLockingObject);
                                                                                 }
                                                                             }
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                             {
                                                                                 commonLog.LogEntry("{0} created data image {1}", tagElement, ImageHeader);
                                                                             }
@@ -9274,7 +9314,7 @@ namespace MultiversalRenderer.Core
                                                                     }
                                                                     catch (Exception ex)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                         {
                                                                             commonLog.LogEntry("Can not convert to image" + ex.Message + " : " + ImageHeader);
                                                                         }
@@ -9375,7 +9415,7 @@ namespace MultiversalRenderer.Core
                                                                         }
                                                                         catch
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                             {
                                                                                 commonLog.LogEntry("Direct Download Error");
                                                                             }
@@ -9416,7 +9456,7 @@ namespace MultiversalRenderer.Core
                                                                         }
                                                                         catch
                                                                         {
-                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                             {
                                                                                 commonLog.LogEntry("Direct Stylesheet Downloading Error");
                                                                             }
@@ -9429,7 +9469,7 @@ namespace MultiversalRenderer.Core
                                                                 }
                                                                 else
                                                                 {
-                                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                     {
                                                                         commonLog.LogEntry("Unknown File Process Type {0}", _fileType.ToString());
                                                                     }
@@ -9495,7 +9535,7 @@ namespace MultiversalRenderer.Core
                                                                 }
                                                                 catch (Exception ex)
                                                                 {
-                                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                     {
                                                                         commonLog.LogEntry("Download Queue", ex);
                                                                     }
@@ -9653,7 +9693,7 @@ namespace MultiversalRenderer.Core
                                                                                 {
                                                                                     if (tagElement.___IsNoScriptBlock == true)
                                                                                     {
-                                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+                                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
                                                                                         {
                                                                                             commonLog.LogEntry("Style found inside Noscript Skip");
 
@@ -9669,7 +9709,7 @@ namespace MultiversalRenderer.Core
                                                                                             tagElement.___MediaQueryNode.Text = commonHTML.GetElementAttributeInString(tagElement, "media");
                                                                                             if (tagElement.___MediaQueryNode.Result == CHtmlMediaQueryResult.Fail)
                                                                                             {
-                                                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                                                 {
                                                                                                     commonLog.LogEntry("[Style MediaQuery] {0} Dynamic Style Element download will be skip MediaQueries", tagElement.___MediaQueryNode.Text);
                                                                                                 }
@@ -9677,7 +9717,7 @@ namespace MultiversalRenderer.Core
                                                                                             }
                                                                                             else
                                                                                             {
-                                                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                                                 {
                                                                                                     commonLog.LogEntry("[Style MediaQuery] {0} Dynamic Style Element will be processed", tagElement.___MediaQueryNode.Text);
                                                                                                 }
@@ -9686,7 +9726,7 @@ namespace MultiversalRenderer.Core
                                                                                         }
                                                                                         catch (Exception ex)
                                                                                         {
-                                                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                                                             {
                                                                                                 commonLog.LogEntry("Style media Error", ex);
                                                                                             }
@@ -9703,7 +9743,7 @@ namespace MultiversalRenderer.Core
                                                                                 {
                                                                                     if (tagElement.___IsNoScriptBlock == true)
                                                                                     {
-                                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+                                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
                                                                                         {
                                                                                             commonLog.LogEntry("Script found inside Noscript Skip");
                                                                                         }
@@ -9761,7 +9801,7 @@ namespace MultiversalRenderer.Core
                                                                                             this.___processScriptElementScript(cscriptElement, cscriptElement.___TagOpenEndPosition + 1, this.___curHTMLParsePosition - 8, tagElement.language, ref  _sbStyleOrScriptTextBuilderPartial);
                                                                                             if (___DocumentWriteBuilder != null)
                                                                                             {
-                                                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel > 50)
+                                                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 50)
                                                                                                 {
                                                                                                     commonLog.LogEntry("calling MergeDocumentWriteBuilder({0}) with {1} char string", this.___curHTMLParsePosition.ToString(), ___DocumentWriteBuilder.Length);
                                                                                                 }
@@ -9796,7 +9836,7 @@ namespace MultiversalRenderer.Core
                                                                     }
                                                                     catch (Exception exStyleScript)
                                                                     {
-                                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                                                         {
                                                                             commonLog.LogEntry("Direct Process Style or Script Block Error", exStyleScript);
                                                                         }
@@ -9814,7 +9854,7 @@ namespace MultiversalRenderer.Core
                                                             }
                                                             else
                                                             {
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                                                                 {
                                                                     commonLog.LogEntry("GetStringPositionInHtmlBuilder failed {0}", tagElement.ToString());
                                                                 }
@@ -9944,7 +9984,7 @@ namespace MultiversalRenderer.Core
                                                         }
                                                         if (___QuoteTestSuccess == false)
                                                         {
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                             {
                                                                 commonLog.LogEntry("HTML Erorr : Invalid Attribute Quote Found! {0}", this.GeRawHTMLStringClean(this.___curHTMLParsePosition - 5, 16));
                                                             }
@@ -10156,7 +10196,7 @@ namespace MultiversalRenderer.Core
 								}
 								if(this.___IsHtmlResponseCompleted == true)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 									{
                                         commonLog.LogEntry("Parse Done With {0} {1} {2} Completed: {3}", ___PreviousParseStartPosition, ___curHTMLParsePosition, this.___HtmlBuilderLength , this.___IsHtmlResponseCompleted);
 									}
@@ -10166,19 +10206,19 @@ namespace MultiversalRenderer.Core
 								{
 									if(this.___ThreadParseSuspendEvent!= null)
 									{
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 										{
 											commonLog.LogEntry("Waiting IsHtmlResponseCompleted becomes true....");
 										}
 										this.___ThreadParseSuspendEvent.WaitOne(100, false);
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 										{
 											commonLog.LogEntry("Waiting IsHtmlResponseCompleted becomes true....");
 										}
 									}
 									else
 									{
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 										{
 											commonLog.LogEntry("Waiting IsHtmlResponseCompleted becomes true...., but emptry event");
 										}
@@ -10191,7 +10231,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch(System.Threading.ThreadAbortException)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 50)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 50)
 					{
 						commonLog.LogEntry("ParseThread ThreadAbort : " + this.___UrlShortName  + "...");
 					}
@@ -10204,7 +10244,7 @@ namespace MultiversalRenderer.Core
 				{
 					if(ex is System.Threading.ThreadAbortException)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 50)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 50)
 						{
 							commonLog.LogEntry("ParseThread ThreadAbort : " + this.___UrlShortName  + "...");
 						}
@@ -10216,7 +10256,7 @@ namespace MultiversalRenderer.Core
 
 					if(this.___IsThreadAbortOccurred == false)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("___parseDocument", ex);
 						}
@@ -10299,7 +10339,7 @@ namespace MultiversalRenderer.Core
                             if (this.___DeferredEnqueuedScriptCount > 0)
                             {
 
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("There is async scripts needs to process : {0}", this.___DeferredEnqueuedScriptCount);
                                 }
@@ -10325,7 +10365,7 @@ namespace MultiversalRenderer.Core
 						int __MethodCalled = 0;
 						//int __OnReadyStateChangeSuccess = 0;
 						DateTime dtOnReadyStageChangeStart = DateTime.Now;
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                         {
                             commonLog.LogEntry("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                             commonLog.LogEntry("entering final load procedure process : {0}", this.___UrlShortName);
@@ -10340,7 +10380,7 @@ namespace MultiversalRenderer.Core
                         {
                             if(this.___WindowDOMCotentLoadedFunctionQueue != null)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("window.DOMContentLoaded has queued functions...");
                                 }
@@ -10363,7 +10403,7 @@ namespace MultiversalRenderer.Core
                                     }
                                 }catch(Exception exLoop)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("window.DOMContentLoaded has queued functions loop error", exLoop);
                                     }
@@ -10404,7 +10444,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception exLoop)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("document.DOMContentLoaded has queued functions loop error", exLoop);
                                     }
@@ -10425,7 +10465,7 @@ namespace MultiversalRenderer.Core
                             }
                             else
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("domcontentload on document has been called");
                                 }
@@ -10488,7 +10528,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception exLoop)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("window.load has queued functions loop error", exLoop);
                                     }
@@ -10507,7 +10547,7 @@ namespace MultiversalRenderer.Core
                             }
                             else
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("window load has been called. Skip.");
                                 }
@@ -10538,7 +10578,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception exLoop)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("window.load has queued functions loop error", exLoop);
                                     }
@@ -10555,7 +10595,7 @@ namespace MultiversalRenderer.Core
                             }
                             else
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("document load has been called. Skip");
                                 }
@@ -10576,7 +10616,7 @@ namespace MultiversalRenderer.Core
                                 {
                                     this.___CalledFunctionHashtable[this.___WindowDOMContentLoadedFunctionWeakReference.Target] = this.___WindowDOMContentLoadedFunctionWeakReference.Target;
                                 }
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                 {
                                     commonLog.LogEntry("window.DOMContentLoaed function is created after load()... execute now...");
                                 }
@@ -10597,7 +10637,7 @@ namespace MultiversalRenderer.Core
                                     this.___CalledFunctionHashtable[this.___DocumentDOMCotentLoadedFunctionWeakReference.Target] = this.___DocumentDOMCotentLoadedFunctionWeakReference.Target;
                                 }
 
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                 {
                                     commonLog.LogEntry("document.DOMContentLoaed function is created after load()... execute now...");
                                 }
@@ -10620,7 +10660,7 @@ namespace MultiversalRenderer.Core
                      
 
 
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							TimeSpan tpSpan = DateTime.Now.Subtract(dtOnReadyStageChangeStart);
 							commonLog.LogEntry("({0}).onreadystagechange processed {1} function(s) with {2} ms...", this.toLogString(), __MethodCalled , tpSpan.TotalMilliseconds);
@@ -10648,7 +10688,7 @@ namespace MultiversalRenderer.Core
                     }
                     if (this.___cssRuleGroundList != null && this.___cssRuleGroundList.Count - this.___CHtmlStyleElementListsCountAtBodyTagPassed > commonHTML.CSS_RECALUCURATION_ENFORCE_LIMIT_DIFFERENCE)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                         {
                             commonLog.LogEntry("CSS Count (Body) : {0} DOM completed phase : {1} has big difference. Recaluculation may be required.", this.___CHtmlStyleElementListsCountAtBodyTagPassed, this.___cssRuleGroundList.Count);
                         }
@@ -10660,7 +10700,7 @@ namespace MultiversalRenderer.Core
                                 {
                                     if (this.___CSSSearchDeepPendingElementList != null && this.___CSSSearchDeepPendingElementList.ContainsKey(this.___documentElement.___elementOID) == false)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("CSS lookup needs to deep css search (many css createdafter body tag)... enqueue now: {0}", this);
                                         }
@@ -10682,14 +10722,14 @@ namespace MultiversalRenderer.Core
                     this.___documentPaintedCount = 99999;
                 }
 				
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					TimeSpan tpSpan = DateTime.Now.Subtract(this.___parseStartTime);
 					commonLog.LogEntry("___parseDocument('{0}') complete {1} chars in {2} ms {3} elements...", this.UrlShortName, this.___HtmlBuilderLength , tpSpan.TotalMilliseconds, this.___documentElementTotalCount);
 
 				}
 
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					if(this.___documentDomType == CHtmlDomModeType.HTMLDOM)
 					{
@@ -10753,7 +10793,7 @@ namespace MultiversalRenderer.Core
 							}
 							catch(Exception ex)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 								{
 									commonLog.LogEntry("CSS Score Error",ex);
 								}
@@ -10802,7 +10842,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -10861,7 +10901,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -10876,7 +10916,7 @@ namespace MultiversalRenderer.Core
 			{
 				if(this.___IsThreadAbortOccurred == false)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 					{
 						commonLog.LogEntry("___parseDocument Has Final Exception", finalParseThread);
 					}
@@ -10893,7 +10933,7 @@ namespace MultiversalRenderer.Core
 				}
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -11030,7 +11070,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 				{
 					commonLog.LogEntry("IsElementLastChildInHTML", ex);
 				}
@@ -11073,7 +11113,7 @@ namespace MultiversalRenderer.Core
 					{
 						// Hoops. Tags in attribute is not well composed.
 						// Just Skip From __SartPoint
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("PerformInvalidTagSkipWithinAttribute has found tag " + sbFirstTag.ToString() + " but no ending tag found. Just Skip For next");
 						}
@@ -11085,7 +11125,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 				{
 					commonLog.LogEntry("PerformInvalidTagSkipWithinAttribute", ex);
 				}
@@ -11170,7 +11210,7 @@ namespace MultiversalRenderer.Core
 				{
 					_ConditionMatch = false;
 				}
-				if(commonLog.LoggingEnabled && commonLog.LogLevel > 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1)
 				{
 					commonLog.LogEntry("Conditional Comment : {0} : {1}  : {2}", __ConditonalCommentComposed,_ConditionMatch, __CurrentPosition);
 				}
@@ -11200,7 +11240,7 @@ namespace MultiversalRenderer.Core
 			{
 				 __IsSearchingForScriptEndBlock = true;
 			}
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				___StopWatch = new CHtmlStopWatch();
 			}
@@ -11268,7 +11308,7 @@ namespace MultiversalRenderer.Core
 			}
 			if(sbText == null || _test == -1 || _test < ___StartingPointOriginalPoint)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					if(___StopWatch != null)
 					{
@@ -11287,7 +11327,7 @@ namespace MultiversalRenderer.Core
 			{
                 sbText.Append(this.___HtmlBuilder[p]);
 			}
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				if(___StopWatch != null)
 				{
@@ -11338,7 +11378,7 @@ namespace MultiversalRenderer.Core
 					{
                         if (this.___IsHtmlResponseCompleted == true)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 1)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1)
                             {
                                 commonLog.LogEntry(" Infite loop! Abort StartingPoint: {0} HtmlLen : {1}", ___StartingPoint, this.___HtmlBuilder.Length);
                             }
@@ -11375,7 +11415,7 @@ namespace MultiversalRenderer.Core
 								___SameLenCount ++;
 								if(___SameLenCount >= 15)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 									{
                                         commonLog.LogEntry("__BuildStringBuilder4InnerTextNextEndOrStartPosition Waitted 15 Times Current Length : {0}. Aborting...", this.___HtmlBuilder.Length);
 									}
@@ -11386,7 +11426,7 @@ namespace MultiversalRenderer.Core
 							if(this.___ThreadParseSuspendEvent != null)
 							{
 								this.___ThreadParseSuspendEvent.WaitOne(50, false);
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 								{
                                     commonLog.LogEntry("__BuildStringBuilder4InnerTextNextEndOrStartPosition Waitng Current Length : {0}...", this.___HtmlBuilder.Length);
 								}
@@ -11411,14 +11451,14 @@ namespace MultiversalRenderer.Core
 									}
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                         }
                                     }
 								}
 
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 								{
                                     commonLog.LogEntry("__BuildStringBuilder4InnerTextNextEndOrStartPosition Sleep(50)...", this.___HtmlBuilder.Length);
 								}
@@ -11472,7 +11512,7 @@ namespace MultiversalRenderer.Core
 											}
 											else
 											{
-												if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+												if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 												{
 													commonLog.LogEntry("HTMLBuilder has strange comment block {0} no end ", __resultOfFindString);
 												}
@@ -11485,7 +11525,7 @@ namespace MultiversalRenderer.Core
 									}
 									else
 									{ // strange. it means '<!' is not follow '-'
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 20)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 20)
 										{
 											commonLog.LogEntry("HTMLBuilder has strange comment block {0} skip the block to create text", __resultOfFindString);
 										}
@@ -11534,7 +11574,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
 				{
 					commonLog.LogEntry("GetNextTagEndOrStartPositionInHtmlBuilder", ex);
 				}
@@ -11629,7 +11669,7 @@ namespace MultiversalRenderer.Core
             {
                 return this.___MultiversalWindowWeakReference.Target as CHtmlMultiversalWindow;
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("Strange! {0}. ___getMultiversalWindow() returns null.", this);
             }
@@ -11673,7 +11713,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 					{
 						commonLog.LogEntry("StringBuilderIndexOf invoke failed {0} Value: {1} StartIndex: {2} Case: {3} ", ex.Message, __value, startIndex, ignoreCase);
 					}
@@ -11724,10 +11764,7 @@ namespace MultiversalRenderer.Core
 		{
 			if(_IsEnqueued)
 			{
-				if(this.___ThreadStylesheetCompleteEvent == null)
-				{
-					this.___ThreadStylesheetCompleteEvent = commonHTML.CreateRegisterResetEvent(false);
-				}
+		
 				if(_DrawType == CHtmlThreadPoolQueueObjectType.UrlStyleSheet)
 				{
                     System.Threading.Interlocked.Increment(ref this.___StyleSheetOnlyFileDownloadPendingCount);
@@ -11779,7 +11816,7 @@ namespace MultiversalRenderer.Core
                                         ___tpSpan = DateTime.Now.Subtract(___dtStartScript);
                                         _scriptElement.result = 200;
                                         _scriptElement.resultText = "[Compile Enqued Scripts] '" + _scriptElement.href + "'" + ___tpSpan.TotalMilliseconds.ToString() + " ms";
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                         {
                                             commonLog.LogEntry(_scriptElement.resultText);
                                         }
@@ -11795,7 +11832,7 @@ namespace MultiversalRenderer.Core
                                         _scriptElement.IsCompiled = true;
                                         _scriptElement.result = 500;
 
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                         {
                                             commonLog.LogEntry(_scriptElement.resultText);
                                             commonLog.LogEntry(_scriptElement.errorDetail);
@@ -11812,7 +11849,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("ProcessEnqueuedScripts Error", ex);
                     }
@@ -11852,7 +11889,7 @@ namespace MultiversalRenderer.Core
                 }
                 if (string.IsNullOrEmpty(__url) == true)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("Enqueue Download is same url empty");
                     }
@@ -11862,7 +11899,7 @@ namespace MultiversalRenderer.Core
 
                 if (this.___readyStateType == CHtmlReadytStateType.complete && this.___documentPaintedCount > 0)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("Warning!  DirectDownload entered after parseComplete {0} '{1}' ", _actionType, __url);
                     }
@@ -11910,7 +11947,7 @@ namespace MultiversalRenderer.Core
                 }
 				if(___tagElement != null && ___tagElement.___elementTagType == CHtmlElementType.SCRIPT  && (___tagElement.___defer == true))
 				{
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("Warning!  ___downloaddirectly() is called for <script defer='true'>, but execute in sync : "+ __url );
                     }
@@ -12565,7 +12602,7 @@ namespace MultiversalRenderer.Core
 						}
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -12575,11 +12612,11 @@ namespace MultiversalRenderer.Core
 				
 				if(commonLog.LoggingEnabled ||System.Diagnostics.Debugger.IsAttached)
 				{
-					if(commonLog.LogLevel < 4)
+					if(commonLog.CommonLogLevel < 4)
 					{
 						goto CompleteStage;
 					}
-					if(commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
 					{
 						TimeSpan tpSpan = DateTime.Now.Subtract(___dtStart);
 						commonLog.LogEntry("DirectPool {0} ! [{1}] {2} in {3} ms", ___IsImageObtained, _actionType, __url, tpSpan.TotalMilliseconds);
@@ -12590,7 +12627,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception exFinal)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 				{
 					commonLog.LogEntry("DirectDownload unsucessfull. Url: {0} Reason :{1} " , __url, exFinal.Message);
 				}
@@ -13051,7 +13088,7 @@ namespace MultiversalRenderer.Core
                     }
                     if (____ParentTextPriorSearchedCount > 100)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                         {
                             commonLog.LogEntry("Parent Top Element Search Infinte loop? {0} abort...", textElement);
                         }
@@ -13081,7 +13118,7 @@ namespace MultiversalRenderer.Core
                             //
                             if (___LookupDownChild.___ChildNodeIndex == -1)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                 {
                                     commonLog.LogEntry("Parent Top Element Search Failed but cont..." + ___LookupDownChild.ToString());
                                 }
@@ -13096,7 +13133,7 @@ namespace MultiversalRenderer.Core
                                     ___priorElementOfparentparentElement = ___parentparentElement.___childNodes[prevIndex] as CHtmlElement;
                                     if (___priorElementOfparentparentElement == null)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                         {
                                             commonLog.LogEntry("Parent Top Element Search Failed but cont..." + ___LookupDownChild.ToString());
                                         }
@@ -13164,7 +13201,7 @@ namespace MultiversalRenderer.Core
                                                     }
                                                     catch (Exception ex)
                                                     {
-                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                                                         {
                                                             commonLog.LogEntry("SearchForLastInlineTextElementFromElementLikeRecursively", ex);
                                                         }
@@ -13173,7 +13210,7 @@ namespace MultiversalRenderer.Core
                                                     {
                                                         if (commonHTML.IsElemeneITextOrIDraw(___SearchedInlineTextElement) == true)
                                                         {
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                                             {
                                                                 commonLog.LogEntry("Parent Text Element success Current: {0} Prior Last : {1}", textElement, ___SearchedInlineTextElement);
                                                             }
@@ -13198,7 +13235,7 @@ namespace MultiversalRenderer.Core
                                                         }
                                                         else
                                                         {
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                                             {
                                                                 commonLog.LogEntry("Parent Text Element success Current: {0} Prior Last : {1}", textElement, ___SearchedInlineTextElement);
                                                             }
@@ -13213,7 +13250,7 @@ namespace MultiversalRenderer.Core
                                                     }
                                                     else
                                                     {
-                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                                         {
                                                             commonLog.LogEntry("Parent Text Node Seach Encounters {0} it seems inline. node search needs more  : {1} ", ___priorElementOfparentparentElement, ___SearchedInlineTextElement);
                                                         }
@@ -13224,7 +13261,7 @@ namespace MultiversalRenderer.Core
                                                 {
                                                     goto GetNextParent;
                                                 }
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                                 {
                                                     commonLog.LogEntry("Parent Text Node Seach Encounters {0} it seems inline. node search has needs more : {1} TODO! ", ___priorElementOfparentparentElement, ___priorElementOfparentparentElement.___childNodes.Count);
                                                 }
@@ -13240,7 +13277,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception ex)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                                     {
                                         commonLog.LogEntry("Parent Text Node Search Error : " + ex.Message);
                                     }
@@ -13339,7 +13376,7 @@ namespace MultiversalRenderer.Core
 			CHtmlElement ___textElementParentElement = textElement.___parent as CHtmlElement;
             /*
 #if DEBUG
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 if (parentElement != null && parentElement.___elementTagType == CHtmlElementType.P)
                 {
@@ -13409,7 +13446,7 @@ namespace MultiversalRenderer.Core
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___caluculateTextElementBounds Parent is null. Skip now for " + textElement.ToString());
                 }
@@ -13417,7 +13454,7 @@ namespace MultiversalRenderer.Core
             }
             /*
 #if DEBUG
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 if (parentElement.id == "hogehoge")
                 {
@@ -13600,7 +13637,7 @@ namespace MultiversalRenderer.Core
                                 ___VisibleParentLookupCount++;
                                 if (___VisibleParentLookupCount >= 16)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("Unable to obtain previous visible text element over limit. break.");
                                     }
@@ -13614,7 +13651,7 @@ namespace MultiversalRenderer.Core
 								}
 								if(__LookUpElement == null)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 									{
 										commonLog.LogEntry("Unable to obtain previous visible text element");
 									}
@@ -13832,7 +13869,7 @@ namespace MultiversalRenderer.Core
 							}
 							catch(Exception ex)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
 								{
 									commonLog.LogEntry("CalculateElementBoundsHtmlTextElement search parent textElement error", ex);
 								}
@@ -14228,7 +14265,7 @@ namespace MultiversalRenderer.Core
 
                 if (grMeasure == null)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("Graphic Information graphic is  null. abort");
                     }
@@ -14244,7 +14281,7 @@ namespace MultiversalRenderer.Core
             if (__textFormat == null || fnt == null)
             {
                 __textFormat = null;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("Graphic Information _textFormat or font is  null. abort");
                 }
@@ -14262,7 +14299,7 @@ namespace MultiversalRenderer.Core
 				___CurrentLoop ++;
 				if(___CurrentLoop > ___LoopLimit)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 					{
                         commonLog.LogEntry("Strange Text Measure infinite loop {0}", ___textElementParentElement);
 					}
@@ -14387,7 +14424,7 @@ namespace MultiversalRenderer.Core
 					{
 
                         ___availWidth = commonHTML.SearchParentWiderAvailWidth(___textElementParentElement, this.___DocumentMinSize.Width);
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
                             commonLog.LogEntry("{0}  availWidth is short {1} Widening to {2}", ___textElementParentElement, fnt.GetHeight(), ___textElementParentElement.___availWidth);
 						}
@@ -14428,7 +14465,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("Bad Resetting Bounds...");
 					}
@@ -14488,7 +14525,7 @@ namespace MultiversalRenderer.Core
 				{
 
 					textElement.X_DOM_ProcessorAdd("Inline Flag has been disabed due to prior visible not was block; ");
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >1)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >1)
 					{
 						commonLog.LogEntry("Inline Flag has been disabed due to prior visible not was block; ");
 					}
@@ -14523,7 +14560,7 @@ namespace MultiversalRenderer.Core
 				{
                     if (___textElementParentElement.___IsElementBlock == false)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
 						{
 							commonLog.LogEntry("Strange. Inlined Parent Element is not inlinedshifted.... but cont");
 						}
@@ -14569,7 +14606,7 @@ namespace MultiversalRenderer.Core
 				}
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -14707,7 +14744,7 @@ namespace MultiversalRenderer.Core
 															}
 															else if(c5Element.___childNodes.Count > 0)
 															{
-																if(commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+																if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
 																{
 																	commonLog.LogEntry("SearchForLastInlineTextElementFromElementLikeRecursively has reached level5 but could not find expected TextElement");
 
@@ -14755,7 +14792,7 @@ namespace MultiversalRenderer.Core
         {
             if (stackCount > 50)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___performChildElementSizeRecalationByWidth stack overflow return ");
                 }
@@ -14787,7 +14824,7 @@ namespace MultiversalRenderer.Core
                         continue;
                     if (___child.___offsetWidth > ___targetWidth)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} offsetWidth is wider than target {1}. needs recaluculation ", ___child, ___child.___offsetWidth , ___targetWidth );
                         }
@@ -14839,7 +14876,7 @@ namespace MultiversalRenderer.Core
             }
             if (stackCount == 0)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     TimeSpan tpSpan = DateTime.Now.Subtract(dtStart);
                     commonLog.LogEntry("___performChildElementSizeRecalationByWidt(\'{0}\') completed in {1} ms.... ", ___curElement, tpSpan.TotalMilliseconds);
@@ -14916,7 +14953,7 @@ namespace MultiversalRenderer.Core
 			{
                 if (tagElement.___parentWeakRef == null)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
 					{
 						commonLog.LogEntry("___caluculateElementBound for \'{0}\' does not have parent associated escaping..", tagElement);
 					}
@@ -14935,7 +14972,7 @@ namespace MultiversalRenderer.Core
 		
             if (___tagElementParent != null && ___tagElementParent.___elementTagType == CHtmlElementType._DOCUMENT_FRAGMENT)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                 {
                     commonLog.LogEntry("Strange... ___calculateElementBounds() Element {0} have document fragment as parent  {1} escaping..", tagElement, ___tagElementParent);
                 }
@@ -14992,7 +15029,7 @@ namespace MultiversalRenderer.Core
             }
             /*
 #if DEBUG
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
             {
                 if (string.Equals(tagElement.___class, "slideshow-tabs-container show-for-medium-up") == true)
                 {
@@ -15086,7 +15123,7 @@ namespace MultiversalRenderer.Core
                     }
                     if (tagElement.___style == null)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Strange {0} does not have style. create now...", tagElement);
                         }
@@ -15300,7 +15337,7 @@ namespace MultiversalRenderer.Core
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                     {
                                                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                                     }
@@ -15329,7 +15366,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("CaluculateElmenentBounds for Style Box Position", ex);
                             }
@@ -15529,7 +15566,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -15543,7 +15580,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -15557,7 +15594,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -15578,7 +15615,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -15719,7 +15756,7 @@ namespace MultiversalRenderer.Core
                                             {
                                                 if (object.ReferenceEquals(tagElement, priorElement) == false)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
                                                     {
                                                         commonLog.LogEntry("Strange PriorElement {0} did not call ___calucuateElementBounds(). Call now..", priorElement);
                                                     }
@@ -15859,7 +15896,7 @@ namespace MultiversalRenderer.Core
                             {
                                 if (___cssFloatBothWidth + tagElement.___offsetWidth >= ___tagElementParent.___availWidth)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("Element {0} can't fit outside floated block : {1} : {2}", tagElement, ___cssFloatBothWidth, ___tagElementParent.___availWidth);
                                     }
@@ -15914,7 +15951,7 @@ namespace MultiversalRenderer.Core
                                             if (___floatRightElementCount > 0 || ___floatRightElementCount > 0)
                                             {
 
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                 {
                                                     commonLog.LogEntry("Element {0} child contains wider block : {1}. needs recaluculation ", tagElement, ___offsetWidthByStyle);
                                                 }
@@ -16078,7 +16115,7 @@ namespace MultiversalRenderer.Core
                                                             }
                                                             catch (Exception ex)
                                                             {
-                                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                                 {
                                                                     commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                                                 }
@@ -16269,7 +16306,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (___childmeasuringFloatElementCount > 0 && ___childmeasuringFloatElementCount == tagElement.___childNodes.Count)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 20)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 20)
                                 {
                                     commonLog.LogEntry("All child Elements are 'floated' Element. Measuing was " + ___tagElementRectangle.ToString() + ", which is reset to 0 for " + tagElement.toLogString());
                                 }
@@ -16609,7 +16646,7 @@ namespace MultiversalRenderer.Core
                                     ___offsetTopByMeasure = tagElement.___offsetTop + ___tagElementParent.___cssFloatTopPostionList.Max;
                                     if (___offsetTopByMeasure == 0 && ___tagElementParent.___cssFloatRightDoneList.Count > 0)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("float right elemnt : {0} still top is zero double checking...", tagElement);
                                         }
@@ -16649,7 +16686,7 @@ namespace MultiversalRenderer.Core
                                     ___offsetTopByMeasure = tagElement.___offsetTop + ___tagElementParent.___cssFloatTopPostionList.Max;
                                     if (___offsetTopByMeasure < 300 && ___tagElementParent.___cssFloatLeftDoneList.Count > 0)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("float left elemnt : {0} still top is zero double checking...", tagElement);
                                         }
@@ -16693,7 +16730,7 @@ namespace MultiversalRenderer.Core
                                                 if (___offsetTopByMeasure < ___tagElementParent.___cssFloatLeftElementList.floatTotalHeight)
                                                 {
                                                     tagElement.___style.StyleCommentAdd("Float Exists, but it does not fit rectangle.");
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                     {
                                                         commonLog.LogEntry("Float exists but, it may overflow : {0}", tagElement);
                                                     }
@@ -16709,7 +16746,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("CalculateElementBounds Float Processing", ex);
                             }
@@ -17030,7 +17067,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                     {
                         commonLog.LogEntry("CalculateElementBounds delected exception " + tagElement.ToString(), ex);
                     }
@@ -17080,7 +17117,7 @@ namespace MultiversalRenderer.Core
 						{
 							if(___ChildZIndexMinimumValue > 0)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel> 20)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel> 20)
 								{
 									commonLog.LogEntry("{0} will be assign z-index to {1}", tagElement, ___ChildZIndexMinimumValue);
 								}
@@ -17113,7 +17150,7 @@ namespace MultiversalRenderer.Core
 					}
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel> 20)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel> 20)
 						{
 							commonLog.LogEntry("{0} ZIndexElementSort Failed : {1}", tagElement.ToString(), ex.Message);
 						}
@@ -17323,7 +17360,7 @@ namespace MultiversalRenderer.Core
                             {
 
                                 tagElement.___iframeMultiversalWindow.___WindowLevel = this.___MultiversalWindow.___WindowLevel + 1;
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("Strange iframe WindowLevel is still less than 1 . Resetting to {0}", tagElement.___iframeMultiversalWindow.___WindowLevel);
                                 }
@@ -17332,7 +17369,7 @@ namespace MultiversalRenderer.Core
                             {
                                 if (tagElement.___attributes.ContainsKey("srcdoc") == true)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("TODO : {0} has srcdoc to navigate. just skip", tagElement);
                                     }
@@ -17366,7 +17403,7 @@ namespace MultiversalRenderer.Core
                 FrameNagigateCheckDone:
                 if (tagElement.___elementTagType != CHtmlElementType.NOSCRIPT)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                     {
                         if (tagElement.___IsElementFloat == false && tagElement.___isElementPositionAbsoluteOrStatic == false && tagElement.___ElementInlineShifted == false && tagElement.___ChildNodeIndex > 0 && tagElement.___IsElementBlock == true)
                         {
@@ -17374,7 +17411,7 @@ namespace MultiversalRenderer.Core
                             {
                                 if (tagElement.___offsetTop == 0)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                                     {
                                         commonLog.LogEntry("Strange. {0} has offsetTop = 0 but, offsetTopByMeasure is {1}", tagElement, ___offsetTopByMeasure);
                                     }
@@ -17400,7 +17437,7 @@ namespace MultiversalRenderer.Core
                         }
                         if (tagElement.___ElementAfter.___isCalculateElementBoundsCalled == false)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                             {
                                 commonLog.LogEntry("calc for :after :{0} origin: {1}", tagElement.___ElementAfter, tagElement);
                             }
@@ -17411,7 +17448,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("CaluculaateElementBoundsForCHTmlElement", ex);
 				}
@@ -17541,7 +17578,7 @@ namespace MultiversalRenderer.Core
 				{
 					double originalTop = __checkElement.___offsetTop;
 					__checkElement.___offsetTop = __AllBounds.Height;
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 15)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 15)
 					{
 						commonLog.LogEntry("{0} is offset seems invalid {1} reset  to {2} All : {3}", __checkElement,originalTop , __checkElement.___offsetTop, __AllBounds);
 					}
@@ -17553,7 +17590,7 @@ namespace MultiversalRenderer.Core
                 {
                     double originalTop = __checkElement.___offsetTop;
                     __checkElement.___offsetTop = __AllBounds.Height;
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 15)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 15)
                     {
                         commonLog.LogEntry("{0} is offset seems invalid {1} reset  to {2} All : {3}", __checkElement, originalTop, __checkElement.___offsetTop, __AllBounds);
                     }
@@ -17600,7 +17637,7 @@ namespace MultiversalRenderer.Core
 			_drawElement.offsetBounds.Width = (float)___tagElement.___offsetWidth;
 			_drawElement.offsetBounds.Height  = (float)___tagElement.___offsetHeight;
 			___tagElement.___drawingObjectList.Add(_drawElement);
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___CreateDrawingElementsAfterwords {0}", ___tagElement);
 			}
@@ -17994,7 +18031,7 @@ namespace MultiversalRenderer.Core
 					}
 					break;
 				default:
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 					{
 						commonLog.LogEntry("GetStyleFloatBeginEndOffsetPoint illegular");
 					}
@@ -18090,7 +18127,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            // TODO: data conversion
+                            // TODO: html conversion
                             System.Drawing.Image __dataImage = null;
                             if (this.___images.TryGetValue(___multiData.background_image_fullUrl, out __dataImage) == false)
                             {
@@ -18109,7 +18146,7 @@ namespace MultiversalRenderer.Core
                             this.___downloadviaQueue(___multiData.liststyle_image_fullUrl, "Image", null, null, this.___URL, null, CHtmlThreadPoolQueueObjectType.UrlImage, ___multiData.liststyle_image_fullUrl, htmlElement, 0, CHtmlUrlSourceType.ListStyleImage_of_DefaultStyle, false);
                         }
                         {
-                            // TODO: data conversion
+                            // TODO: html conversion
                             System.Drawing.Image __dataImage = null;
                             if (this.___images.TryGetValue(___multiData.liststyle_image_fullUrl, out __dataImage) == false)
                             {
@@ -18125,7 +18162,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___processElementStyleMultipleImageDataImage Error", ex);
                 }
@@ -18197,7 +18234,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception exCharset)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry(" ___createDataImageForMultiDataImage  charset exception.: ", exCharset);
                                     }
@@ -18230,7 +18267,7 @@ namespace MultiversalRenderer.Core
 
                                     return;
                                 default:
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("TODO:  needs to generate image from ___createDataImageForMultiDataImage : {0}", strBase64 );
                                     }
@@ -18242,7 +18279,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___createDataImageForMultiDataImage Exception", ex);
                 }
@@ -18273,7 +18310,7 @@ namespace MultiversalRenderer.Core
              
             
              
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 if (commonHTML.elementTagTypesNeverSeachStyleSheetSortedList.ContainsKey(htmlElement.___elementTagType) == true)
                 {
@@ -18302,7 +18339,7 @@ namespace MultiversalRenderer.Core
                 }
                 if ( ___tagElementParent.___elementTagType == CHtmlElementType._DOCUMENT_FRAGMENT)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("Strange... ___calculateElementBounds() Element {0} have document fragment as parent  {1} escaping..", htmlElement, ___tagElementParent);
                     }
@@ -18720,7 +18757,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                         {
                                             commonLog.LogEntry("ProcessingInlineStyleSheet Parse Exception {0} \"{1}\"", ex.Message, sValue);
                                         }
@@ -18774,7 +18811,7 @@ namespace MultiversalRenderer.Core
                                 htmlElement.___style.Color = commonHTML.ReplaceInvalidCharacters(sValue, true, true);
                                 continue;
                             default:
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                                 {
                                     commonLog.LogEntry("Warning! style non-related element attribute can be skipped : " + attr.name);
                                 }
@@ -18817,7 +18854,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
 				{
 					commonLog.LogEntry("HitList Sort Exception", ex);
 				}
@@ -18939,7 +18976,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         else
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 30)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 30)
                                             {
                                                 commonLog.LogEntry("Style Selector does not have :after or :before ignore now... :{0}", sPart.___SelectorID);
                                             }
@@ -18997,7 +19034,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("Error Before Style Selector {0}  : {1}", sPart, ex.Message);
                                         }
@@ -19041,7 +19078,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("Error After Style Selector {0}  : {1}", sPart, ex.Message);
                                         }
@@ -19234,7 +19271,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					commonLog.LogEntry("___applyElemenetStyleSheets For Bounds", ex);
 				}
@@ -19387,7 +19424,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (htmlElement.___elementTagType != CHtmlElementType.DIV)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("'{0}' was disallowed inline", htmlElement);
                         }
@@ -19753,7 +19790,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                         {
                                             commonLog.LogEntry("Parse Textarea Rows");
                                         }
@@ -19785,7 +19822,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         catch
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                             {
                                                 commonLog.LogEntry("Parse Textarea Cols");
                                             }
@@ -20124,7 +20161,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         else
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                             {
                                                 commonLog.LogEntry("Element caluculation for {0} is seems to invalid '{1}' skip now", htmlElement, htmlElement.___style.___WidthComputedValue);
                                                 
@@ -20411,7 +20448,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("___applyElemenetStyleSheets For Bounds", ex);
 						}
@@ -20514,7 +20551,7 @@ namespace MultiversalRenderer.Core
 					}
 					catch (Exception ex)
 					{
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                         {
                             commonLog.LogEntry("___applyElemenetStyleSheets For Maxheight Error", ex);
                         }
@@ -20577,7 +20614,7 @@ namespace MultiversalRenderer.Core
 					}
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("___applyElemenetStyleSheets For Bounds", ex);
 						}
@@ -20610,7 +20647,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -20728,7 +20765,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("BackgroundColor & Foreground Color", ex);
 						}
@@ -20839,7 +20876,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -20944,7 +20981,7 @@ namespace MultiversalRenderer.Core
 						}
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                             }
@@ -21082,7 +21119,7 @@ namespace MultiversalRenderer.Core
 			/*
 			if(htmlElement.styleBeforeList != null && htmlElement.styleBeforeList.Count > 0)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
 				{
 					
 				}
@@ -21144,7 +21181,7 @@ namespace MultiversalRenderer.Core
                         if (htmlElement.___style.___StyleFontInfo != null && htmlElement.___style.___StyleFontInfo.FontSize > 0)
                         {
                             htmlElement.___style.StyleCommentAdd("HTML Element has font size defined as " + htmlElement.___style.___StyleFontInfo.FontSize);
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                             {
                                 commonLog.LogEntry("HTML Element has font size defined : {0}", htmlElement.___style.___StyleFontInfo.FontSize);
                             }
@@ -21217,14 +21254,14 @@ namespace MultiversalRenderer.Core
                 }
                 if (___element.___IsDynamicElement == true && ___element.___IsDynamicProcessDone == false)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry(" ___applyElementsStyleSheetsForRecaluculationForRootChangedElement('" + ___element.ToString() + "') has skiped.... ");
                     }
                     ___element.___isApplyElemenetStyleSheetCalled = true;
                     return;
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry(" ___applyElementsStyleSheetsForRecaluculationForRootChangedElement('" + ___element.ToString() + "') has entered... ");
                 }
@@ -21549,13 +21586,13 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry(" ___applyElementsStyleSheetsForRecaluculationForRootChangedElement('" + ___element.ToString() + "') has exception", ex);
                 }
             }
                        
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 TimeSpan tpSpan = DateTime.Now.Subtract(dtStart);
                 commonLog.LogEntry(" ___applyElementsStyleSheetsForRecaluculationForRootChangedElement('{0}') processed with {1} ms {2}  elements recaluculated with {3} levels...", ___element, tpSpan.TotalMilliseconds, this.___ElementCountAffectedByCSSRecaluculation, ___reachedLevel);
@@ -21687,7 +21724,7 @@ namespace MultiversalRenderer.Core
                     /*
                     if (commonHTML.compareDoubleDiff(___oldWidth ,___element.___offsetWidth, 200) || commonHTML.compareDoubleDiff( ___oldHeight,___element.___offsetHeight, 200))
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Element Style '{0}' recalcated to tuns out diffrent size {1}:{2} ===> {3}:{4}", ___element, ___oldWidth, ___oldHeight, ___element.___offsetWidth, ___element.___offsetHeight);
                         }
@@ -21699,7 +21736,7 @@ namespace MultiversalRenderer.Core
                    
                     if (___oldCSSFloatType != ___element.___style.___cssFloatType)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("Element Style '{0}' recalcated to tuns out diffrent size OLD : {1} NOW : {2}", ___element, ___oldCSSFloatType, ___element.___style.___cssFloatType);
                         }
@@ -21740,7 +21777,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
 
                     commonLog.LogEntry(" ___applyElementsStyleSheetsForRecaluculationForEachElementRecursively('" + ___element.ToString() + "') has exception", ex);
@@ -21774,7 +21811,7 @@ namespace MultiversalRenderer.Core
         {
             CHtmlElement ___orignalRootNode = commonData.convertObjectIntoCHtmlElement(___importNode);
             bool ___boolDeep = commonData.convertObjectToBoolean(___objDeep, false);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
             {
                 commonLog.LogEntry("TODO: {0}.importNode({1}, {2}) will just use Element.cloneNode()....", this.toLogString(), ___orignalRootNode, ___boolDeep);
             }
@@ -21880,7 +21917,7 @@ namespace MultiversalRenderer.Core
 				}
 				else
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("Ohhh, _allElementIdSortedList seems locked..., but cont");
 					}
@@ -21889,7 +21926,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("RegisterElementIDToDocument(", ex);
 				}
@@ -21922,12 +21959,12 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("HTML.CHtmlLocationBase RecreateLocationBase",ex);
 				}
 			}
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 			{
 				commonLog.LogEntry("Document Location has recreted : {0}",  locBase.ToString());
 			}
@@ -21964,7 +22001,7 @@ namespace MultiversalRenderer.Core
             CHtmlRegisteredElementConstructorFunction ___registeredFunction = new CHtmlRegisteredElementConstructorFunction();
             ___registeredFunction.___registeredTagName = commonHTML.GetStringValue(___newTagString);
             ___registeredFunction.___optionObject = ___objOption;
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("TODO: {0}.registerElement({1}, {2}) is called, but it is unsupported. it will fail...", this, ___registeredFunction.___registeredTagName, ___registeredFunction.___optionObject);
             }
@@ -22074,7 +22111,7 @@ namespace MultiversalRenderer.Core
                                 {
                                     if (addElement.___iframeMultiversalWindow == null)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                         {
                                             commonLog.LogEntry("AddDyamicElementInfoDocumentPropertyList detected '{0}' does not have iframeMultiversalWindow assigned. create now...", addElement);
                                         }
@@ -22145,7 +22182,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("AddDyamicElementInfoDocumentPropertyList Exception", ex);
                 }
@@ -22223,7 +22260,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (commonHTML.elementTagTypesAppearsOnlyHeaderSortedList.ContainsKey(addElement.___elementTagType) == true || addElement.___elementTagType == CHtmlElementType.STYLE || addElement.___elementTagType == CHtmlElementType.SCRIPT || addElement.___elementTagType == CHtmlElementType.LINK)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("document has no root and head, create one. " + addElement.ToString());
                                 }
@@ -22319,7 +22356,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 else
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
                                     {
                                         commonLog.LogEntry("AddToParent could not find documentElement for {0}", addElement);
                                     }
@@ -22345,7 +22382,7 @@ namespace MultiversalRenderer.Core
                 
             
 
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
 				{
 					commonLog.LogEntry("AddToParent Start {0} {1}", addElement, addElement.___TagOpenStartPosition );
 				}
@@ -22396,7 +22433,7 @@ namespace MultiversalRenderer.Core
 							addElement.tagName = "HTML";
 							goto AddElementFistCheckDone;
 						}
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("Stange all[0] is not html, create manually and insert at 0");
 						}
@@ -22441,7 +22478,7 @@ namespace MultiversalRenderer.Core
 						}
 						else
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 							{
 								commonLog.LogEntry("Strange Element {0} becoomes documentElement", addElement);
 							}
@@ -22465,7 +22502,7 @@ namespace MultiversalRenderer.Core
 				}
 				if(string.IsNullOrEmpty(addElement.___tagName) == true)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 					{
 						commonLog.LogEntry("Strange Element {0} in ___AddToParentElement", addElement);
 					}
@@ -22493,7 +22530,7 @@ namespace MultiversalRenderer.Core
                             {
                                 if(this.___documentElement == null || this.___head == null)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                                     {
                                         commonLog.LogEntry("___addToCurrentParentElement({0}) could not find documentElement or head element. create it know...", addElement.toLogString(),  this);
                                     }
@@ -22691,7 +22728,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 else
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                     {
                                         commonLog.LogEntry("No parent not found script. Ignoring");
                                     }
@@ -22757,7 +22794,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("No parent not found iframe add to top child");
                             }
@@ -22816,7 +22853,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                             {
                                 commonLog.LogEntry("___AddToParentElement could not find parent to append. use body");
                             }
@@ -22834,7 +22871,7 @@ namespace MultiversalRenderer.Core
                             }
                             else 
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                 {
                                     commonLog.LogEntry("___AddToParentElement fails due to no html or body for {0}", addElement);
                                 }
@@ -22909,7 +22946,7 @@ namespace MultiversalRenderer.Core
 						
 							if(commonHTML.elementTagTypesValidTDTHParentTagNameTypesSortedList.ContainsKey(this.___currentParentElement.___elementTagType) == false)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 								{
 									commonLog.LogEntry("Cell {0}'s Parent looks like invalid parent {1}", addElement, this.___currentParentElement);
 								}
@@ -22940,7 +22977,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception exCloseElement)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("__addToCurrentParentElement to closeElement Exception", exCloseElement);
                                         }
@@ -23002,7 +23039,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 else
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("Parent Table Element is not found : {0} -> {1} [{2}]", addElement, this.___currentParentElement, this.GeRawHTMLStringClean(addElement.___TagOpenStartPosition, 50));
                                     }
@@ -23039,7 +23076,7 @@ namespace MultiversalRenderer.Core
 						{
 							if(this.___body !=null)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 								{
 									commonLog.LogEntry("___AddToParentElement {0} could not find parentElement, use body...", addElement.tagName);
 								}
@@ -23051,7 +23088,7 @@ namespace MultiversalRenderer.Core
 							}
 							else
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 								{
 									commonLog.LogEntry("___AddToParentElement {0} failed. body and parent is null", addElement.tagName);
 								}
@@ -23121,7 +23158,7 @@ namespace MultiversalRenderer.Core
                         }
 						if(__IsParentContainsPossibleTagName == false)
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
 							{
 								StringBuilder __sb = new StringBuilder(commonHTML.StringBuilder_BUFFER_Size_For_CSS_Tag);
 								if(_possibleParentTagTypes != null)
@@ -23233,7 +23270,7 @@ namespace MultiversalRenderer.Core
                         ___svgElement.___parentSVGElementWeakReference = new WeakReference(___lookupSVGElement, false);
                     }else
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                         {
                             commonLog.LogEntry("strange... ___assignParentSVGRootElement('{0}') could not find any parent SVG Element", ___svgElement.toLogString());
                         }
@@ -23275,7 +23312,7 @@ namespace MultiversalRenderer.Core
                         if (___findParticularStringFromHTMLBuilder("<head") < 0)
                         {
                             this.___head = __element;
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("newly created node has become head element {0}", __element);
                             }
@@ -23283,7 +23320,7 @@ namespace MultiversalRenderer.Core
 					}
 					else
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("newly created head. but document already contains head. just cont...{0}", __element);
 						}
@@ -23297,7 +23334,7 @@ namespace MultiversalRenderer.Core
 					{
                         if (___findParticularStringFromHTMLBuilder("<head") < 0)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("newly created body. but head is no exists. create dummy {0}", __element);
                             }
@@ -23306,7 +23343,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("newly created HeadElement will not become document.body becase there is static Head found in HTMLBuilder", __element);
                             }
@@ -23316,7 +23353,7 @@ namespace MultiversalRenderer.Core
 					{
                         if (___findParticularStringFromHTMLBuilder("<body") < 0)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("newly created body bocome document.body {0}", __element);
                             }
@@ -23325,7 +23362,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("newly created BodyElement will not become document.body becase there is static body found in HTMLBuilder", __element);
                             }
@@ -23337,7 +23374,7 @@ namespace MultiversalRenderer.Core
 					}
 					else
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("newly created body element. but body already exists. {0}", __element);
 						}
@@ -23495,7 +23532,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("CloseElementChildren", ex);
 				}
@@ -23522,7 +23559,7 @@ namespace MultiversalRenderer.Core
 			}
 			if(__LookUpElement == null)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("XML Node Close Failed TAG:{0} {1} {2} {3} {4}", __sTag, __CloseStartPosition, __CloseEndPostion,  CloseOtherTagIfOpen,  ___targetClosingElement);
 				}
@@ -23600,14 +23637,14 @@ namespace MultiversalRenderer.Core
 							}
 							else
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 								{
 									commonLog.LogEntry("Stange documentElement is not html or emptry...");
 								}
 								CHtmlCollection htmlList = this.getElementsByTagName("HTML");
 								if(htmlList.length > 0)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 									{
 										commonLog.LogEntry("HTML Tag Found make it close...");
 									}
@@ -23674,7 +23711,7 @@ namespace MultiversalRenderer.Core
 								}
 								else
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 									{
 										commonLog.LogEntry("CurrentParent Node is not title, title not found");
 									}
@@ -23686,7 +23723,7 @@ namespace MultiversalRenderer.Core
 				} 
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("___closeElementWithTagString Head", ex);
 					}
@@ -23747,7 +23784,7 @@ namespace MultiversalRenderer.Core
 #endif
 			if(this.___currentParentElement == null)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					commonLog.LogEntry("BUGBUG!!! CloseParentElement does not have Current Element for {0} {1}", __sTag, __CloseEndPostion);
 				}
@@ -23775,7 +23812,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("BodyTagClose Process", ex);
 						}
@@ -23783,7 +23820,7 @@ namespace MultiversalRenderer.Core
                     #endregion
 					if(___bodyCleanUpTotal > 0)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("<body> had {0} open tags and {1} calc",___bodyCleanUpTotal, ___bodyCleanUpCaluculateDone);
 						}
@@ -23795,7 +23832,7 @@ namespace MultiversalRenderer.Core
 				}
 				else
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
                         commonLog.LogEntry("___closeElementWithTagString Tried to Close [Body] but body is is not found all count : {0} Disposing : {1}", -1, this.___Disposing);
 					}
@@ -23860,7 +23897,7 @@ namespace MultiversalRenderer.Core
 					}
 					catch
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("BUGBUG! Bad Closing");
 						}
@@ -24022,7 +24059,7 @@ namespace MultiversalRenderer.Core
 
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -24050,7 +24087,7 @@ namespace MultiversalRenderer.Core
 				}
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -24211,7 +24248,7 @@ namespace MultiversalRenderer.Core
 									} 
 									catch(Exception ex)
 									{
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 										{
 											commonLog.LogEntry("Table Bounds Final", ex);
 										}
@@ -24219,7 +24256,7 @@ namespace MultiversalRenderer.Core
 								}
 								else
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 									{
 										commonLog.LogEntry("Strange Table Element not found...");
 									}
@@ -24230,7 +24267,7 @@ namespace MultiversalRenderer.Core
 					}
 					else
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("Stange Final Cell is null with TD Max : {0}....",__tdCountMax );
 						}
@@ -24238,7 +24275,7 @@ namespace MultiversalRenderer.Core
 				} 
 				catch (Exception exfinal)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 					{
 						commonLog.LogEntry("Final TableElement Bounds Settings", exfinal);
 					}
@@ -24247,7 +24284,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					commonLog.LogEntry("ComposeTableCells", ex);
 				}
@@ -24324,7 +24361,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("Unable to parse rowSpan");
 						}
@@ -24349,7 +24386,7 @@ namespace MultiversalRenderer.Core
 					}
 					catch
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("Unable to parse colSpan");
 						}
@@ -24358,7 +24395,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("SumUpTableCells Colspan RowSpan", ex);
 				}
@@ -24399,7 +24436,7 @@ namespace MultiversalRenderer.Core
 							} 
 							catch
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 								{
 									commonLog.LogEntry("Eror Row Height Sum up");
 								}
@@ -24457,7 +24494,7 @@ namespace MultiversalRenderer.Core
 										}
 										else
 										{
-											if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+											if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 											{
 												commonLog.LogEntry("SumUpTables Cells Unable to obtain Width Value {0} from list : {1} Fixed : {2}", ___previousTDCount, __colWidthMaxList.Count, tableElement.___IsTableCellWidthFixedOnEachColumn);
 											}
@@ -24482,7 +24519,7 @@ namespace MultiversalRenderer.Core
 									} 
 									catch
 									{
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 										{
 											commonLog.LogEntry("ColSpan failed");
 										}
@@ -24506,7 +24543,7 @@ namespace MultiversalRenderer.Core
 									} 
 									catch
 									{
-										if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+										if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 										{
 											commonLog.LogEntry("RowSpan failed");
 										}
@@ -24537,7 +24574,7 @@ namespace MultiversalRenderer.Core
 								} 
 								catch(Exception ex)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 									{
 										commonLog.LogEntry("Cell Layout", ex);
 									}
@@ -24557,7 +24594,7 @@ namespace MultiversalRenderer.Core
 										}
                                         catch (Exception ex)
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                             {
                                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                             }
@@ -24571,7 +24608,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("SumpTableCells Mapping Stage", ex);
 						}
@@ -24615,7 +24652,7 @@ namespace MultiversalRenderer.Core
 												}
                                                 catch (Exception ex)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                     {
                                                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                                     }
@@ -24632,7 +24669,7 @@ namespace MultiversalRenderer.Core
 												}
                                                 catch (Exception ex)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                     {
                                                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                                     }
@@ -24708,7 +24745,7 @@ namespace MultiversalRenderer.Core
 								}
 								catch(Exception ex)
 								{
-									if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+									if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 									{
 										commonLog.LogEntry("SumUpTableCells Measure At First Row", ex);
 									}
@@ -24771,7 +24808,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch (Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 						{
 							commonLog.LogEntry("Col Row Max Height Width Error : ", ex);
 						}
@@ -24781,7 +24818,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch (Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("SumUpTable Mapping Failed for ({0}:{1}) {2}", _tr, _td, commonData.GetExceptionAsString(ex));
 				}
@@ -24932,18 +24969,21 @@ namespace MultiversalRenderer.Core
                 _scriptElement.IsCompiled = false;
 
                 int ___scriptPos = -1;
-                if (Monitor.TryEnter(this.___scriptEventList.SyncRoot, 1000))
+                if (___scriptEventList != null)
                 {
-                    try
+                    if (Monitor.TryEnter(___scriptEventList.SyncRoot, 1000))
                     {
-                        ___scriptPos = this.___scriptEventList.Add(_scriptElement);
-                    }
-                    finally
-                    {
-
-                        Monitor.Exit(this.___scriptEventList.SyncRoot);
+                        try
+                        {
+                            ___scriptPos = ___scriptEventList.Add(_scriptElement);
+                        }
+                        finally
+                        {
+                            Monitor.Exit(___scriptEventList.SyncRoot);
+                        }
                     }
                 }
+
                 if (___scriptPos == -1)
                 {
                     return;
@@ -24967,7 +25007,7 @@ namespace MultiversalRenderer.Core
                                 _scriptElement.result = -100;
                             }
 
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("___executeScriptElementScript(\'{0}\')  completed successfully by multiversal processor", cscriptElement);
                             }
@@ -24992,7 +25032,7 @@ namespace MultiversalRenderer.Core
                             _scriptElement.IsCompiled = true;
                             _scriptElement.result = 500;
 
-                            if (___SkipLog == false && commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (___SkipLog == false && commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry(sbError.ToString());
                                 commonLog.LogEntry(_scriptElement.errorDetail);
@@ -25008,7 +25048,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___executeScriptElementScript", ex);
                 }
@@ -25094,7 +25134,7 @@ namespace MultiversalRenderer.Core
 						tagElement.value = sbStyle.ToString();
 						if(commonHTML.IsMediaValueValid(commonHTML.GetElementAttributeInString(tagElement, "media")) == false)
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
 							{
 								commonLog.LogEntry("{0} has ignoring media {1}. Skip.", tagElement, tagElement.media);
 							}
@@ -25167,7 +25207,7 @@ namespace MultiversalRenderer.Core
                 char c = this.___HtmlBuilder[this.___curHTMLParsePosition];
 			}
 			TimeSpan tp = DateTime.Now.Subtract(dtStart);
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 			{
 				commonLog.LogEntry("TestFetch took {0} ms...", tp.TotalMilliseconds);
 			}
@@ -25208,7 +25248,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch 
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                 {
                                     commonLog.LogEntry("stange...  commonData.GetCharsetFromHTMLCharset({0}) failed", this.___charset);
                                 }
@@ -25280,7 +25320,7 @@ namespace MultiversalRenderer.Core
                         }
                         if (this.___encText == null)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("Stange, null Encoding..");
                             }
@@ -25313,7 +25353,7 @@ namespace MultiversalRenderer.Core
                         {
                             this.___HtmlBuilder.Append(this.___encText.GetString(buffer));
                             this.___HtmlBuilderLength = this.___HtmlBuilder.Length;
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("___writeBytesIntoDocumentStream {0} : {1} {2}", ex.Message, 0, read);
                             }
@@ -25399,7 +25439,7 @@ namespace MultiversalRenderer.Core
 						} 
 						catch (Exception ex)
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 							{
 								commonLog.LogEntry("BUGBUG!!! DBCS Opertion Failed", ex);
 							}
@@ -25409,7 +25449,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("GetStringExtend",ex);
 					}
@@ -25452,7 +25492,7 @@ namespace MultiversalRenderer.Core
         internal void ___PerformDocumentOrWindowEventFunction(object objFunction, string ___eventName,object ___eventSource, object ___eventObject,bool DoNotResetEvent,  string EventRecodTitle)
         {
             
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
 
                 commonLog.LogEntry("calling ___PerformDocumentOrWindowEventFunction({0}, {1}, {2}, {3})", objFunction, ___eventName, ___eventSource, ___eventObject);
@@ -25497,7 +25537,7 @@ namespace MultiversalRenderer.Core
                 script.result = 500;
                 script.resultText = "Script Onload Segment Compile Exception : " +  ___eventName;
                 script.errorDetail = commonData.GetExceptionAsString(ex);
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
 
                     commonLog.LogEntry(script.resultText);
@@ -25589,7 +25629,7 @@ namespace MultiversalRenderer.Core
                 {
                     goto FinalStage;
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                 {
                     commonLog.LogEntry("PrefechThread  Begin Prosess Main Stage...");
                 }
@@ -25602,7 +25642,7 @@ namespace MultiversalRenderer.Core
                     currentWhileCount++;
                     if (currentWhileCount > while_loop_maximum_count)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                         {
                             commonLog.LogEntry("PrefechThread loops so many times exit now...");
                         }
@@ -25611,7 +25651,7 @@ namespace MultiversalRenderer.Core
 
                     if (___IsPrefetchThreadNeedsToAbort())
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                         {
                             commonLog.LogEntry("PrefechThread will exit loop...");
                         }
@@ -25624,7 +25664,7 @@ namespace MultiversalRenderer.Core
 
                         if (___IsPrefetchThreadNeedsToAbort())
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                             {
                                 commonLog.LogEntry("PrefechThread will exit loop...");
                             }
@@ -25667,7 +25707,7 @@ namespace MultiversalRenderer.Core
                                         }
                                     }catch (Exception exPrefechComment)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("___prefetch_element_src_with_prefetch_thread() comment block exception. ", exPrefechComment );
                                         }
@@ -25723,7 +25763,7 @@ namespace MultiversalRenderer.Core
                                                 }
                                                 catch (Exception exComment)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >=3)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >=3)
                                                     {
                                                         commonLog.LogEntry("Prefetch Comment End SerchException. ", exComment );
                                                     }
@@ -25760,7 +25800,7 @@ namespace MultiversalRenderer.Core
                                             }
                                         }
 
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
                                         {
                                             commonLog.LogEntry("Prefetch <" + ___tName + "> has " + __sbAttributes.ToString());
                                         }
@@ -26026,7 +26066,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     else
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                                         {
                                             commonLog.LogEntry("TagFound but Attributs is null");
                                         }
@@ -26089,7 +26129,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception ex)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                     }
@@ -26102,7 +26142,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     if (___WaitCount >= 10)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                         {
                                             commonLog.LogEntry("___prefetch_element_src_with_prefetch_thread will stop due to bad response.");
                                         }
@@ -26129,7 +26169,7 @@ namespace MultiversalRenderer.Core
                     this.___IsThreadAbortOccurred = true;
                     goto FinalStage;
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("___prefetch_element_src_with_prefetch_thread Exception : " + this.___UrlShortName, ex);
                 }
@@ -26139,7 +26179,7 @@ namespace MultiversalRenderer.Core
                 if (___stopWatch != null)
                 {
                     ___stopWatch.Stop();
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("___prefetch_element_src_with_prefetch_thread(\'{0}\') completed {1} Chars Found {2} Tags ToDownload : {3} ImgToDownload : {4} ScriptToDownload {5} in {6}", this.___UrlShortName, ___ReadCharCount, ___TagMatchCount, ___TagNeedsToDownloadCount, ___ImgTagNeedsToDownloadCount, ___ScriptTagNeedsToDownloadCount, ___stopWatch);
                     }
@@ -26211,7 +26251,7 @@ namespace MultiversalRenderer.Core
 					}
 					else
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 50)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 50)
 						{
 							commonLog.LogEntry("Element is inline Shifted, but InlineVeryTopTextElement is null. Inline Positioning may fail : " + ___tagElement.ToString());
 						}
@@ -26592,7 +26632,7 @@ namespace MultiversalRenderer.Core
                                         strEventTypeName = strEventTypeName.Substring(2);
                                     }
                                 }
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("Strange... PerformCHtmlElementAction is processing but event.type is empty. use  : {0}", strEventTypeName);
                                 }
@@ -26656,7 +26696,7 @@ namespace MultiversalRenderer.Core
 							}
 							catch(System.Threading.ThreadAbortException thabort)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 								{
 									commonLog.LogEntry("PerformCHtmlElementAction Timeout.", thabort);
 								}
@@ -26665,7 +26705,7 @@ namespace MultiversalRenderer.Core
 								script.result = 500;
                                 script.resultText = "PerformCHtmlElementAction Error " + eventElement.toLogString() + " " + ___targetAttr.name;
                                 script.errorDetail = commonData.GetExceptionAsString(thabort);
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 								{
 									commonLog.LogEntry(script.resultText);
                                  
@@ -26678,7 +26718,7 @@ namespace MultiversalRenderer.Core
 								script.result = 500;
                                 script.resultText = "PerformCHtmlElementAction Error " + eventElement.toLogString() + " " + ___targetAttr.name;
                                 script.errorDetail = commonData.GetExceptionAsString(ex);
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 								{
 									commonLog.LogEntry(script.resultText);
                                     commonLog.LogEntry(script.errorDetail);
@@ -26693,7 +26733,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					commonLog.LogEntry("PerformCHtmlElementAction", ex);
 				}
@@ -26901,7 +26941,7 @@ namespace MultiversalRenderer.Core
 				}
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -26922,7 +26962,7 @@ namespace MultiversalRenderer.Core
 			}
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("CHtmlDocument LoadXML() {0} has error {1}", this, commonData.GetExceptionAsString(ex));
                 }
@@ -27011,7 +27051,7 @@ namespace MultiversalRenderer.Core
 									}
                                     catch (Exception ex)
                                     {
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                         {
                                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                         }
@@ -27084,7 +27124,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("DrawElementRecursively {0} : {1}", ___tagElement, ex.Message);
 					}
@@ -27092,7 +27132,7 @@ namespace MultiversalRenderer.Core
 			}
 			if(_grCon.CurrentElementDepth >= DRAW_ELEMENT_STACK_LIMIT)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
 				{
 					commonLog.LogEntry("drawRootElementRecursively {0} stack depth is too deep. Abort Drawring : {1}", ___tagElement, DRAW_ELEMENT_STACK_LIMIT);
 				}
@@ -27113,7 +27153,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 						{
 							commonLog.LogEntry("LocateManagedControlForTagElement", ex);
 						}
@@ -27330,7 +27370,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("drawRootElementRecursively Draw Error" + ___tagElement.toLogString(), ex);
 				}
@@ -27433,7 +27473,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception ex)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 50)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 50)
                                     {
                                         commonLog.LogEntry("DrawTagElement Canvas Paint Has Exception : {0}", ex.Message );
                                     }
@@ -27523,7 +27563,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("___drawElement drawLine Exception. ", ex);
                     }
@@ -27615,7 +27655,7 @@ namespace MultiversalRenderer.Core
 							}
                             catch (Exception ex)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                 }
@@ -27692,7 +27732,7 @@ namespace MultiversalRenderer.Core
 				} 
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 					{
 						commonLog.LogEntry("DrawHTMLLaytoutPanel", ex);
 					}
@@ -27792,7 +27832,7 @@ namespace MultiversalRenderer.Core
                                             }
                                             catch (Exception ex)
                                             {
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                 {
                                                     commonLog.LogEntry("___DrawCHtmlElement Radius Error", this, commonData.GetExceptionAsString(ex));
                                                 }
@@ -28061,7 +28101,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception exMulti)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("___drawElement drawMultiImageData Exception", exMulti);
                     }
@@ -28211,7 +28251,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch(Exception exOpacity)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                 {
                                     commonLog.LogEntry("convertAndCreateImageOpacity Error", exOpacity);
                                 }
@@ -28248,7 +28288,7 @@ namespace MultiversalRenderer.Core
 						{
 
                           
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 							{
 								commonLog.LogEntry("Uhhh,Bad Image Size For {0} Enter as bad image flag...." ,imgUrl);
 							}
@@ -28433,7 +28473,7 @@ namespace MultiversalRenderer.Core
                                 __img.Dispose();
                                 __img = null;
                             }
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("DrawTagElement DrawImage. may be invalid image. removing from cache", ex);
                             }
@@ -28443,7 +28483,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch (Exception ex2)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex2));
                                 }
@@ -28571,7 +28611,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("ListStyleImageDraw Exception. ", ex);
 				}
@@ -28631,13 +28671,13 @@ namespace MultiversalRenderer.Core
         {
             if ((this.___documentElement != null )|| (this.___childNodes  != null && this.___childNodes.Count > 0))
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
                     commonLog.LogEntry("{0}.hasChildNodes() returns true. ", this);
                 }
                 return true;
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("{0}.hasChildNodes() returns false. ", this);
             }
@@ -28665,7 +28705,7 @@ namespace MultiversalRenderer.Core
         
         public void focus()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("{0}.focus() is called ", this);
             }
@@ -28684,7 +28724,7 @@ namespace MultiversalRenderer.Core
 		private bool ___execCommandInner(object _ocommand, bool _oUserInterface, object _Param)
 		{
 			string sCommand = commonHTML.GetStringValue(_ocommand);
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 			{
                 commonLog.LogEntry("document.execCommand('{0}',{1}, {2}) is called. but do nothing...return true...", sCommand, _oUserInterface, _Param);
 
@@ -28857,7 +28897,7 @@ namespace MultiversalRenderer.Core
 						catch
 						{
 							/*
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 							{
 								commonLog.LogEntry("AutoResetEvent Close Failed");
 							}
@@ -28873,7 +28913,7 @@ namespace MultiversalRenderer.Core
 						}
 						catch
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 							{
 								commonLog.LogEntry("Dispose AutoReset Failed");
 							}
@@ -28889,7 +28929,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("CloseAndDisposeAutoResetEvent", ex);
 				}
@@ -28943,7 +28983,7 @@ namespace MultiversalRenderer.Core
 			{
 				if(value != null)
 				{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 						{
 							commonLog.LogEntry("CHtmlDocument.location attempted to set value {0}. abort", value);
 						}
@@ -28997,7 +29037,7 @@ namespace MultiversalRenderer.Core
 		internal void ___attachEventForElement(string __evtName, object ___function, int ___documentIndex)
 		{
             
-            if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
             {
                 if(___documentIndex == (int)CHtmlEventOriginatorType.CHTMLDocument)
                  {
@@ -29073,7 +29113,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
 				{
 					commonLog.LogEntry("attachEventForElemet({0} ,{1}, {2}) Error : {3}", __evtName, ___function,  ___documentIndex, ex.Message );
 				}
@@ -29186,7 +29226,7 @@ namespace MultiversalRenderer.Core
 		{
 			if(__Name == null)
 				return;
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 if(__docIndex == (int)CHtmlEventOriginatorType.CHTMLDocument)
                 {
@@ -29245,7 +29285,7 @@ namespace MultiversalRenderer.Core
 				}
 				catch(Exception ex)
 				{
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
 					{
 						commonLog.LogEntry("GetExplicitFixedHeightFromParentElement", ex);
 					}
@@ -29273,7 +29313,7 @@ namespace MultiversalRenderer.Core
         public void fairdllfair_sleep(object ___interval)
         {
             double val = commonHTML.GetDoubleFromObject(___interval, 0);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
             {
                 commonLog.LogEntry("calling \"debug purpose only API\" document.fairdllfia_.sleep({0})", val);
             }
@@ -29298,7 +29338,7 @@ namespace MultiversalRenderer.Core
         }
         private void OnCHtmlCSSRuleMergeQueueCompleted(object sendr, EventArgs e)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
             {
                 commonLog.LogEntry("OnCHtmlCSSRuleMergeQueueCompleted is called");
             }
@@ -29341,7 +29381,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (this.___IsDomModeFullParseMode() == true && child.___prototypeWeakReference == null && this.___IsMultiversalDocument == true)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                         {
                             commonLog.LogEntry("element is added to full parsed mode documnet, but  parent prototype is not assigned... assign now! element: {0}",  child);
 
@@ -29371,7 +29411,7 @@ namespace MultiversalRenderer.Core
 					{
 						if(child.___style.___styleCHtmlCollection != null && child.___style.___styleCHtmlCollection.Count > 0)
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
 							{
 								commonLog.LogEntry("CssText element's style not yet mearged to document {0} items for {1}. Merge it now!", child.___style.___styleCHtmlCollection.Count, child);
 
@@ -29383,7 +29423,7 @@ namespace MultiversalRenderer.Core
 							}
 							catch(Exception ex)
 							{
-								if(commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+								if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
 								{
 									commonLog.LogEntry("AfterProcessCHtmlElement Meage CSS Failed for {0} Reason : {1}", child, ex.Message);
 								}
@@ -29435,7 +29475,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                         }
@@ -29467,7 +29507,7 @@ namespace MultiversalRenderer.Core
 					}
 					catch (Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel>= 5)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel>= 5)
 						{
 							commonLog.LogEntry("___stylesheetsForNextNodeList.Sortet", ex);
 						}
@@ -29489,7 +29529,7 @@ namespace MultiversalRenderer.Core
                     }
                     if (object.ReferenceEquals(childchild, child) == true)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("strange parent is same as child " + childchild.toLogString() + " : " + __StackDepth.ToString());
                         }
@@ -29503,7 +29543,7 @@ namespace MultiversalRenderer.Core
                         if (__StackDepth <= 36)
                         {
                             __StackDepth++;
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("calling child  ___postprocessDynamicElementCHtmlElement() " + childchild.toLogString() + " Hash :" + childchild.GetHashCode() + " : " + __StackDepth.ToString());
                             }
@@ -29530,7 +29570,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("AfterProcessChtmlElement Child Lookup Stack Overflow");
                             }
@@ -29612,7 +29652,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         catch
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                             {
                                                 commonLog.LogEntry("Base64ImageConversion Failed : " + __srcUri.href);
                                             }
@@ -29625,7 +29665,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 else
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("Stanange Dynamic <img> has empty src");
                                     }
@@ -29653,7 +29693,7 @@ namespace MultiversalRenderer.Core
                                             }
                                             if (child.type.Length != 0 && commonHTML.isTemplateScriptBlock(child.type))
                                             {
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                 {
                                                     commonLog.LogEntry("TODO: AfterProcessCHTMLElement is about to downloading template scripts!", child);
                                                 }
@@ -29683,7 +29723,7 @@ namespace MultiversalRenderer.Core
                                                 }
                                                 else
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                                                     {
                                                         commonLog.LogEntry("___postprocessDynamicElementCHtmlElement() will execute  {0} element in sync : ", child.toLogString(), __srcUri.___Href);
                                                     }
@@ -29695,7 +29735,7 @@ namespace MultiversalRenderer.Core
 
                                         catch (Exception ex)
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                             {
                                                 commonLog.LogEntry("AfterProcessCHTMLElement ScriptBlock", ex);
                                             }
@@ -29739,7 +29779,7 @@ namespace MultiversalRenderer.Core
 
                                             if (child.___MediaQueryNode.Result == CHtmlMediaQueryResult.Fail)
                                             {
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                 {
                                                     commonLog.LogEntry("[MediaQuery] {0} Dynamic Link Element download will be skip MediaQueries", child.___MediaQueryNode.Text);
                                                 }
@@ -29747,7 +29787,7 @@ namespace MultiversalRenderer.Core
                                             }
                                             else
                                             {
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                 {
                                                     commonLog.LogEntry("[MediaQuery] {0} Dynamic Link Element will be download", child.___MediaQueryNode.Text);
                                                 }
@@ -29757,7 +29797,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         catch (Exception ex)
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                             {
                                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                             }
@@ -29808,7 +29848,7 @@ namespace MultiversalRenderer.Core
                                                     child.___MediaQueryNode.Text = commonHTML.GetElementAttributeInString(child, "media");
                                                     if (child.___MediaQueryNode.Result == CHtmlMediaQueryResult.Fail)
                                                     {
-                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                         {
                                                             commonLog.LogEntry("[MediaQuery] {0} Dynamic Style Element download will be skip MediaQueries", child.___MediaQueryNode.Text);
                                                         }
@@ -29816,7 +29856,7 @@ namespace MultiversalRenderer.Core
                                                     }
                                                     else
                                                     {
-                                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                                                         {
                                                             commonLog.LogEntry("[MediaQuery] {0} Dynamic Style Element will be processed", child.___MediaQueryNode.Text);
                                                         }
@@ -29825,7 +29865,7 @@ namespace MultiversalRenderer.Core
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                     {
                                                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                                     }
@@ -29857,7 +29897,7 @@ namespace MultiversalRenderer.Core
                                                         }
                                                         catch (Exception ex)
                                                         {
-                                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                             {
                                                                 commonLog.LogEntry("AfterProcessCHTMLElement Style Merge", ex);
                                                             }
@@ -29874,7 +29914,7 @@ namespace MultiversalRenderer.Core
 
                                             if (___mergedCount > 0)
                                             {
-                                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                                 {
                                                     commonLog.LogEntry("{0} dynamic style Len : {1} Style Mearged : {2}", child, strStyle.Length, ___mergedCount);
                                                 }
@@ -29896,7 +29936,7 @@ namespace MultiversalRenderer.Core
                                 break;
                         }
                     SwithDone:
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             if (child.innerHTML.Length != 0)
                             {
@@ -29911,7 +29951,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("AfterProcessCHtmlElement", ex);
 				}
@@ -29960,7 +30000,7 @@ namespace MultiversalRenderer.Core
 			} 
 			catch (Exception ex1)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("AfterProcessCHtmlElement ___applyElemenetStyleSheets", ex1);
 				}
@@ -30024,7 +30064,7 @@ namespace MultiversalRenderer.Core
 					} 
 					catch(Exception ex)
 					{
-						if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+						if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 						{
 							commonLog.LogEntry("AfterProcessCHtmlElement ___calculateElementBounds", ex);
 						}
@@ -30058,7 +30098,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 else
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                     {
                                         commonLog.LogEntry("Strange {0} does not have multiversal iframe window. create now", child);
 
@@ -30124,7 +30164,7 @@ namespace MultiversalRenderer.Core
 												}
 												if(___SizeReset)
 												{
-													if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+													if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 													{
 														commonLog.LogEntry("{0} has reise reset {1}", child, child.offsetBounds);
 													}
@@ -30133,7 +30173,7 @@ namespace MultiversalRenderer.Core
 										}
                                         catch (Exception ex)
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                             {
                                                 commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                             }
@@ -30144,7 +30184,7 @@ namespace MultiversalRenderer.Core
 							}
                             catch (Exception ex)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                                 {
                                     commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                                 }
@@ -30181,7 +30221,7 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("After ProcessCHTMLElement Final Stage : " + child.ToString(), ex);
 				}
@@ -30192,7 +30232,7 @@ namespace MultiversalRenderer.Core
             TimeSpan tpPostProcessTime = DateTime.Now.Subtract(___postProcessStartTime);
             if (tpPostProcessTime.TotalMilliseconds >= 10000)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___postprocessDynamicElement({0}) took too long {1} ms...", child, tpPostProcessTime.TotalMilliseconds);
                 }
@@ -30227,13 +30267,13 @@ namespace MultiversalRenderer.Core
                             ___interval = 25;
                         }
                         this.___DocumentTimerThread.Change(__StartupMilliseconds, ___interval);
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                         {
                             commonLog.LogEntry("Reset DocumentTimerInterval({0}, {1})", __StartupMilliseconds, ___interval);
                         }
                 } catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                     {
                         commonLog.LogEntry("ChangeDocumentTimerInterval Error : {0}. but it is ok.", ex.Message);
                     }
@@ -30294,7 +30334,7 @@ namespace MultiversalRenderer.Core
                         }
                         if (this.___IsDocumentTimerTooksTooLong == true)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                             {
                                 commonLog.LogEntry("IsDocumentTimerTooksTooLong is TRUE. No timer on this document");
                             }
@@ -30332,7 +30372,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 7)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 7)
                 {
                     commonLog.LogEntry("InitializeDocumentTimer()", ex);
                 }
@@ -30460,7 +30500,7 @@ namespace MultiversalRenderer.Core
                                 try
                                 {
 
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                     {
                                         commonLog.LogEntry("DocumentTimer has found Queued Script Process Now...");
                                     }
@@ -30591,7 +30631,7 @@ namespace MultiversalRenderer.Core
                                     {
                                         if (___IsEventHasBeenFromLiveList == false)
                                         {
-                                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+                                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
                                             {
                                                 commonLog.LogEntry("DocumentTimerLiveList Removing : {0}", ___timerkey);
                                             }
@@ -30667,7 +30707,7 @@ namespace MultiversalRenderer.Core
                                             this.___DocumentTimerCompleteList.RemoveAt(0);
                                         }
                                         this.___DocumentTimerCompleteList.Add(timerEvt);
-                                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+                                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
                                         {
                                             commonLog.LogEntry("DocumentTimerLiveList Removing : {0}", ___timerkey);
                                         }
@@ -30685,7 +30725,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                         {
                             commonLog.LogEntry("DocumentTimer_Elapsed Error. ", ex);
                         }
@@ -30721,7 +30761,7 @@ namespace MultiversalRenderer.Core
                             {
                                 goto TimerProcessDone;
                             }
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                             {
                                 commonLog.LogEntry("No Event DocumentTimer should process...");
                             }
@@ -30742,7 +30782,7 @@ namespace MultiversalRenderer.Core
                         TimeSpan tpSpan = DateTime.Now.Subtract(___dtStart);
                         if (tpSpan.TotalSeconds >= commonHTML.MAX_DOCUMENT_TIMER_TIMEOUT_SECONDS )
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("DocumentTimer tooks long to complete. Disable Doucument Timer From now on...");
                             }
@@ -30789,12 +30829,12 @@ namespace MultiversalRenderer.Core
                 {
                     if (ex is System.Threading.ThreadAbortException)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                         {
                             commonLog.LogEntry("DocumentTimerThread_Elapsed Thread Abort. It is ok!");
                         }
                         
-                    }else if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                    }else if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                     {
                         commonLog.LogEntry("DocumentTimerThread_Elapsed", ex);
                     }
@@ -30820,7 +30860,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (this.___cookieUpdatedTime > this.___cookieLastSavedTime)
                     {
-                        if (commonLog.LoggingEnabled == true && commonLog.LogLevel > 7)
+                        if (commonLog.LoggingEnabled == true && commonLog.CommonLogLevel > 7)
                         {
                             commonLog.LogEntry("Saving Cookie list {0}", this.___cookieList.Count);
                         }
@@ -30831,7 +30871,7 @@ namespace MultiversalRenderer.Core
 			}
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                 }
@@ -30848,7 +30888,7 @@ namespace MultiversalRenderer.Core
 				}
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex));
                     }
@@ -30903,7 +30943,7 @@ namespace MultiversalRenderer.Core
                               object obj_screenX, object obj_screenY, object obj_clientX, object obj_clientY,
                               object obj_radiusX, object obj_radiusY, object obj_rotationAngle, object obj_force)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 9)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 9)
             {
                 commonLog.LogEntry("TODO: {0}.createTouch() is called",this);
             }
@@ -30922,7 +30962,7 @@ namespace MultiversalRenderer.Core
             }
             if (__otherNodeElement == null)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
                 {
 
                     commonLog.LogEntry(" compareDocumentPosition enment fail");
@@ -30964,7 +31004,7 @@ namespace MultiversalRenderer.Core
 			if(___IsURLDownload)
 			{
 				___downloaddirectly(newPart.___baseUrl,null ,null, null , this.___URL, this.___charset, CHtmlThreadPoolQueueObjectType.UrlStyleSheet, this.___URL , null, 0, CHtmlUrlSourceType.Unknown,false);
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("createStyleSheet({0}) is called Download : {1}" , ___url, ___IsURLDownload );
 				}
@@ -31046,12 +31086,12 @@ namespace MultiversalRenderer.Core
 			} 
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 				{
 					commonLog.LogEntry("SetCloseHTMLDocumentIfOpen", ex);
 				}
 			}
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 			{
 				TimeSpan tpSpan = DateTime.Now.Subtract(___dtStart);
 				commonLog.LogEntry("Force HTML Close Completed {0} ms...", tpSpan.TotalMilliseconds);
@@ -31130,7 +31170,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex2)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex2));
                         }
@@ -31140,7 +31180,7 @@ namespace MultiversalRenderer.Core
 			}
 			else
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
 				{
 					commonLog.LogEntry("LoadFile File not Found :{0}",sPath);
 				}
@@ -31178,7 +31218,7 @@ namespace MultiversalRenderer.Core
                         ___parentLooupCount++;
                         if (___parentLooupCount >= commonHTML.___TRACE_PARENT_FOR_DOCUMENT_LOOKUP_MAX)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                             {
                                 commonLog.LogEntry("___isElementParentTraceableToDocument ({0}) is aborted because lookup is over {1} limit", ___elem, commonHTML.___TRACE_PARENT_FOR_DOCUMENT_LOOKUP_MAX);
                             }
@@ -31195,7 +31235,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                 {
                     commonLog.LogEntry("___isElementParentTraceableToDocument exception", ex);
                 }
@@ -31250,7 +31290,7 @@ namespace MultiversalRenderer.Core
 #region ____defineGetter___ ____defineSetter___
         public void __defineGetter__(string ___propName, object ____getFunction)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("{0}.__defineGetter___({1}, {2})", this, ___propName, ____getFunction);
             }
@@ -31258,7 +31298,7 @@ namespace MultiversalRenderer.Core
         }
         public void __defineSetter__(string ___propName, object ____getFunction)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("{0}.__defineSetter___({1}, {2})",  this, ___propName, ____getFunction);
             }
@@ -31276,7 +31316,7 @@ namespace MultiversalRenderer.Core
 		{
 			try
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("get : {0} for {1}",  ___name, this);
 				}
@@ -31417,7 +31457,7 @@ namespace MultiversalRenderer.Core
 						}
 						else
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
 							{
                                 commonLog.LogEntry("document.___locationBase is null. disposing : {0}", this.___Disposing);
 							}
@@ -31427,7 +31467,7 @@ namespace MultiversalRenderer.Core
                     case "documentElement":
 						if(this.___documentElement == null)
 						{
-							if(commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+							if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
 							{
 								commonLog.LogEntry("Strange Document Element is null");
 							}
@@ -31651,14 +31691,14 @@ namespace MultiversalRenderer.Core
                         break;
 				}
 
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("GetPropertyValue for {0} {1} {2} failed",this.GetType(), this, ___name);
 				}
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 				{
 					commonLog.LogEntry("x_GetPropertyValue", ex);
 				}
@@ -31669,7 +31709,7 @@ namespace MultiversalRenderer.Core
 		public virtual void ___setPropertyByName(string ___name, object val)
 		{
           
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
                 commonLog.LogEntry("calling {0}.___setPropertyByIndex({1}, {2})", this, ___name, val);
 			}
@@ -31872,19 +31912,19 @@ namespace MultiversalRenderer.Core
                     // rhino may put wirteln to document sometimes. Just ignore it.
                     return;
                 case "styleSheets":
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 7)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 7)
                     {
                         commonLog.LogEntry("Attempting directly set document.styleSheets. ignore.", this, ___name, val);
                     }
                     return;
                 case "pointerLockElement":
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 7)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 7)
                     {
                         commonLog.LogEntry("Attempting directly set pointerLockElement. ignore.", this, ___name, val);
                     }
                     return;
                 case "head":
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 7)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 7)
                     {
                         commonLog.LogEntry("Attempting directly set CHtmlDocument Property head {0} {1} = {2}", this, ___name, val);
                     }
@@ -31895,7 +31935,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (object.ReferenceEquals(__UnwrappedHead, this.___head) == true)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel > 7)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 7)
                                 {
                                     commonLog.LogEntry("CHtmlDocument already contains head which is reference is samle. exit");
                                 }
@@ -31905,7 +31945,7 @@ namespace MultiversalRenderer.Core
                             {
                                 if (this.___head == null)
                                 {
-                                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 7)
+                                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 7)
                                     {
                                         commonLog.LogEntry("TODO: CHtmlDocument already contains head which is reference is not samle. Store Now?");
                                     }
@@ -31924,7 +31964,7 @@ namespace MultiversalRenderer.Core
 					}
                     catch (Exception ex2)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                         {
                             commonLog.LogEntry("{0} has error {1}", this, commonData.GetExceptionAsString(ex2));
                         }
@@ -31965,7 +32005,7 @@ namespace MultiversalRenderer.Core
 					}
 					
 					
-					if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+					if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 					{
 						commonLog.LogEntry("SetPropertyValue for {0} {1}  {2} = {3} Success : {4}",this.GetType(), this, ___name, val, ___ValueStored );
 					}
@@ -32012,7 +32052,7 @@ namespace MultiversalRenderer.Core
 			}
 					
 					
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
                 commonLog.LogEntry("CreateCHtmlAttributeEntry for {0} {1}  {2} = {3} Success : {4}", this.GetType(), this, ___nameLow, val, ___ValueStored);
 			}
@@ -32020,7 +32060,7 @@ namespace MultiversalRenderer.Core
 		
         public virtual  void ___setPropertyByIndex(int ___index, object val)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("SetPropertyValueIndex for {0} \'{1}\' {2} = {3} failed",this.GetType(), this, ___index, val);
 			}
@@ -32028,7 +32068,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual object ___getPropertyByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getPropertyByName by index {0} {1} {2} failed",this.GetType(), this, ___index);
 			}
@@ -32037,7 +32077,7 @@ namespace MultiversalRenderer.Core
 
         public virtual bool ___hasPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 5)
             {
                 commonLog.LogEntry("{0}._x__HasProperty {1} ", this, ___name);
             }
@@ -32053,7 +32093,7 @@ namespace MultiversalRenderer.Core
         }
         public virtual bool ___hasPropertyByIndex(int ___index)
 		{
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("calling {0}._x__HasProperty({1})", this, ___index );
             }
@@ -32061,7 +32101,7 @@ namespace MultiversalRenderer.Core
 		}
 		public virtual object ___common_object_clone()
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("x__Clone {0} {1} called",this.GetType(), this);
 			}
@@ -32069,14 +32109,14 @@ namespace MultiversalRenderer.Core
 		}
         public virtual void ___deleteByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}",this.GetType(), this, ___index);
 			}
 		}
         public virtual void ___deleteByName(string ___name)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByName {0} {1} called : {2}",this.GetType(), this, ___name);
 			}
@@ -32084,7 +32124,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual object[] ___getByIds()
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getByIds() {0} {1} called",this.GetType(), this);
 			}
@@ -32093,7 +32133,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual  string ___getClassName()
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getClassName {0} {1} called",this.GetType(), this);
 			}
@@ -32101,7 +32141,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual  object ___getDefaultValue()
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getDefaultValue {0} {1} called",this.GetType(), this);
 			}
@@ -32109,7 +32149,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual  object ___getParentScope()
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getParentScope {0} {1} called",this.GetType(), this);
 			}
@@ -32117,14 +32157,14 @@ namespace MultiversalRenderer.Core
 		}
         public virtual  void ___setParentScope(object ___object)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setParentScope {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
 		}
         public virtual  object ___getProtoType()
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getProtoType {0} {1} called",this.GetType(), this);
 			}
@@ -32136,7 +32176,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual  bool ___hasInstance(object ___object)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___hasInstance {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -32144,7 +32184,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual bool ___instanceEquals(object ___object)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___instanceEquals {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -32152,7 +32192,7 @@ namespace MultiversalRenderer.Core
 		}
         public virtual  void ___setProtoType(object ___object)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setProtoType {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -32232,7 +32272,7 @@ namespace MultiversalRenderer.Core
                 }
 
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("BUGBUG!!!   getComputedStyle_viaWindow(\'{0}\', \'{1}\') returns null", ___objectElment, ___objectParam);
             }
@@ -32278,12 +32318,12 @@ namespace MultiversalRenderer.Core
 			}
 			catch(Exception ex)
 			{
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 				{
 					commonLog.LogEntry("get_parent_viaWindow via Window() {0} {1}", this, commonData.GetExceptionAsString(ex));
 				}
 			}
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("get_parent_viaWindow returns null. okay?", this);
 			}
@@ -32308,7 +32348,7 @@ namespace MultiversalRenderer.Core
         }
         public bool isEqualNode(object ___obj)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("calling {0}.isEqualNode(\'{1}\'}\')", this, ___obj );
             }
@@ -32340,7 +32380,7 @@ namespace MultiversalRenderer.Core
                     ___tpSpan = DateTime.Now.Subtract(___dtStart);
                     _scriptElement.result = 200;
                     _scriptElement.resultText = string.Format("[execScript via Window Success] '{0}' {1} ms", _scriptElement.text, ___tpSpan.TotalMilliseconds);
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry(_scriptElement.resultText);
                     }
@@ -32370,7 +32410,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("execScript via Window() {0} {1}", this, commonData.GetExceptionAsString(ex));
                 }
@@ -32440,7 +32480,7 @@ namespace MultiversalRenderer.Core
                     System.Threading.Monitor.Exit(this.___DocumentTimerLiveLockingObject);
                 }
 
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
                 {
                     commonLog.LogEntry("setting window.setInternal({0}, {1}, {2}) = {3}", __script, __mseconds, __language, evtTimer.DocumentIndex);
                 }
@@ -32455,7 +32495,7 @@ namespace MultiversalRenderer.Core
                         }
                         else if (commonHTML.AllowTimerStartupBeforeComplete == true)
                         {
-                            if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+                            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
                             {
                                 commonLog.LogEntry("setIntaval() may start timer...");
                             }
@@ -32480,7 +32520,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
                 {
                     commonLog.LogEntry("setTimeout() may start timer errror :" + ex.Message);
                 }
@@ -32512,7 +32552,7 @@ namespace MultiversalRenderer.Core
                     timerKey = commonHTML.getDocumentTimerAdhocRandomNumber();
                 }
                 evtTimer.DocumentIndex = timerKey;
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1000)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1000)
                 {
                     commonLog.LogEntry("setting window.setTimeout({0}, {1}, {2}) = {3}", __script, __mseconds, __language, evtTimer.DocumentIndex);
                 }
@@ -32537,7 +32577,7 @@ namespace MultiversalRenderer.Core
                         {
                             if (isFrameTimer == false)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
                                 {
                                     commonLog.LogEntry("setTimeout() may start timer...");
                                 }
@@ -32564,7 +32604,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 5)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 5)
                 {
                     commonLog.LogEntry("setIntaval() may start timer errror :" +  ex.Message );
                 }
@@ -32575,7 +32615,7 @@ namespace MultiversalRenderer.Core
         
         public void clear()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 commonLog.LogEntry("document.clear() is deprecated. This method doesn't do anything. ");
             }
@@ -32628,7 +32668,7 @@ namespace MultiversalRenderer.Core
 			LookUpEvents:
             if (___timerHash == -99999999 || ___timerHash == 0)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("___clearDocumentTimerInner is called but no timer id {0}", timerID);
                 }
@@ -32644,7 +32684,7 @@ namespace MultiversalRenderer.Core
                 {
                     if (this.___DocumentTimerLiveList != null && this.___DocumentTimerLiveList.Count > 0)
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                         {
                             commonLog.LogEntry("___clearDocumentTimerInner is called many times (Sequential: {0} Total : {1}), there is live timer exists. clear all now...", this.___DocumentTimerClearSequentailMissCount, this.___DocumentTimerClearTotalMissCount);
 
@@ -32668,14 +32708,14 @@ namespace MultiversalRenderer.Core
                                 this.___DocumentTimerLiveList.Clear();
                                 this.___DocumentTimerBrandNewIDList.Clear();
                                 this.___DocumentTimerClearTotalMissCount = 0;
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                 {
                                     commonLog.LogEntry("___clearDocumentTimerInner clear all timer success. ");
                                 }
                             }
                             catch (Exception exTimerClear)
                             {
-                                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                                 {
                                     commonLog.LogEntry("___clearDocumentTimerInner timer clear exception. ", exTimerClear);
                                 }
@@ -32690,7 +32730,7 @@ namespace MultiversalRenderer.Core
                     }
                     else
                     {
-                        if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                         {
                             commonLog.LogEntry("___clearDocumentTimerInner is called many times (Sequential: {0} Total : {1}), there is no live timer events exists", this.___DocumentTimerClearSequentailMissCount, this.___DocumentTimerClearTotalMissCount);
 
@@ -32727,14 +32767,14 @@ namespace MultiversalRenderer.Core
                     {
                         this.___DocumentTimerClearSequentailMissCount++;
                     }
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("___clearDocumentTimerInner Exception ", ex);
                     }
                 }
             }
 			//ClearDone:
-				if(commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+				if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
 				{
 					commonLog.LogEntry("___clearDocumentTimerInner({0}, {1})  Cleared : {2}", timerID, _name, ___clearedTimerCount);
 				}
@@ -32762,7 +32802,7 @@ namespace MultiversalRenderer.Core
         {
             try
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("postMessage({0}, {1}, {2})", __message, __targetOrigin, __transfer);
                 }
@@ -34108,7 +34148,7 @@ namespace MultiversalRenderer.Core
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                 {
                     commonLog.LogEntry("Strange.... ___get_localStorage_viaWindow() will returns null...");
                 }
@@ -34123,7 +34163,7 @@ namespace MultiversalRenderer.Core
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
                 {
                     commonLog.LogEntry("Strange.... ___get_sessionStorage_viaWindow() will returns null...");
                 }
@@ -34147,7 +34187,7 @@ namespace MultiversalRenderer.Core
 		
 		public void addEventListener_viaWindow(string __Name, object ___function, bool ___bool)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3 )
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3 )
 			{
 				commonLog.LogEntry("addEventListener for '{0} : {1} {2}'", __Name,___function, ___function.GetType());
 			}
@@ -34173,7 +34213,7 @@ namespace MultiversalRenderer.Core
         }
         private object ___open_viaWindow_Inner(object param1, object param2, object param3, object param4)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 1)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 1)
             {
                 commonLog.LogEntry("calling {0}.___open_viaWindow_Inner({1}, {2} , {3} , {4}) readyState : {5}", this, param1,  param2,  param3,  param4, this.___readyStateType);
             }
@@ -34184,7 +34224,7 @@ namespace MultiversalRenderer.Core
 		
 		public void addEventListener_viaWindow(object __Name, object ___function, object boolObj)
 		{
-			if(commonLog.LoggingEnabled && commonLog.LogLevel >= 3 )
+			if(commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3 )
 			{
                 if (___function != null)
                 {
@@ -34277,7 +34317,7 @@ namespace MultiversalRenderer.Core
       
 
             double ret =  (double)this.setTimeoutInner(___callback, commonHTML.WINDOW_MULTIMEDIA_TIMER_MINUMUM, null, true);
-            if (commonLog.LoggingEnabled && commonLog.LogLevel > 1000)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1000)
             {
                 commonLog.LogEntry("requestAnimationFrame is called : {0} => {1}", ___callback, ret);
             }
@@ -34292,7 +34332,7 @@ namespace MultiversalRenderer.Core
         
         public void ___cancelAnimationFrame_viaWindow(object ___cancelID)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel > 1000)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 1000)
             {
                 commonLog.LogEntry("cancelAnimationFrame is called : {0}", ___cancelID);
             }
@@ -34363,7 +34403,7 @@ namespace MultiversalRenderer.Core
         }
         public bool isPrototypeOf(object ___protoObject)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 commonLog.LogEntry("calling {0}.isPrototpyeOf('{1}') ", this, ___protoObject);
             }
@@ -34371,7 +34411,7 @@ namespace MultiversalRenderer.Core
             {
                 case 0:
                 default:
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                     {
                         commonLog.LogEntry("TODO:  {0}.isPrototpyeOf('{1}') test needs more test. returns true for now... ", this, ___protoObject);
                     }
@@ -34401,7 +34441,7 @@ namespace MultiversalRenderer.Core
             this.___CSSSearchDeepExecutionThread.IsBackground = true;
             this.___CSSSearchDeepExecutionThread.Priority = ThreadPriority.Lowest;
             //this.___CSSSearchDeepExecutionThread.ApartmentState = ApartmentState.MTA;
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("starting CSS Deep Lookup Execution Thread : {0}", this.___CSSSearchDeepExecutionThread.Name );
             }
@@ -34487,7 +34527,7 @@ namespace MultiversalRenderer.Core
             {
                 commonLog.LogEntry(" ___performCSSDeepElementLookup() exception. ", ex);
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 TimeSpan tpSpan = DateTime.Now.Subtract(__CSSDeepSearchStartTime);
                 if (this.___CSSSearchDeepExecutionThread != null)

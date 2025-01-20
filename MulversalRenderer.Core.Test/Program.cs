@@ -16,16 +16,17 @@ using System.IO.Pipes;
 using System.Threading.Tasks;
 using System.Data;
 using NiL.JS;
+using System.Diagnostics.CodeAnalysis;
 namespace Core.Test
 {
     internal class Program
     {
-        static CHtmlDocument localdocument = null;
-        static void Main(string[] args)
+        private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
+        static async Task Main(string[] args)
         {
             var window = new CHtmlMultiversalWindow();
             MultiversalRenderer.Core.commonLog.LoggingEnabled = true;
-            MultiversalRenderer.Core.commonLog.LogLevel = 10;
+            MultiversalRenderer.Core.commonLog.CommonLogLevel = 2;
             var scope = new NilJsScope();
             scope.___initScriptEngine();
             scope.___setMultiversalWindow(window);
@@ -74,18 +75,32 @@ namespace Core.Test
                 throw new Exception("globalThis is not IMultiversalWindow");
 
             }
-            var url = @"http://localhost/";
-             LoadUrl(url).Wait();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var url = @"http://ascii.jp";
+            var contentData = await getContentData(url);
+            if (contentData != null && contentData.ContentType == "text/html")
+            {
+                Debug.WriteLine($"ContentData: {contentData}");
+                Debug.WriteLine($"ContentData.HtmlContent: {contentData.HtmlContent}");
+                Debug.WriteLine($"ContentData.FileLocation: {contentData.FileLocation}");
+                CHtmlDocument document = MultiversalRenderer.Core.CHtmlDocument.createDocument(CHtmlDomModeType.HTMLDOM, url,contentData.HtmlContent, window, contentData);
+                Debug.Write(document);
+            }
+            else
+            {
+                Debug.WriteLine(contentData);
+            }
+            stopwatch.Stop();
+            Debug.WriteLine($"処理時間: {stopwatch.ElapsedMilliseconds} ミリ秒");
 
-            Debug.WriteLine("LoadUrl completed.");
-            processor.put("document", localdocument);
-   
-            
+
 
 
         }
-        public async static Task LoadUrl(string url)
+        public async static Task<MultiversalRenderer.Core.MultivasalContentData> getContentData(string url)
         {
+            MultiversalRenderer.Core.MultivasalContentData __contentData = null;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             var handler = new HttpClientHandler
@@ -102,10 +117,10 @@ namespace Core.Test
                 client.DefaultRequestVersion = new Version(1, 0);
                 client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
 
-                client.Timeout = TimeSpan.FromSeconds(30);
+                client.Timeout = TimeSpan.FromSeconds(60);
 
                 bool IsCharsetFound = false;
-                string charset = "UTF -8";
+                string charset = "UTF-8";
 
                 client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36");
                 client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
@@ -121,7 +136,7 @@ namespace Core.Test
                     //HttpResponseMessage response = await client.GetAsync(url, cts.Token);
                     HttpResponseMessage response = await client.GetAsync(url);
                     response.EnsureSuccessStatusCode();
-                    bool IsHreadEndTagfound = false;
+       
                     bool IsContentTypeHTML = false;
                     if (response.Content.Headers.ContentType.MediaType != "text/html")
                     {
@@ -155,7 +170,7 @@ namespace Core.Test
                             if (headEndPos > -1)
                             {
                                 sbRsponseReporter.Append("endheadタグが見つかりました。\r");
-                                IsHreadEndTagfound = true;
+                          
                             }
                             else
                             {
@@ -217,9 +232,28 @@ namespace Core.Test
                         string __contentType = string.Format("{0}", response.Content.Headers.ContentType.MediaType);
 
 
-                        var contentData = MultiversalWebCache.CreateUrlContentDataPath(url, __contentType);
-                        var contentDataPath = MultiversalWebCache.StoregePath + contentData.FileLocation;
-                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(contentDataPath));
+                        __contentData = MultiversalWebCache.CreateUrlContentDataPath(url, __contentType);
+                        var contentDataPath = MultiversalWebCache.StoregePath + __contentData.FileLocation;
+                        if (!string.IsNullOrEmpty(contentDataPath))
+                        {
+                            string directoryPath = Path.GetDirectoryName(contentDataPath);
+                            if (!string.IsNullOrEmpty(directoryPath))
+                            {
+                                System.IO.Directory.CreateDirectory(directoryPath);
+                            }
+                            else
+                            {
+                                // Handle the case where directoryPath is null or empty
+                                Console.WriteLine("Invalid directory path.");
+                            }
+                        }
+                        else
+                        {
+                            // Handle the case where contentDataPath is null or empty
+                            Console.WriteLine("Invalid content data path.");
+                        }
+
+              
                         if (IsContentTypeHTML)
                         {
                             MemoryStream ms = new MemoryStream();
@@ -230,16 +264,35 @@ namespace Core.Test
                             }
                             Encoding encoding = Encoding.GetEncoding(charset);
                             string content = encoding.GetString(ms.ToArray(), 0, ___bytesReead);
-                            localdocument = new CHtmlDocument(CHtmlDomModeType.HTMLDOM);
-                            localdocument.___parseDocument(content, charset);
-                 
-                            await File.WriteAllTextAsync(contentDataPath, content, encoding);
-                            sbRsponseReporter.Append($"コンテンツがテキストファイル {contentData.FileLocation} に保存されました。\r");
+                            __contentData.Charset = charset;
+    
+                            if(IsNotNull(response.Content.Headers.ContentLength))
+                            {
+                                __contentData.ContentLength = (int)response.Content.Headers.ContentLength;
+                            }
+                            if(IsNotNull(response.Content.Headers.LastModified))
+                            {
+                                __contentData.LastModified = response.Content.Headers.LastModified;
+                            }
                             
-                        
+                            __contentData.HtmlContent = content;
+                            sbRsponseReporter.Append($"コンテンツがテキストファイル {__contentData.FileLocation} に保存されました。\r");
+                        //var contentData = MultiversalWebCache.CreateUrlContentDataPath(url, __contentType);
+;
+
+
+
                         }
                         else
                         {
+                            if (IsNotNull(response.Content.Headers.ContentLength))
+                            {
+                                __contentData.ContentLength = (int)response.Content.Headers.ContentLength;
+                            }
+                            if (IsNotNull(response.Content.Headers.LastModified))
+                            {
+                                __contentData.LastModified = response.Content.Headers.LastModified;
+                            }
                             using (var fileStream = new FileStream(contentDataPath, FileMode.Create, FileAccess.Write, FileShare.None))
                             {
                                 await fileStream.WriteAsync(buffer, 0, ___bytesReead);
@@ -248,10 +301,11 @@ namespace Core.Test
                                     await fileStream.WriteAsync(buffer, 0, bytesRead);
                                 }
                             }
-                            sbRsponseReporter.Append($"コンテンツがバイナリファイル {contentData.FileLocation} に保存されました。\r");
+                            sbRsponseReporter.Append($"コンテンツがバイナリファイル {__contentData.FileLocation} に保存されました。\r");
                         }
 
-                        MultiversalWebCache.CacheData[url] = contentData;
+                        MultiversalWebCache.CacheData[url] = __contentData;
+
                     }
 
 
@@ -278,13 +332,8 @@ namespace Core.Test
                 {
                     sbRsponseReporter.Append($"リクエストエラー: {e.Message}\r");
                 }
-                sw.Stop();
-                Debug.WriteLine($"処理時間: {sw.ElapsedMilliseconds} ミリ秒 ");
-                var sbList = sbRsponseReporter.ToString().Split("\r");
-                foreach (var item in sbList)
-                {
-                    Debug.WriteLine(item);
-                }
+                return __contentData;
+
 
             }
 

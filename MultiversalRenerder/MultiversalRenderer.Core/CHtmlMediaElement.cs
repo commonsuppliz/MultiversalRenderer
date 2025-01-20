@@ -303,7 +303,7 @@ namespace MultiversalRenderer.Core
                         if (WindowsIntegrationElementHostType != null)
                         {
                             
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                             {
                                commonLog.LogEntry("ElementHost  Type : {0} Child : {1}", WindowsIntegrationElementHostType, ___hostElementChildPropertyMethodInfo);
                                commonLog.LogEntry("MediaElement Type :{0} MediaState: {1}", WindowsMediaElementType, ___MediaElementMediaStateEnumType);
@@ -315,7 +315,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 6)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 6)
                     {
                        commonLog.LogEntry("ElementHost Reflection Exception.  ", ex);
 
@@ -399,7 +399,7 @@ namespace MultiversalRenderer.Core
         }
         private CHtmlMediaElement ___addTextTrack_Inner(object objkind, object objlabel, object objlanguage)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling addTextTrack()", this);
             }
@@ -483,7 +483,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("MediaElement Dispose", ex);
                 }
@@ -799,7 +799,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("startOffsetTime ParseDate Error", ex);
                         }
@@ -949,7 +949,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                             {
                                commonLog.LogEntry("load_src_inner", ex);
                             }
@@ -960,7 +960,7 @@ namespace MultiversalRenderer.Core
                 }
             }catch(Exception ex2)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("load_src_inner exception final stage", ex2);
                 }
@@ -984,7 +984,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("load_src_inner", ex);
                     }
@@ -1009,7 +1009,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("CHtmlMediaElement pause Exception. ", ex);
                     }
@@ -1079,7 +1079,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("load_src_inner", ex);
                 }
@@ -1538,7 +1538,7 @@ namespace MultiversalRenderer.Core
             {
                 __resultValue = "";
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0} canPlayType '{1}' : '{2}' = '{3}'", this.toLogString(), _mimeType, _codecType, __resultValue);
             }
@@ -1550,7 +1550,7 @@ namespace MultiversalRenderer.Core
 
         public override void ___setPropertyByName(string ___name, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("entering {0}.setPropertyValue : {1} = {2}", this, ___name, val);
             }
@@ -1677,7 +1677,7 @@ namespace MultiversalRenderer.Core
         }
         public override bool ___hasPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("calling HasPropertyValueIndex for {0} {1}  {2} ", this.GetType(), this, ___index);
             }
@@ -1686,14 +1686,14 @@ namespace MultiversalRenderer.Core
 
         public override void ___setPropertyByIndex(int ___index, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("SetPropertyValueIndex for {0} {1}  {2} = {3} failed", this.GetType(), this, ___index, val);
             }
         }
         public override object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("___getPropertyByName by index {0} {1} {2} failed", this.GetType(), this, ___index);
             }
@@ -1702,7 +1702,7 @@ namespace MultiversalRenderer.Core
 
         public override object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("get : {0} for {1}", ___name, this.toLogString());
             }
@@ -1850,7 +1850,7 @@ namespace MultiversalRenderer.Core
                 case "onreset":
                     return this.onreset;
                 case "readyState":
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                     {
                        commonLog.LogEntry("TODO: MediaElement readyState always returns ready to play");
                     }
@@ -1869,7 +1869,7 @@ namespace MultiversalRenderer.Core
                             __ProtoLookupCont++;
                             if (__ProtoLookupCont > 10)
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                                 {
                                    commonLog.LogEntry("GetPropertyValue for {0} {1} Prototype lookup loop", this.GetType(), this);
                                 }
@@ -1909,7 +1909,7 @@ namespace MultiversalRenderer.Core
                 return _obase;
             }
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} {2} failed", this.GetType(), this, ___name);
             }

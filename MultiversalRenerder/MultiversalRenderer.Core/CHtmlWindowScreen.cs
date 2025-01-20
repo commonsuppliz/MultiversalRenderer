@@ -333,7 +333,7 @@ namespace MultiversalRenderer.Core
                 return objProp;
             }
 
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
             {
                 commonLog.LogEntry("GetPropertyValue for {0} {1} {2} failed", this.GetType(), this, ___name);
             }
@@ -342,7 +342,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___common_object_clone()
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("x__Clone {0} {1} called", this.GetType(), this);
             }

@@ -14,7 +14,7 @@ namespace MultiversalRenderer.Core
         private object ___filterFunction = null;
         public CHtmlPerformanceEntriesList filter(object ___objFilter)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: calling {0}.filter({1})", this, ___objFilter);
             }
@@ -28,7 +28,7 @@ namespace MultiversalRenderer.Core
         }
         private object ___reduce_inner(object ___objReduce1, object ___objRduce2)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: calling {0}.recude({1}, {2})", this, ___objReduce1, ___objRduce2);
             }

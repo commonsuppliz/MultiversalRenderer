@@ -81,7 +81,7 @@ namespace MultiversalRenderer.Core
 
         private CHtmlBlob ___slice_inner(object ___startObj, object ___endObj, object ___contentTypeObj)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.slice({1}, {2}, {3}) is called....", this, ___startObj, ___endObj, ___contentTypeObj);
             }
@@ -104,7 +104,7 @@ namespace MultiversalRenderer.Core
             else
             {
                 ___newBlob.___type = newContentType;
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                     if (this.___type != newContentType)
                     {
@@ -129,7 +129,7 @@ namespace MultiversalRenderer.Core
                 // bounds check
                 if(___start < 0 || ___start > this.___size)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("Blob.slice() start param is out of bounds : {0}....", ___start);
                     }
@@ -137,7 +137,7 @@ namespace MultiversalRenderer.Core
                 }
                 if (___end < 0 || ___end > this.___size)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("Blob.slice() end param is out of bounds {0}....", ___end);
                     }
@@ -179,7 +179,7 @@ namespace MultiversalRenderer.Core
                         ___newBlob.___size = ___newBlob.___blobArray.___arrayLength;
                         break;
                     default:
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("Blob.slice() Copy Operation is not defained for this array type : {1}...", ___newBlob.___blobArray.___arrayType);
                         }
@@ -190,7 +190,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                        commonLog.LogEntry("Blob.slice() Exceptioin....", ex);   
                 }
@@ -213,7 +213,7 @@ namespace MultiversalRenderer.Core
         }
         internal void ___ctor(CHtmlNativeArray nativeArray,  string mimeType, string filename, double ___dateValue, string strEndings)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("creating Blob with : {0}, {1}", nativeArray, mimeType);
             }
@@ -231,7 +231,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlBlob(object[] ___args)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.constuctor called with args:... ", this, ___args);
             }
@@ -263,7 +263,7 @@ namespace MultiversalRenderer.Core
                 }
                 if(string.IsNullOrEmpty(strFileName) == false && strFileName.Contains("/") == true)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("strange. FileName contains / {0}. it may be mimetype? ", strFileName);
                     }
@@ -279,7 +279,7 @@ namespace MultiversalRenderer.Core
 
         public void close()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.close() is called....", this);
             }
@@ -327,7 +327,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public object text()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: {0}.text() called ... return null ", this);
             }
@@ -338,7 +338,7 @@ namespace MultiversalRenderer.Core
 
         public bool isPrototypeOf(object ___protoObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.isPrototpyeOf('{1}') ", this, ___protoObject);
             }
@@ -346,7 +346,7 @@ namespace MultiversalRenderer.Core
             {
                 case 0:
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("TODO:  {0}.isPrototpyeOf('{1}') test needs more test. returns true for now... ", this, ___protoObject);
                     }
@@ -361,7 +361,7 @@ namespace MultiversalRenderer.Core
    
         public object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling GetPropertyValue for {0} {1} '{2}' ", this.GetType(), this, ___name);
             }
@@ -379,7 +379,7 @@ namespace MultiversalRenderer.Core
                     }
                     break;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} '{2}' failed", this.GetType(), this, ___name);
             }
@@ -398,7 +398,7 @@ namespace MultiversalRenderer.Core
                     ___ValueStored = true;
                     break;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("SetPropertyValue for {0} {1}  '{2}' = {3} Success : {4}", this.GetType(), this, ___name, val, ___ValueStored);
             }
@@ -406,7 +406,7 @@ namespace MultiversalRenderer.Core
    
         public void ___setPropertyByIndex(int ___index, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO : SetPropertyValueIndex for {0} \'{1}\' {2} = {3} failed", this.GetType(), this, ___index, val);
             }
@@ -415,7 +415,7 @@ namespace MultiversalRenderer.Core
    
         public object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO : ___getPropertyByName by index {0} {1} {2} failed", this.GetType(), this, ___index);
             }
@@ -436,7 +436,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___common_object_clone()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("x__Clone {0} {1} called", this.GetType(), this);
             }
@@ -444,14 +444,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___deleteByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}", this.GetType(), this, ___index);
             }
         }
         public void ___deleteByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByName {0} {1} called : {2}", this.GetType(), this, ___name);
             }
@@ -459,7 +459,7 @@ namespace MultiversalRenderer.Core
         }
         public object[] ___getByIds()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getByIds() {0} {1} called", this.GetType(), this);
             }
@@ -472,7 +472,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getDefaultValue()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getDefaultValue {0} {1} called", this.GetType(), this);
             }
@@ -480,7 +480,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getParentScope()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getParentScope {0} {1} called", this.GetType(), this);
             }
@@ -488,14 +488,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setParentScope(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setParentScope {0} {1} called : {2}", this.GetType(), this, ___object);
             }
         }
         public object ___getProtoType()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getProtoType {0} {1} called", this.GetType(), this);
             }
@@ -503,7 +503,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___hasInstance(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___hasInstance {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -511,7 +511,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___instanceEquals(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___instanceEquals {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -519,14 +519,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setProtoType(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setProtoType {0} {1} called : {2}", this.GetType(), this, ___object);
             }
         }
         public bool hasOwnProperty(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry(" {0}.hasOwnProperty {1} called : {2}", this.GetType(), this, ___name);
             }

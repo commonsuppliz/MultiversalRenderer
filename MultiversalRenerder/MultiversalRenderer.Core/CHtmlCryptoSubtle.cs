@@ -23,7 +23,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoOperation decrypt(object ___obj_algorithm, object ___obj_key, object ___obj_buffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.decrypt() calling", this);
             }
@@ -33,7 +33,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoOperation digest(object ___obj_algorithm, object ___obj_buffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.digest() calling", this);
             }
@@ -43,7 +43,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoOperation encrypt(object ___obj_algorithm, object ___obj_buffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.encrypt() calling", this);
             }
@@ -53,7 +53,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoOperation sign(object ___obj_algorithm, object ___obj_buffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.sign() calling", this);
             }
@@ -63,7 +63,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoOperation verify(object ___obj_algorithm, object ___obj_key, object ___obj_signature, object ___obj_buffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.verify() calling", this);
             }
@@ -72,7 +72,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoKeyOperation deriveKey(object ___obj_algorithm, object ___obj_baseKey, object ___obj_derivedKeyType, object ___obj_extractable, object ___obj_keyUsages)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.deriveKey() calling", this);
             }
@@ -81,7 +81,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoKeyOperation exportKey(object ___obj_format, object ___obj_key)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.exportKey() calling", this);
             }
@@ -91,7 +91,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlCryptoKeyOperation generateKey(object ___obj_algorithm, object ___obj_extractable, object ___obj_keyUsages)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.generateKey({1}, {2}, {3})", this, ___obj_algorithm, ___obj_extractable , ___obj_keyUsages);
             }
@@ -100,7 +100,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoKeyOperation importKey(object ___obj_format, object ___obj_keyData, object ___obj_algorithm, object ___obj_extractable, object ___obj_keyUsages)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.importKey({1}, {2}, {3}, {4}, {5})", this, ___obj_format, ___obj_keyData, ___obj_algorithm, ___obj_extractable, ___obj_keyUsages);
             }
@@ -109,7 +109,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoKeyOperation unwrapKey(object ___obj_format, object ___obj_keyData, object ___obj_algorithm, object ___obj_extractable, object ___obj_keyUsages)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.unwrapKey({1}, {2}, {3}, {4}, {5})", this, ___obj_format, ___obj_keyData, ___obj_algorithm, ___obj_extractable, ___obj_keyUsages);
             }
@@ -118,7 +118,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCryptoKeyOperation wrapKey(object ___obj_key, object ___obj_keyEncryptionKey, object ___obj_keyWrappingAlgorithm)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("TODO: entering {0}.wrapKey({1}, {2}, {3})", this, ___obj_key, ___obj_keyEncryptionKey, ___obj_keyWrappingAlgorithm);
             }
@@ -131,7 +131,7 @@ namespace MultiversalRenderer.Core
 
         public object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} ", this, ___name);
             }
@@ -145,7 +145,7 @@ namespace MultiversalRenderer.Core
             {
                 return propValue;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} failed", this, ___name);
             }
@@ -157,7 +157,7 @@ namespace MultiversalRenderer.Core
             switch (___name)
             {
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("SetPropertyValue for {0} {1}  {2} = {3} failed", this.GetType(), this, ___name, val);
                     }
@@ -167,14 +167,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setPropertyByIndex(int ___index, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("SetPropertyValueIndex for {0} {1}  {2} = {3} failed", this.GetType(), this, ___index, val);
             }
         }
         public object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValueInex for {0} {1} {2} failed", this.GetType(), this, ___index);
             }
@@ -192,7 +192,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___common_object_clone()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("x__Clone {0} {1} called", this.GetType(), this);
             }
@@ -200,14 +200,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___deleteByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}", this.GetType(), this, ___index);
             }
         }
         public void ___deleteByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByName {0} {1} called : {2}", this.GetType(), this, ___name);
             }
@@ -215,7 +215,7 @@ namespace MultiversalRenderer.Core
         }
         public object[] ___getByIds()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getByIds() {0} {1} called", this.GetType(), this);
             }
@@ -224,7 +224,7 @@ namespace MultiversalRenderer.Core
         }
         public string ___getClassName()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getClassName {0} {1} called", this.GetType(), this);
             }
@@ -232,7 +232,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getDefaultValue()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getDefaultValue {0} {1} called", this.GetType(), this);
             }
@@ -240,7 +240,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getParentScope()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getParentScope {0} {1} called", this.GetType(), this);
             }
@@ -248,14 +248,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setParentScope(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setParentScope {0} {1} called : {2}", this.GetType(), this, ___object);
             }
         }
         public object ___getProtoType()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getProtoType {0} {1} called", this.GetType(), this);
             }
@@ -263,7 +263,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___hasInstance(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___hasInstance {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -271,7 +271,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___instanceEquals(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___instanceEquals {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -279,7 +279,7 @@ namespace MultiversalRenderer.Core
         }
         public void ___setProtoType(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setProtoType {0} {1} called : {2}", this.GetType(), this, ___object);
             }

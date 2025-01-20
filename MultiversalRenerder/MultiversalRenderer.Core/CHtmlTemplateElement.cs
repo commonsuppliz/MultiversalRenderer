@@ -31,7 +31,7 @@ namespace MultiversalRenderer.Core
                 {
                     ___contentNode = this;
                 }
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
                 {
                     commonLog.LogEntry("{0}.content will returns this template node : {1}.....", this.toLogString(), ___contentNode);
                 }
@@ -40,7 +40,7 @@ namespace MultiversalRenderer.Core
         }
         public override object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 3)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 3)
             {
                 commonLog.LogEntry("entering {0}.___getPropertyByName({1}).....", this.toLogString(), ___name);
             }

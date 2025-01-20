@@ -69,7 +69,7 @@ namespace MultiversalRenderer.Core
         {
 
             this.___IsDisposing = true;
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                 if (this.___IsPrototype == false)
                 {
@@ -460,7 +460,7 @@ namespace MultiversalRenderer.Core
 
                     this.___contextCHtmlFontInfo = new CHtmlFontInfo(FontFamily.GenericSerif.ToString(), 10);
                     this.___contextFontAsString = null;
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("TODO: CHtmlCanvasContext.___setContextFont() for non string...");
                     }
@@ -468,7 +468,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext.___setContextFont() errror : ", ex);
                 }
@@ -574,7 +574,7 @@ namespace MultiversalRenderer.Core
 
         public void Dispose()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
             {
                 if (this.___IsPrototype == false)
                 {
@@ -708,7 +708,7 @@ namespace MultiversalRenderer.Core
         private const double MIN_GRADIENT_WIDTH = 300;
         public CHtmlCanvasContextExtenstionObject createLinearGradient(double x0, double y0, double x1, double y1)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.createLinearGradient({1},{2},{3},{4})", this, x0, y0, x1, y1);
             }
@@ -722,7 +722,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasContextExtenstionObject createLinearGradient(double x0, double y0, double x1, double y1, double p5)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.createLinearGradient({1},{2},{3},{4},{5})", this, x0, y0, x1, y1, p5);
             }
@@ -736,7 +736,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasContextExtenstionObject createLinearGradient(double x0, double y0, double x1, double y1, double p5, double p6)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.createLinearGradient({1},{2},{3},{4},{5},{6})", this, x0, y0, x1, y1, p5, p6);
             }
@@ -782,7 +782,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public CHtmlCanvasContextExtenstionObject createRadialGradient(double x0, double y0, double r0, double x1, double y1, double r1)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.createRadialGradient({1},{2},{3},{4},{5},{6})", this, x0, y0, r0, x1, y1, r1);
             }
@@ -799,7 +799,7 @@ namespace MultiversalRenderer.Core
         public CHtmlCanvasContextExtenstionObject createRadialGradient(double x0, double y0, double r0, double x1, double y1, object obj_r1)
         {
             double r1 = commonData.GetDoubleFromObject(obj_r1, 0);
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.createRadialGradient({1},{2},{3},{4},{5},{6})", this, x0, y0, r0, x1, y1, obj_r1);
             }
@@ -820,7 +820,7 @@ namespace MultiversalRenderer.Core
         /// <returns>0: no error</returns>
         public object getError()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.getError()", this);
             }
@@ -849,7 +849,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
 		public CHtmlCanvasImageData createImageData(object p1Object, object p2Object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.getImageData({1}, {2})", this, p1Object, p2Object);
             }
@@ -881,7 +881,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public CHtmlCanvasImageData createImageData(object imageObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("createImageData with 1 parameter: {0}", imageObject);
             }
@@ -899,7 +899,7 @@ namespace MultiversalRenderer.Core
                 }
             } catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("Error  createImageData unkonwn data type ", ex);
                 }
@@ -910,7 +910,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlNativeArray getImageDataHD(object p1, object p2, object p3, object p4)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling getImageDataHD()...", this);
             }
@@ -918,7 +918,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlNativeArray getImageData(object p1, object p2, object p3, object p4)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.getImageDataHD({1}, {2}, {3}, {4})...", this, p1, p2, p3, p4);
             }
@@ -1013,7 +1013,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("Canvas getImageData Failed. ", ex);
                 }
@@ -1112,7 +1112,7 @@ namespace MultiversalRenderer.Core
         }
         private void ___putImageData_inner(object _imageData, object p1, object p2, object dirtyX, object dirtyY, object dirtyWidth, object dirtyHeight)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering {0}.putImageData_inner({1}, {2}, {3}, {4}, {5}, {6})...", this, p1, p2, dirtyX, dirtyY, dirtyWidth, dirtyHeight );
             }
@@ -1182,7 +1182,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 30)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 30)
                                 {
                                    commonLog.LogEntry("Convert image bytes to byte array failed");
                                 }
@@ -1218,7 +1218,7 @@ namespace MultiversalRenderer.Core
                     if (bmp != null)
                     {
 
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 30)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 30)
                         {
                            commonLog.LogEntry("putImageData created created bitmap image : " + ___imageWidth.ToString() + "  " + ___imageHeight.ToString());
                         }
@@ -1245,7 +1245,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext putImageData_Inner errror : ", ex);
                 }
@@ -1272,7 +1272,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception exBmp)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("__BytesToBmp() errror : ", exBmp);
                     }
@@ -1283,7 +1283,7 @@ namespace MultiversalRenderer.Core
             {
                 try
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("__BytesToBmp() has been zero sise. Attempting bytes to get image....");
                     }
@@ -1293,7 +1293,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex2)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("__BytesToBmp() errror : ", ex2);
                     }
@@ -1310,7 +1310,7 @@ namespace MultiversalRenderer.Core
         /// <returns>image string</returns>
         internal static string ___performToDataURLOperation(string ___imageType, int ___imageQuality, int ___ImageWidth, int ___imageHeight, CHtmlCanvasContext __contextObject, CHtmlElement __canvasElement)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("entering PerformToDataURLOperation  : {0}, {1} , {2}, {3} , {4} , {5}", ___imageType, ___imageQuality, ___ImageWidth, ___imageHeight, __contextObject, __canvasElement);
             }
@@ -1389,7 +1389,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                 {
                    commonLog.LogEntry("toDataURL Operation Error : ", ex);
                 }
@@ -1522,7 +1522,7 @@ namespace MultiversalRenderer.Core
                 {
                     rectFCircle.Height = 1;
                 }
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("calling {0}.arc({1}, {2}, {3})", this, rectFCircle, ___startDegree, ___endDegree);
                 }
@@ -1589,7 +1589,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext arc errror : ", ex);
                 }
@@ -1623,7 +1623,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext arcTo errror : ", ex);
                 }
@@ -1661,7 +1661,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("beginpath error : ", ex);
                 }
@@ -1689,21 +1689,21 @@ namespace MultiversalRenderer.Core
         }
         public void clearColor(object ___object_red, object ___object_green, object ___object_blue, object ___object_alpha)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.clearColor()", this);
             }
         }
         public void clearDepth(object ___depth)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.clearDepth()", this);
             }
         }
         public void clear(object ___objMask)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.clear({0}) ", this, ___objMask);
             }
@@ -1810,7 +1810,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("CHtmlContext clearRect errror : ", ex);
                         }
@@ -1835,7 +1835,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exBase)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext clearRect error : ", exBase);
                 }
@@ -1857,7 +1857,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioPannerNode createPanner()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createPanner()", this);
             }
@@ -1866,7 +1866,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasWebGLShader createShader(object __type)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("setting {0}.createShader()", this);
             }
@@ -1909,7 +1909,7 @@ namespace MultiversalRenderer.Core
         }
         private object ___createBuffer_Inner(object[] ___args)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createBuffer()", this);
             }
@@ -1922,7 +1922,7 @@ namespace MultiversalRenderer.Core
             }
 
             
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.createBuffer() returns {1}", this, ____returnBuffer);
             }
@@ -1930,7 +1930,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioDynamicsCompressorNode createDynamicsCompressor()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createDynamicsCompressor()", this);
             }
@@ -1938,7 +1938,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasWebGLFramebuffer createFramebuffer()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createFramebuffer()", this);
             }
@@ -1946,7 +1946,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasWebGLRenderbuffer createRenderbuffer()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createRenderbuffer()", this);
             }
@@ -1954,7 +1954,7 @@ namespace MultiversalRenderer.Core
         }
         public void bindBuffer(object ___objectTarget, object ___objectBuffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calliing {0}.bindBuffer({1}, {2})", this, ___objectTarget, ___objectBuffer);
             }
@@ -1976,35 +1976,35 @@ namespace MultiversalRenderer.Core
         }
         public void blendEquation(object ___mode)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.blendEquation({1})", this, ___mode);
             }
         }
         public void cullFace(object ___mode)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.cullFace({1})", this, ___mode);
             }
         }
         public void viewport(object object_x, object object_y, object p1, object p2)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("setting {0}.viewport({1}, {2}, {3} , {4})", this, object_x, object_y, p1, p2);
             }
         }
         public void shaderSource(object ___shader, object ___shaderType)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.sourceShader({1}, {2}", this, ___shader, ___shaderType);
             }
         }
         public void compileShader(object ___shaderSource)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.compileShader({1})", this, ___shaderSource);
             }
@@ -2016,7 +2016,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___shader"></param>
         public void attachShader(object ___objectProgram, object ___shader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.attachShader({1}, {2})", this, ___objectProgram, ___shader);
             }
@@ -2027,7 +2027,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objectProgram"></param>
         public void linkProgram(object ___objectProgram)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.linkProgram({1})", this, ___objectProgram);
             }
@@ -2089,7 +2089,7 @@ namespace MultiversalRenderer.Core
 
             }
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.getProgramparameter({1}, {2}) returns : {3}", this, ___objectProgram, ___paramValue, ___objResult);
             }
@@ -2102,14 +2102,14 @@ namespace MultiversalRenderer.Core
         /// <param name="___objectProgram"></param>
         public void useProgram(object ___objectProgram)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.useProgram({1})", this, ___objectProgram);
             }
         }
         public double getAttribLocation(object ___objectProgram, object ___pname)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getAttribLocation({1}, {2})", this, ___objectProgram, ___pname);
             }
@@ -2127,7 +2127,7 @@ namespace MultiversalRenderer.Core
         public object getShaderParameter(object ___shader, object ___pcname)
         {
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.getShaderParameter({1}, {2})", this, ___shader, ___pcname);
             }
@@ -2141,7 +2141,7 @@ namespace MultiversalRenderer.Core
                 case (int)0x8B81:
                     return true;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.getShaderParameter({1}, {2}) failed", this, ___shader, ___pcname);
             }
@@ -2149,21 +2149,21 @@ namespace MultiversalRenderer.Core
         }
         public void depthFunc(object ___param)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.depthFunc({1})", this, ___param);
             }
         }
         public void activeTexture(object ___texture)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.activeTexture({1})", this, ___texture);
             }
         }
         public string getProgramInfoLog(object ___program)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getProgramInfoLog({1})", this, ___program);
             }
@@ -2171,7 +2171,7 @@ namespace MultiversalRenderer.Core
         }
         public string getShaderInfoLog(object ___shader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getShaderInfoLog({1})", this, ___shader);
             }
@@ -2195,14 +2195,14 @@ namespace MultiversalRenderer.Core
         }
         public void enable(object ___objectCap)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.enable({1})", this, ___objectCap);
             }
         }
         public void disable(object ___objectCap)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.disable({1})", this, ___objectCap);
             }
@@ -2213,7 +2213,7 @@ namespace MultiversalRenderer.Core
         }
         public object getUniformLocation(object ___objectProgram, object ___pname)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getUniformLocation({1}, {2})", this, ___objectProgram, ___pname);
             }
@@ -2221,7 +2221,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasWebGLTexture createTexture()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createTexture()", this);
             }
@@ -2229,14 +2229,14 @@ namespace MultiversalRenderer.Core
         }
         public void bindTexture(object ___target, CHtmlCanvasWebGLTexture ___texture)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.bindTexture({1}, {2})", this, ___target, ___texture);
             }
         }
         public void bindAttribLocation(object ___objProgram, object ___objIndex, object ___objName)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.bindAttribLocation({1}, {2}, {3})", this, ___objProgram, ___objIndex, ___objName);
             }
@@ -2277,7 +2277,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext closePath Error : ", ex);
                 }
@@ -2316,7 +2316,7 @@ namespace MultiversalRenderer.Core
             /// <param name="param_anticlockwise"></param>
             public void ellipse(double ___x, double ___y , double ___radiusX ,double ___radiusY ,double  ___rotation , double ___startAngle, double ___endAngle, bool ___antiClockwise)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("CHtmlCanvasContext.ellipse() is called");
             }
@@ -2352,7 +2352,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext arcTo errror : ", ex);
                 }
@@ -2363,7 +2363,7 @@ namespace MultiversalRenderer.Core
         
         public void fill(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("CHtmlCanvasContext fill() is called with paramateter : {0}. just fill()", ___object);
             }
@@ -2398,7 +2398,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                             {
                                commonLog.LogEntry("CHtmlCanvasContext clear errror : ", ex);
                             }
@@ -2431,7 +2431,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("fill error : ", ex);
                 }
@@ -2607,7 +2607,7 @@ namespace MultiversalRenderer.Core
                                 }
                                 catch (Exception blendEx)
                                 {
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                     {
                                        commonLog.LogEntry("createBrushFromFillStyleObject() blend color errror : {0}", blendEx.Message);
                                     }
@@ -2693,7 +2693,7 @@ namespace MultiversalRenderer.Core
 
                 else
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("BUG : ___createBrushFromFillStyleObject unable to create brush from object : {0}", this.___contextFillStyleAsObject);
                     }
@@ -2706,7 +2706,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext ___createBrushFromFillStyleObject() errror : ", ex);
                 }
@@ -2786,7 +2786,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception blendEx)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("createBrushFromFillStyleObject() blend color errror : {0}", blendEx.Message);
                     }
@@ -2919,7 +2919,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exColorArray)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("createBrushFromFillStyleObject() blend color Array errror. ", exColorArray);
                 }
@@ -2930,7 +2930,7 @@ namespace MultiversalRenderer.Core
         }
         public void fillText(object __text, double __x, double __y, double __maxWidth)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.fillText('{1}', {2}, {3}, {4})... ", this, __text,  __x, __y, __maxWidth);
             }
@@ -2992,7 +2992,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("CHtmlCanvasContext fillText errror : ", ex);
                         }
@@ -3025,7 +3025,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exBase)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("fillText errror : ", exBase);
                 }
@@ -3130,7 +3130,7 @@ namespace MultiversalRenderer.Core
                                     this.___C2DStokeBrush = ___createRadialGradationAsPathGradientBrush(ref __ext);
                                     return;
                                 default:
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                     {
                                        commonLog.LogEntry("TODO: createStrokeStyle {0} will returns empty brush", __ext.___ContextGraphicsObjectType);
                                     }
@@ -3169,7 +3169,7 @@ namespace MultiversalRenderer.Core
                     this.___C2DStokeBrush.Dispose();
                     this.___C2DStokeBrush = null;
                 }
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("___createStrokeBrushInstance Exception. ",exBrush);
                 }
@@ -3178,7 +3178,7 @@ namespace MultiversalRenderer.Core
         }
         public void strokeRect(double x, double y, double w, double h, double _e1)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("storkeRect is called with 5 params : {0}.... ", _e1);
             }
@@ -3214,7 +3214,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("CHtmlCanvasContext storkeRect errror : ", ex);
                         }
@@ -3236,7 +3236,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exBase)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("stokeRect errror : ", exBase);
                 }
@@ -3298,7 +3298,7 @@ namespace MultiversalRenderer.Core
                         }
                         catch (Exception ex)
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                             {
                                commonLog.LogEntry("CHtmlCanvasContext clear errror : ", ex);
                             }
@@ -3320,7 +3320,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exBase)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext fillrect errror : ", exBase);
                 }
@@ -3372,14 +3372,14 @@ namespace MultiversalRenderer.Core
 		}
         public void flush()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.flush()", this);
             }
         }
         public void drawElements(object ____mode,object ____objcount, object ___objtype,object ___objoffset)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: {0}.drawElements({1}, {2}, {3}, {4})", this, ____mode, ____objcount, ___objtype, ___objoffset);
             }
@@ -3610,7 +3610,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch (Exception exOpacity)
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                 {
                                    commonLog.LogEntry("CHtmlCanvasContext image opacity operation failed. ", exOpacity);
                                 }
@@ -3623,7 +3623,7 @@ namespace MultiversalRenderer.Core
                             Bitmap ___bmpNew = null;
                             Graphics grNewBmp = null;
 
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                             {
                                commonLog.LogEntry("drawImage is not PAargbImage. converting...");
                             }
@@ -3775,7 +3775,7 @@ namespace MultiversalRenderer.Core
 
             } catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("[CHtmlCanvasContext drawImage inner processing Errror]\t : ", ex);
                    commonLog.LogEntry("[CanvasImageInfo]\t : \r\n{0} Width: {1} Height: {2} ", ___imgType, this.___CanvasWidth, this.___CanvasHeight);
@@ -3902,7 +3902,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                 {
                                    commonLog.LogEntry("Canvas 2D Graphic Dispose Error");
                                 }
@@ -3978,7 +3978,7 @@ namespace MultiversalRenderer.Core
                             }
                             catch
                             {
-                                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 30)
+                                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 30)
                                 {
                                    commonLog.LogEntry("CanvasContext Graphics retry....");
                                 }
@@ -3993,7 +3993,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CanvasContext Graphics Failed....", ex);
                 }
@@ -4051,7 +4051,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception transException)
                                     {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                                         {
                                            commonLog.LogEntry("CanvasContext Graphics Transform Operation Error", transException);
                                         }
@@ -4069,7 +4069,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception transException)
                                     {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                                         {
                                            commonLog.LogEntry("CanvasContext Graphics Transform Operation Error", transException);
                                         }
@@ -4087,7 +4087,7 @@ namespace MultiversalRenderer.Core
                                     }
                                     catch (Exception clipex)
                                     {
-                                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 30)
+                                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 30)
                                         {
                                            commonLog.LogEntry("CanvasContext Graphics Clip Operation Error", clipex);
                                         }
@@ -4101,7 +4101,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exTransFrom)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 30)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 30)
                 {
                    commonLog.LogEntry("CanvasContext Graphics TransFrom Error", exTransFrom);
                 }
@@ -4169,7 +4169,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("CHtmlCanvasContext stroke errror : ", ex);
                         }
@@ -4198,7 +4198,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext stroke errror : ", ex);
                 }
@@ -4221,7 +4221,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("quadraticCurveTo : ", ex);
                 }
@@ -4230,7 +4230,7 @@ namespace MultiversalRenderer.Core
 		}
         public CHtmlCollection getLineDash()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.getLineDash() ", this);
             }
@@ -4243,7 +4243,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objSegments">An Array. A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units). If the number of elements in the array is odd, the elements of the array get copied and concatenated. For example, [5, 15, 25] will become [5, 15, 25, 5, 15, 25].</param>
         public void setLineDash(object ___objSegments)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.setLineDash({1}) ", this, ___objSegments);
             }
@@ -4262,7 +4262,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exDash)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("setLineDash() exception", exDash);
                 }
@@ -4281,7 +4281,7 @@ namespace MultiversalRenderer.Core
         {
             try
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("calling {0}.setTransform({0}, {1} ,{2}, {3}, {4}, {5}) ", this, m11, m12, m21, m22, dx, dy);
                 }
@@ -4299,7 +4299,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("setTransform Error : ", ex);
                 }
@@ -4318,7 +4318,7 @@ namespace MultiversalRenderer.Core
         {
             try
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("calling {0}.transform({0}, {1} ,{2}, {3}, {4}, {5}) ", this, object_m11 , object_m12, object_m21 , object_m22 , object_dx , object_dy);
                 }
@@ -4345,7 +4345,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("transform Error : ", ex);
                 }
@@ -4354,7 +4354,7 @@ namespace MultiversalRenderer.Core
         public void resetTransform()
         {
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.resetTransform()", this);
             }
@@ -4369,7 +4369,7 @@ namespace MultiversalRenderer.Core
 
         public void translate(double  ___x, double  ___y)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.translate({1}, {2})", this, ___x, ___y);
             }
@@ -4406,7 +4406,7 @@ namespace MultiversalRenderer.Core
 		{
             try
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("calling {0}.lineTo({1}, {2})", this, x, y);
                 }
@@ -4427,7 +4427,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("lineTo Error : ", ex);
                 }
@@ -4460,7 +4460,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("createPattern Error : ", ex);
                 }
@@ -4515,7 +4515,7 @@ namespace MultiversalRenderer.Core
                 }
                 measureResult.___baseWidth = measuredWidth;
                 measureResult.___baseHeight = measuredHeight;
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlCanvasContext measureText('{0}')  : Result: {1}, {2}", _text, measuredWidth, measuredHeight);
                 }
@@ -4524,7 +4524,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("measureText Error : ", ex);
                 }
@@ -4552,7 +4552,7 @@ namespace MultiversalRenderer.Core
         private void ___moveToInner(double __x, double __y)
         {
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
             {
                commonLog.LogEntry("{0}.moveTo({1}, {2})", this, __x, __y);
             }
@@ -4742,7 +4742,7 @@ namespace MultiversalRenderer.Core
         /// <returns>String Array</returns>
         public string[] getSupportedExtensions()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling canvas getSupportedExtensions()...");
             }
@@ -4794,7 +4794,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch (Exception ex)
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("Canvas.Save() Error : ", ex);
                         }
@@ -4822,7 +4822,7 @@ namespace MultiversalRenderer.Core
                         grCloneBitmap.Dispose();
                         grCloneBitmap = null;
 
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("Canvas.Save() state success for 2D...");
                         }
@@ -4830,7 +4830,7 @@ namespace MultiversalRenderer.Core
                     }
                     catch
                     {
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                         {
                            commonLog.LogEntry("Canvas.Save() Image Clone faild retry...");
                         }
@@ -4876,7 +4876,7 @@ namespace MultiversalRenderer.Core
                                                 this.___C2DImageWeakReference = null;
                                             }
                                             this.___C2DImageWeakReference = new WeakReference(ownerElementCanvas.___C2DImage, false);
-                                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                             {
                                                commonLog.LogEntry("Canvas.restore() success...");
                                             }
@@ -4890,7 +4890,7 @@ namespace MultiversalRenderer.Core
                                                 }
                                                 catch (Exception exOld)
                                                 {
-                                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                                     {
                                                        commonLog.LogEntry("Canvas.restore() Image OldImage Dispose faild to Dispose...", exOld);
                                                     }
@@ -4899,7 +4899,7 @@ namespace MultiversalRenderer.Core
                                         }
                                         catch (Exception exCanvas)
                                         {
-                                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                                             {
                                                commonLog.LogEntry("Canvas.restore() Image Clone faild to Dispose...", exCanvas);
                                             }
@@ -4926,7 +4926,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("Canvas.restore() Image Clone faild...", ex);
                 }
@@ -4955,7 +4955,7 @@ namespace MultiversalRenderer.Core
         }
         private bool ___drawFocusRing(object obj_element, double ___x, double ___y, bool boolCustom)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO {0}.drawFocusRing({1}, {2}, {3}, {4})", this, obj_element, ___x,  ___y,  boolCustom);
             }
@@ -4963,7 +4963,7 @@ namespace MultiversalRenderer.Core
         }
         public void rotate(double doubleRadian)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.rotate({1})", this, doubleRadian);
             }
@@ -5500,7 +5500,7 @@ namespace MultiversalRenderer.Core
                     }
                     break;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} '{2}' failed", this.GetType(), this, ___name);
             }
@@ -6762,7 +6762,7 @@ namespace MultiversalRenderer.Core
    
 		public void ___setPropertyByName(string ___name, object val)
 		{
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling SetPropertyValue for {0} \'{1}\' {2} = {3}", this.GetType(), this, ___name, val);
             }
@@ -6946,7 +6946,7 @@ namespace MultiversalRenderer.Core
                     this.___properties[___name] = val;
                     ___ValueStored = true;
 
-					if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+					if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 					{
 						commonLog.LogEntry("SetPropertyValue for {0} {1}  '{2}' = {3} Success : {4}",this.GetType(), this, ___name, val, ___ValueStored );
 					}
@@ -6956,7 +6956,7 @@ namespace MultiversalRenderer.Core
 		
 		public void ___setPropertyByIndex(int ___index, object val)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("SetPropertyValueIndex for {0} \'{1}\' {2} = {3} failed",this.GetType(), this, ___index, val);
 			}
@@ -6965,7 +6965,7 @@ namespace MultiversalRenderer.Core
 		
 		public object ___getPropertyByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
 			{
 				commonLog.LogEntry("___getPropertyByName by index {0} {1} {2} failed",this.GetType(), this, ___index);
 			}
@@ -6973,7 +6973,7 @@ namespace MultiversalRenderer.Core
 		}
         public bool hasOwnProperty(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("entering {0}.hasOwnProperty({1})....",  this, ___name);
             }
@@ -6992,7 +6992,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___common_object_clone()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("x__Clone {0} {1} called",this.GetType(), this);
 			}
@@ -7000,14 +7000,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___deleteByIndex(int ___index)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}",this.GetType(), this, ___index);
 			}
 		}
 		public void ___deleteByName(string ___name)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___deleteByName {0} {1} called : {2}",this.GetType(), this, ___name);
 			}
@@ -7015,7 +7015,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object[] ___getByIds()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getByIds() {0} {1} called",this.GetType(), this);
 			}
@@ -7024,7 +7024,7 @@ namespace MultiversalRenderer.Core
 		}
 		public string ___getClassName()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getClassName {0} {1} called",this.GetType(), this);
 			}
@@ -7032,7 +7032,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getDefaultValue()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getDefaultValue {0} {1} called",this.GetType(), this);
 			}
@@ -7040,7 +7040,7 @@ namespace MultiversalRenderer.Core
 		}
 		public object ___getParentScope()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getParentScope {0} {1} called",this.GetType(), this);
 			}
@@ -7048,14 +7048,14 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setParentScope(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setParentScope {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
 		}
 		public object ___getProtoType()
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___getProtoType {0} {1} called",this.GetType(), this);
 			}
@@ -7063,7 +7063,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___hasInstance(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___hasInstance {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -7071,7 +7071,7 @@ namespace MultiversalRenderer.Core
 		}
 		public bool ___instanceEquals(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___instanceEquals {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -7079,7 +7079,7 @@ namespace MultiversalRenderer.Core
 		}
 		public void ___setProtoType(object ___object)
 		{
-			if(commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+			if(commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
 			{
 				commonLog.LogEntry("___setProtoType {0} {1} called : {2}",this.GetType(), this, ___object);
 			}
@@ -7210,7 +7210,7 @@ namespace MultiversalRenderer.Core
                                 if (isPossibleOutOfBounds)
                                 {
                                     /*
-                                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+                                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
                                     {
                                        commonLog.LogEntry("[@] Intersect Canvas Boounds {0} : {1}", ___elementBounds, ___canvasElement.___BaseControlDisplayRectangle);
                                     }
@@ -7261,7 +7261,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                     {
                        commonLog.LogEntry("___DrawC2DImageFromWindowHandle()", ex);
                     }
@@ -7315,7 +7315,7 @@ namespace MultiversalRenderer.Core
         }
         public void uniformMatrix4fv(object ___object_location, object ___object_transpose, object ___object_value)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: {0}.uniformMatrix4fv()", this, ___object_location, ___object_transpose, ___object_value);
             }
@@ -7371,7 +7371,7 @@ namespace MultiversalRenderer.Core
         }
         public void deleteShader(object ___shader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: {0}.deleteShader({1})", this, ___shader);
             }
@@ -7386,7 +7386,7 @@ namespace MultiversalRenderer.Core
         }
         public void drawArrays(object ___mode, object ___first, object ___count)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.drawArrays({1}, {2}, {3})", this, ___mode,  ___first, ___count);
             }
@@ -7413,7 +7413,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasContextAttributes getContextAttributes()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.getContextAttributes()", this);
             }
@@ -7430,7 +7430,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasWebGLExtention getExtension(object ____name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.getExtenstion({1})", this, ____name );
             }
@@ -7447,7 +7447,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasWebGLShaderPrecisionFormat getShaderPrecisionFormat(object ____shaderType, object ____precisionType)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.getShaderPrecisionFormat()", this);
             }
@@ -7560,7 +7560,7 @@ namespace MultiversalRenderer.Core
         #region AudioContext Related APIs
         public CHtmlAudioOscillatorNode createOscillator()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createOscillator()", this);
             }
@@ -7570,7 +7570,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioGainNode createGain()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createGain()", this);
             }
@@ -7580,7 +7580,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioBufferSourceNode createBufferSource()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createBufferSource()", this);
             }
@@ -7598,7 +7598,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objFunction"></param>
         public object  decodeAudioData(object ___objAudioData, object ___objFunction)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.decodeAudioData({1}, {2}) [Classic Way]", this, ___objAudioData, ___objFunction );
             }
@@ -7614,7 +7614,7 @@ namespace MultiversalRenderer.Core
         /// <param name="parammask"></param>
         public void stencilFunc(object paramfunc, object paramref, object parammask)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.stencilFunc({1}, {2}, {3})", this, paramfunc , paramref, parammask);
             }
@@ -7628,7 +7628,7 @@ namespace MultiversalRenderer.Core
         /// <param name=""></param>
         public void stencilOp(object paramfail, object paramzfail,object paramzpass)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.stencilOp({1}, {2}, {3})", this, paramfail, paramzfail, paramzpass);
             }
@@ -7642,7 +7642,7 @@ namespace MultiversalRenderer.Core
         /// <param name="pwidth"></param>
         public void webglLineWidth(object pwidth)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.lineWidth({1})", this, pwidth);
             }
@@ -7653,7 +7653,7 @@ namespace MultiversalRenderer.Core
 
         public bool isPrototypeOf(object ___protoObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.isPrototpyeOf('{1}') ", this, ___protoObject);
             }
@@ -7661,7 +7661,7 @@ namespace MultiversalRenderer.Core
             {
                 case 0:
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("TODO:  {0}.isPrototpyeOf('{1}') test needs more test. returns true for now... ", this, ___protoObject);
                     }

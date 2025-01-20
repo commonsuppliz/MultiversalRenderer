@@ -89,7 +89,7 @@ namespace MultiversalRenderer.Core
         }
         internal void ___start_inner(object pwhen, object poffset, object pduaration)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.start()", this);
             }
@@ -97,7 +97,7 @@ namespace MultiversalRenderer.Core
             { }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("calling {0}.start() exception", ex);
                 }
@@ -113,7 +113,7 @@ namespace MultiversalRenderer.Core
         }
         private void ___stop_inner(double ___num)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: calling {0}.stop()", this);
             }
@@ -121,7 +121,7 @@ namespace MultiversalRenderer.Core
             { }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("calling {0}.stop() exception", ex);
                 }
@@ -133,7 +133,7 @@ namespace MultiversalRenderer.Core
 
         public override object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("getPropertyValue for {0} {1} ", this, ___name);
             }
@@ -161,7 +161,7 @@ namespace MultiversalRenderer.Core
             {
                 return propValue;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("getPropertyValue for {0} {1} failed", this, ___name);
             }
@@ -171,7 +171,7 @@ namespace MultiversalRenderer.Core
 
         public override void ___setPropertyByName(string ___name, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("setPropertyValue for {0} {1} ", this, ___name);
             }
@@ -192,7 +192,7 @@ namespace MultiversalRenderer.Core
                     break;
 
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("setPropertyValue for {0} {1}  {2} = {3} failed", this.GetType(), this, ___name, val);
                     }

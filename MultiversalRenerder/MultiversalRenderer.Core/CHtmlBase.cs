@@ -706,7 +706,7 @@ namespace MultiversalRenderer.Core
                 {
                     sbClass.Remove(sbClass.Length - 1, 1);
                 }
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                 {
                    commonLog.LogEntry("{0} is class have changed to {1} by script", this, sbClass.ToString());
                 }

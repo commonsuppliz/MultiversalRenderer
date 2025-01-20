@@ -26,7 +26,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.NodeType", this);
                 }
@@ -70,7 +70,7 @@ namespace MultiversalRenderer.Core
 
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.LocalName", this);
                     // we should returns<bk:book> = "book"
@@ -113,7 +113,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.Name", this);
                     // we should retuns <bk:book> = bk:book
@@ -136,7 +136,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.NamespaceURI", this);
                 }
@@ -171,7 +171,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.IsEmptyElement", this);
                 }
@@ -191,7 +191,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.NameTable", this);
                 }
@@ -205,7 +205,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.HasAttributes", this);
                 }
@@ -217,7 +217,7 @@ namespace MultiversalRenderer.Core
         }
         public override string GetAttribute(string localName, string namespaceURI)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.GetAttribute({1}, {2})", this, localName, namespaceURI);
             }
@@ -230,7 +230,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToAttribute(string localName, string namespaceURI)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToAttribute({1}, {2})", this, localName, namespaceURI);
             }
@@ -244,7 +244,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToFirstAttribute()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToFirstAttribute()", this);
             }
@@ -260,7 +260,7 @@ namespace MultiversalRenderer.Core
         }
         public override bool MoveToNextAttribute()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToNextAttribute()", this);
             }
@@ -285,7 +285,7 @@ namespace MultiversalRenderer.Core
         //Namespace Accesors
         public override string GetNamespace(string localname)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.GetNamespace()", this);
             }
@@ -293,7 +293,7 @@ namespace MultiversalRenderer.Core
         }
         public override bool MoveToNamespace(string Namespace)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToNamespace()", this);
             }
@@ -302,7 +302,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToFirstNamespace()", this);
             }
@@ -311,7 +311,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToNextNamespace()", this);
             }
@@ -322,7 +322,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToNext()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToNext()", this);
             }
@@ -339,7 +339,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToPrevious()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToPrevious()", this);
             }
@@ -356,7 +356,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToFirst()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToFirst()", this);
             }
@@ -372,7 +372,7 @@ namespace MultiversalRenderer.Core
         }
         public override bool MoveToFirstChild()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToFirstChild()", this);
             }
@@ -385,7 +385,7 @@ namespace MultiversalRenderer.Core
 
         public override bool MoveToParent()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToParent()", this);
             }
@@ -438,7 +438,7 @@ namespace MultiversalRenderer.Core
 
         public override void MoveToRoot()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToRoot()", this);
             }
@@ -450,7 +450,7 @@ namespace MultiversalRenderer.Core
         }
         public override bool MoveTo(XPathNavigator other)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveTo()", this);
             }
@@ -463,7 +463,7 @@ namespace MultiversalRenderer.Core
         }
         public override bool MoveToId(string ___ID)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToId({1})", this, ___ID);
             }
@@ -473,7 +473,7 @@ namespace MultiversalRenderer.Core
 
         public override bool IsSamePosition(XPathNavigator other)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.IsSamePosition()", this);
             }
@@ -499,7 +499,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.HasChildren", this);
                 }
@@ -515,7 +515,7 @@ namespace MultiversalRenderer.Core
         // to its associated element.
         public bool MoveToElement()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToElement()", this);
             }
@@ -533,7 +533,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.IndexInParent", this);
                 }
@@ -546,7 +546,7 @@ namespace MultiversalRenderer.Core
         //Helper method. Move to child i of the current node.
         public bool MoveToChild(int i)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("calling {0}.MoveToChild({1})", this,i);
             }
@@ -584,7 +584,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.AttributeCount", this);
                 }
@@ -607,7 +607,7 @@ namespace MultiversalRenderer.Core
         {
             get
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                 {
                    commonLog.LogEntry("calling {0}.ChildCount", this);
                 }
@@ -636,14 +636,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setPropertyByIndex(int ___index, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("SetPropertyValueIndex for {0} {1}  {2} = {3} failed", this.GetType(), this, ___index, val);
             }
         }
         public object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValueInex for {0} {1} {2} failed", this.GetType(), this, ___index);
             }
@@ -651,12 +651,12 @@ namespace MultiversalRenderer.Core
         }
         public object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling GetPropertyValue for {0} {1} {2}", this.GetType(), this, ___name);
             }
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} {2} failed", this.GetType(), this, ___name);
             }
@@ -680,7 +680,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___common_object_clone()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("x__Clone {0} {1} called", this.GetType(), this);
             }
@@ -688,14 +688,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___deleteByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}", this.GetType(), this, ___index);
             }
         }
         public void ___deleteByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___deleteByName {0} {1} called : {2}", this.GetType(), this, ___name);
             }
@@ -703,7 +703,7 @@ namespace MultiversalRenderer.Core
         }
         public object[] ___getByIds()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___getByIds() {0} {1} called", this.GetType(), this);
             }
@@ -712,7 +712,7 @@ namespace MultiversalRenderer.Core
         }
         public string ___getClassName()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___getClassName {0} {1} called", this.GetType(), this);
             }
@@ -720,7 +720,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getDefaultValue()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___getDefaultValue {0} {1} called", this.GetType(), this);
             }
@@ -728,7 +728,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getParentScope()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___getParentScope {0} {1} called", this.GetType(), this);
             }
@@ -736,14 +736,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setParentScope(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___setParentScope {0} {1} called : {2}", this.GetType(), this, ___object);
             }
         }
         public object ___getProtoType()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___getProtoType {0} {1} called", this.GetType(), this);
             }
@@ -751,7 +751,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___hasInstance(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___hasInstance {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -759,7 +759,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___instanceEquals(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___instanceEquals {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -767,7 +767,7 @@ namespace MultiversalRenderer.Core
         }
         public void ___setProtoType(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
             {
                commonLog.LogEntry("___setProtoType {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -899,7 +899,7 @@ namespace MultiversalRenderer.Core
             {
                 get
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                     {
                        commonLog.LogEntry("calling {0}.TextValue", this);
                     }
@@ -951,7 +951,7 @@ namespace MultiversalRenderer.Core
             {
                 get
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                     {
                        commonLog.LogEntry("calling {0}.AttributeText", this);
                     }
@@ -982,7 +982,7 @@ namespace MultiversalRenderer.Core
             {
                 get
                 {
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= loggingReportLevel)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= loggingReportLevel)
                     {
                        commonLog.LogEntry("calling {0}.ElementText", this);
                     }

@@ -33,24 +33,42 @@ namespace MultiversalRenderer.Core
 
 			}
 		}
-		
-		public static int LogLevel
+		private static int _commonnlogLevel = 0;
+
+        public static int CommonLogLevel
 		{
 			get
 			{
-				/*
-                if (NLog.LogManager.Configuration.Variables.TryGetValue("LogLevel", out NLog.Layouts.Layout simpValue) == true)
-                {
-                    if (int.TryParse(simpValue., out int result) == true)
-                    {
-                        return result;
-                    }
-                }
-				*/
-                return 0;
-			}
+                return _commonnlogLevel;
+
+            }
 			set
-            {   
+            {
+                _commonnlogLevel = value;
+                switch (value)
+                {
+                    case 0:
+                        Logger.Info("Log Level set to Info");
+                        break;
+                    case 1:
+                        Logger.Info("Log Level set to Debug");
+                        break;
+                    case 2:
+                        Logger.Info("Log Level set to Trace");
+                        break;
+                    case 3:
+                        Logger.Info("Log Level set to Warn");
+                        break;
+                    case 4:
+                        Logger.Info("Log Level set to Error");
+                        break;
+                    case 5:
+                        Logger.Info("Log Level set to Fatal");
+                        break;
+                    default:
+                        Logger.Info("Log Level set to Info");
+                        break;
+                }
             }	
         }
 
@@ -79,8 +97,8 @@ namespace MultiversalRenderer.Core
             var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
 
             // Rules for mapping loggers to targets
-            //config.AddRule(LogLevel, LogLevel.Fatal, logconsole);
-            //config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
+            config.AddRule(LogLevel.Debug, LogLevel.Debug, logconsole);
+            //config.AddRule(CommonLogLevel.Debug, CommonLogLevel.Fatal, logfile);
 
             // Apply config
             NLog.LogManager.Configuration = config;

@@ -33,7 +33,7 @@ namespace MultiversalRenderer.Core
 
 
                 case string stringobj:
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
                         commonLog.LogEntry("newElement is text...create one.");
                     }
@@ -50,7 +50,7 @@ namespace MultiversalRenderer.Core
                     break;
 
                 case object objobject:
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
                     {
 
                         commonLog.LogEntry("ConvertObjectIntoElement() Unknown object Type to convert!  : {0}", objobject);
@@ -60,7 +60,7 @@ namespace MultiversalRenderer.Core
                     break;
             }
 
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 if (__object != null)
                 {
@@ -94,7 +94,7 @@ namespace MultiversalRenderer.Core
 
             
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 10)
             {
                 commonLog.LogEntry("TypeConverter Unable to convert object to Boolean {0}", _boolObj);
             }
@@ -198,7 +198,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exImage)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 8)
                 {
                     commonLog.LogEntry("___convertBytesToImageGeneric() Exception. return null.", exImage);
                 }
@@ -214,7 +214,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exSvg)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                 {
                     commonLog.LogEntry(string.Format("reateSVGImageFromString SVG Rendering Error", exSvg));
 
@@ -231,7 +231,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exSvg)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel >= 30)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel >= 30)
                 {
                     commonLog.LogEntry(string.Format("reateSVGImageFromString WebP Rendering Error", exSvg));
 
@@ -250,7 +250,7 @@ namespace MultiversalRenderer.Core
                 }
                 else
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                     {
                         commonLog.LogEntry("convertBytesIntoImage(bytes, {0}, {1}) image handler is not set", contentType, contentLength);
                     }
@@ -258,7 +258,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                 {
                     commonLog.LogEntry("convertBytesIntoImage(bytes, {0}, {1}) image exception Reason : {2}", contentType, contentLength, ex.Message);
                 }
@@ -291,7 +291,7 @@ namespace MultiversalRenderer.Core
                 }
                 catch (Exception ex)
                 {
-                    if (commonLog.LoggingEnabled && commonLog.LogLevel > 10)
+                    if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 10)
                     {
                         commonLog.LogEntry("commonTypeConverter.convertObjectIntoDateTime() Exception", ex);
                     }
@@ -407,7 +407,7 @@ namespace MultiversalRenderer.Core
             }
             else
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
                 {
                     commonLog.LogEntry("TODO Needs Type Swicher for ___convertObjectIntoFloatArray({0} , {1},  {2}) : Type {3}", ___object, ___offset, __length, ___object.GetType());
                 }

@@ -41,7 +41,7 @@ namespace MultiversalRenderer.Core
         {
 
             this.___IsDisposing = true;
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                 if (this.___IsPrototype == false)
                 {
@@ -134,7 +134,7 @@ namespace MultiversalRenderer.Core
 
         public void Dispose()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
             {
                 if (this.___IsPrototype == false)
                 {
@@ -211,7 +211,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlAudioBiquadFilterNode createBiquadFilter()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createBiqualFilter()", this);
             }
@@ -223,7 +223,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlAudioDynamicsCompressorNode createDynamicsCompressor()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createDynamicsCompressor()", this);
             }
@@ -233,7 +233,7 @@ namespace MultiversalRenderer.Core
 
         public void bindBuffer(object ___objectTarget, object ___objectBuffer)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calliing {0}.bindBuffer({1}, {2})", this, ___objectTarget, ___objectBuffer);
             }
@@ -255,35 +255,35 @@ namespace MultiversalRenderer.Core
         }
         public void blendEquation(object ___mode)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.blendEquation({1})", this, ___mode);
             }
         }
         public void cullFace(object ___mode)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.cullFace({1})", this, ___mode);
             }
         }
         public void viewport(object object_x, object object_y, object p1, object p2)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("setting {0}.viewport({1}, {2}, {3} , {4})", this, object_x, object_y, p1, p2);
             }
         }
         public void shaderSource(object ___shader, object ___shaderType)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.sourceShader({1}, {2}", this, ___shader, ___shaderType);
             }
         }
         public void compileShader(object ___shaderSource)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.compileShader({1})", this, ___shaderSource);
             }
@@ -295,7 +295,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___shader"></param>
         public void attachShader(object ___objectProgram, object ___shader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.attachShader({1}, {2})", this, ___objectProgram, ___shader);
             }
@@ -306,7 +306,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objectProgram"></param>
         public void linkProgram(object ___objectProgram)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.linkProgram({1})", this, ___objectProgram);
             }
@@ -368,7 +368,7 @@ namespace MultiversalRenderer.Core
 
             }
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.getProgramparameter({1}, {2}) returns : {3}", this, ___objectProgram, ___paramValue, ___objResult);
             }
@@ -381,14 +381,14 @@ namespace MultiversalRenderer.Core
         /// <param name="___objectProgram"></param>
         public void useProgram(object ___objectProgram)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.useProgram({1})", this, ___objectProgram);
             }
         }
         public double getAttribLocation(object ___objectProgram, object ___pname)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getAttribLocation({1}, {2})", this, ___objectProgram, ___pname);
             }
@@ -406,7 +406,7 @@ namespace MultiversalRenderer.Core
         public object getShaderParameter(object ___shader, object ___pcname)
         {
 
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.getShaderParameter({1}, {2})", this, ___shader, ___pcname);
             }
@@ -420,7 +420,7 @@ namespace MultiversalRenderer.Core
                 case (int)0x8B81:
                     return true;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.getShaderParameter({1}, {2}) failed", this, ___shader, ___pcname);
             }
@@ -428,21 +428,21 @@ namespace MultiversalRenderer.Core
         }
         public void depthFunc(object ___param)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.depthFunc({1})", this, ___param);
             }
         }
         public void activeTexture(object ___texture)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.activeTexture({1})", this, ___texture);
             }
         }
         public string getProgramInfoLog(object ___program)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getProgramInfoLog({1})", this, ___program);
             }
@@ -450,7 +450,7 @@ namespace MultiversalRenderer.Core
         }
         public string getShaderInfoLog(object ___shader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.getShaderInfoLog({1})", this, ___shader);
             }
@@ -474,14 +474,14 @@ namespace MultiversalRenderer.Core
         }
         public void enable(object ___objectCap)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.enable({1})", this, ___objectCap);
             }
         }
         public void disable(object ___objectCap)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("TODO: calling {0}.disable({1})", this, ___objectCap);
             }
@@ -583,7 +583,7 @@ namespace MultiversalRenderer.Core
                     }
                     break;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("getPropertyValue for {0} {1} '{2}' failed", this.GetType(), this, ___name);
             }
@@ -596,7 +596,7 @@ namespace MultiversalRenderer.Core
    
         public void ___setPropertyByName(string ___name, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling setPropertyValue for {0} \'{1}\' {2} = {3}", this.GetType(), this, ___name, val);
             }
@@ -613,7 +613,7 @@ namespace MultiversalRenderer.Core
                     this.___properties[___name] = val;
                     ___ValueStored = true;
 
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("setPropertyValue for {0} {1}  '{2}' = {3} Success : {4}", this.GetType(), this, ___name, val, ___ValueStored);
                     }
@@ -623,7 +623,7 @@ namespace MultiversalRenderer.Core
    
         public void ___setPropertyByIndex(int ___index, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("SetPropertyValueIndex for {0} \'{1}\' {2} = {3} failed", this.GetType(), this, ___index, val);
             }
@@ -632,7 +632,7 @@ namespace MultiversalRenderer.Core
    
         public object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("___getPropertyByName by index {0} {1} {2} failed", this.GetType(), this, ___index);
             }
@@ -640,7 +640,7 @@ namespace MultiversalRenderer.Core
         }
         public bool hasOwnProperty(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("entering {0}.hasOwnProperty({1})....", this, ___name);
             }
@@ -659,7 +659,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___common_object_clone()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("x__Clone {0} {1} called", this.GetType(), this);
             }
@@ -667,14 +667,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___deleteByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}", this.GetType(), this, ___index);
             }
         }
         public void ___deleteByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByName {0} {1} called : {2}", this.GetType(), this, ___name);
             }
@@ -682,7 +682,7 @@ namespace MultiversalRenderer.Core
         }
         public object[] ___getByIds()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getByIds() {0} {1} called", this.GetType(), this);
             }
@@ -691,7 +691,7 @@ namespace MultiversalRenderer.Core
         }
         public string ___getClassName()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getClassName {0} {1} called", this.GetType(), this);
             }
@@ -699,7 +699,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getDefaultValue()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getDefaultValue {0} {1} called", this.GetType(), this);
             }
@@ -707,7 +707,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___getParentScope()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getParentScope {0} {1} called", this.GetType(), this);
             }
@@ -715,14 +715,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setParentScope(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setParentScope {0} {1} called : {2}", this.GetType(), this, ___object);
             }
         }
         public object ___getProtoType()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getProtoType {0} {1} called", this.GetType(), this);
             }
@@ -730,7 +730,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___hasInstance(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___hasInstance {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -738,7 +738,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___instanceEquals(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___instanceEquals {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -746,7 +746,7 @@ namespace MultiversalRenderer.Core
         }
         public void ___setProtoType(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setProtoType {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -844,7 +844,7 @@ namespace MultiversalRenderer.Core
         }
         public void deleteShader(object ___shader)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: {0}.deleteShader({1})", this, ___shader);
             }
@@ -859,7 +859,7 @@ namespace MultiversalRenderer.Core
         }
         public void drawArrays(object ___mode, object ___first, object ___count)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("{0}.drawArrays({1}, {2}, {3})", this, ___mode, ___first, ___count);
             }
@@ -886,7 +886,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlCanvasContextAttributes getContextAttributes()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.getContextAttributes()", this);
             }
@@ -924,7 +924,7 @@ namespace MultiversalRenderer.Core
         }
         internal void ___set_onstatechange(object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("setting {0}.onstatechange({1})", this, val);
             }
@@ -932,7 +932,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioPannerNode createPanner()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createPanner()", this);
             }
@@ -943,7 +943,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlAudioOscillatorNode createOscillator()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createOscillator()", this);
             }
@@ -953,7 +953,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioAnalyserNode createAnalyser()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createAnalyser()", this);
             }
@@ -998,7 +998,7 @@ namespace MultiversalRenderer.Core
         }
         private object ___createBuffer_Inner(object[] ___args)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.createBuffer()", this);
             }
@@ -1023,7 +1023,7 @@ namespace MultiversalRenderer.Core
                 }
                 ____returnBuffer = ___audioBuffer;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.createBuffer() returns {1}", this, ____returnBuffer);
             }
@@ -1031,7 +1031,7 @@ namespace MultiversalRenderer.Core
         }
         public void resume()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.resume()", this);
             }
@@ -1039,7 +1039,7 @@ namespace MultiversalRenderer.Core
         }
         public void suspend()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.suspend()", this);
             }
@@ -1048,7 +1048,7 @@ namespace MultiversalRenderer.Core
 
         public void close()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling {0}.close()", this);
             }
@@ -1082,7 +1082,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlAudioScriptProcessorNode createScriptProcessor(double pbufferSize, double pnumberOfInputChannels, double pnumberOfOutputChannels)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createScriptProcessor()", this);
             }
@@ -1096,7 +1096,7 @@ namespace MultiversalRenderer.Core
 
         public CHtmlAudioGainNode createGain()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createGain()", this);
             }
@@ -1106,7 +1106,7 @@ namespace MultiversalRenderer.Core
         }
         public CHtmlAudioBufferSourceNode createBufferSource()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createBufferSource()", this);
             }
@@ -1124,7 +1124,7 @@ namespace MultiversalRenderer.Core
         }
         private CHtmlAudioChannelMergerNode ___createChannenelMerger(double ___numOfInputs)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.createChannelMerger()", this);
             }
@@ -1147,7 +1147,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objFunction"></param>
         public object  decodeAudioData(object ___objAudioData, object ___objFunction)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.decodeAudioData({1}, {2}) [Classic Way]", this, ___objAudioData, ___objFunction );
             }
@@ -1167,7 +1167,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___objFunction"></param>
         public object decodeAudioData(object ___objAudioData, object ___objFunction, object ___objErrorCallBack)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.decodeAudioData({1}, {2}, {3}) [Classic Way]", this, ___objAudioData, ___objFunction, ___objErrorCallBack);
             }
@@ -1190,7 +1190,7 @@ namespace MultiversalRenderer.Core
                 thread.Start();
             } else
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("strange AudioContext owner window reference is not assigned. Skipping...");
                 }
@@ -1204,7 +1204,7 @@ namespace MultiversalRenderer.Core
             // ================================================================================================
             // decodeAudioData Actual Data Processing Step here. Skip it for now
             // ================================================================================================
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: decodeAudioData Data Processing Part. Skipping...");
             }
@@ -1215,7 +1215,7 @@ namespace MultiversalRenderer.Core
             // ================================================================================================
             if (this.___decodedAudioDataFunctionObject !=null)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("decodeAudioData Function Process Begin...");
                 }
@@ -1234,7 +1234,7 @@ namespace MultiversalRenderer.Core
         /// <returns>PromiseObject</returns>
         public CHtmlPromisingFunctionObject decodeAudioData(object ___objAudioData)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.decodeAudioData({1}, {2}) [ES6 Way]", this, ___objAudioData);
             }
@@ -1253,7 +1253,7 @@ namespace MultiversalRenderer.Core
 
         public bool isPrototypeOf(object ___protoObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.isPrototpyeOf('{1}') ", this, ___protoObject);
             }
@@ -1261,7 +1261,7 @@ namespace MultiversalRenderer.Core
             {
                 case 0:
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("TODO:  {0}.isPrototpyeOf('{1}') test needs more test. returns true for now... ", this, ___protoObject);
                     }

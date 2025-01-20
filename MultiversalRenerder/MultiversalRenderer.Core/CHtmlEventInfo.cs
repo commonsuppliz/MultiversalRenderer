@@ -110,7 +110,7 @@ namespace MultiversalRenderer.Core
              
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("CHtmlEventInfoComparer", ex);
                 }

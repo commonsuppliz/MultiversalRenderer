@@ -160,7 +160,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                             {
                                commonLog.LogEntry("TODO: ___copyArrayFromSourceArray({0}) work needs", srcArray);
                             }
@@ -186,7 +186,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                             {
                                commonLog.LogEntry("TODO: ___copyArrayFromSourceArray({0}) work needs", srcArray);
                             }
@@ -211,7 +211,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                             {
                                commonLog.LogEntry("TODO: ___copyArrayFromSourceArray({0}) work needs", srcArray);
                             }
@@ -250,7 +250,7 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                             {
                                commonLog.LogEntry("TODO: ___copyArrayFromSourceArray({0}) work needs", srcArray);
                             }
@@ -292,14 +292,14 @@ namespace MultiversalRenderer.Core
                         }
                         else
                         {
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                             {
                                commonLog.LogEntry("TODO: ___copyArrayFromSourceArray({0}) work needs", srcArray);
                             }
                         }
                         break;
                     default:
-                        if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                        if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                         {
                            commonLog.LogEntry("TODO: ___copyArrayFromSourceArray({0}) work needs", srcArray);
                         }
@@ -309,7 +309,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 5)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 5)
                 {
                    commonLog.LogEntry("___copyArrayFromSourceArray() exception", ex);
                 }
@@ -471,14 +471,14 @@ namespace MultiversalRenderer.Core
                     }
                 }
             }
-             if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+             if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("{0}.set() seems to be invald values. skip now.", this);
             }
         }
         private void ___set_inner(object ___array, object ___index, object ___offset)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("calling  {0}.set({1}, {2}, {3})", this, ___array, ___index, ___offset );
             }
@@ -507,7 +507,7 @@ namespace MultiversalRenderer.Core
             catch (Exception ex1)
             {
 
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("CHtmlNaviveArray set Inner Error ", ex1);
                 }
@@ -534,14 +534,14 @@ namespace MultiversalRenderer.Core
                 }
 
 
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                 {
                    commonLog.LogEntry("TODO: needs to works offset value set  {0}.set({1}, {2}, {3})", this, ___array, ___index, ___offset);
                 }
                 
             }catch(Exception ex2)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlNaviveArray set Inner Error ", ex2);
                 }
@@ -551,7 +551,7 @@ namespace MultiversalRenderer.Core
         }
         private static CHtmlNativeArray ____getSystemArrayIntoNewArray(object ___objArray, CHtmlNumericArrayType ___targetType)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: ____getCHtmlNativeArrayIntoNewArray Copy");
             }
@@ -560,7 +560,7 @@ namespace MultiversalRenderer.Core
         }
         private static CHtmlNativeArray ____getJavaArrayIntoNewArray(object ___objArray, CHtmlNumericArrayType ___targetType)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: ____getCHtmlNativeArrayIntoNewArray Copy");
             }
@@ -581,7 +581,7 @@ namespace MultiversalRenderer.Core
 
         if (objArray == null)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("BUGBUG!!! __getOrgMozillaJavascriptNativeArrayIntoNewArray failed to create array : {0}  ", ___objArray);
             }
@@ -589,7 +589,7 @@ namespace MultiversalRenderer.Core
         }
         if (isTargetTypeChanged)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("NativeArray TargetType is changed to {0}", ___targetType);
             }
@@ -658,7 +658,7 @@ namespace MultiversalRenderer.Core
                 break;
 
             default:
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("TODO: ____getCHtmlNativeArrayIntoNewArray Copy");
                 }
@@ -672,7 +672,7 @@ namespace MultiversalRenderer.Core
 
     public object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
             {
                commonLog.LogEntry("calling  {0}.{1}", this, ___name);
             }
@@ -691,13 +691,13 @@ namespace MultiversalRenderer.Core
                         case CHtmlNumericArrayType.ByteArray:
                         case CHtmlNumericArrayType.Int8Array:
 
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
                             {
                                commonLog.LogEntry("{0}{1} returning itself to {2}", this, ___name , this.___arrayType);
                             }
                             return this;
                         default:
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
                             {
                                commonLog.LogEntry("BUGBUG ! {0} returning data as null to {1} {2}", this, ___name, this.___arrayType);
                             }
@@ -717,7 +717,7 @@ namespace MultiversalRenderer.Core
                             return ___nativeArray;
 
                         default:
-                            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+                            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
                             {
                                commonLog.LogEntry("BUGBUG {0} buffer property is not defined for this array type {1} to buffer, returns null", this, this.___arrayType);
 
@@ -753,7 +753,7 @@ namespace MultiversalRenderer.Core
                     // ==================================================================
                     throw new System.NotImplementedException("CHtmlNativeArray does not have toJSON method");
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling  {0}.{1} failed...", this, ___name);
             }
@@ -766,7 +766,7 @@ namespace MultiversalRenderer.Core
         /// <returns></returns>
         public string toJSON(object ____arrayObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
             {
                commonLog.LogEntry("calling  {0}.toJSON()", this, ____arrayObject);
             }
@@ -784,7 +784,7 @@ namespace MultiversalRenderer.Core
         public object ___getPropertyByIndex(int ___index)
         {
             // ------------------------------------------------------
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
             {
                commonLog.LogEntry("calling  {0} get by index {1}", this, ___index);
             }
@@ -819,7 +819,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlNativeArray Exception.", ex);
                 }
@@ -831,7 +831,7 @@ namespace MultiversalRenderer.Core
         }
         public  void ___setPropertyByName(string ___name, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("set : {0} = {1} for {2}", ___name, val, this);
             }
@@ -840,7 +840,7 @@ namespace MultiversalRenderer.Core
 
         public  void ___setPropertyByIndex(int ___index, object ___val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 1000)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 1000)
             {
                commonLog.LogEntry("calling  {0} set by index {1} =  {2}", this, ___index, ___val);
             }
@@ -866,7 +866,7 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception ex)
             {
-                if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                 {
                    commonLog.LogEntry("CHtmlNativeArray Set by Index Error", ex);
                 }
@@ -884,7 +884,7 @@ namespace MultiversalRenderer.Core
         }
         public object ___common_object_clone()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("x__Clone {0} {1} called", this.GetType(), this);
             }
@@ -892,14 +892,14 @@ namespace MultiversalRenderer.Core
         }
         public  void ___deleteByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByIndex {0} {1} called : {2}", this.GetType(), this, ___index);
             }
         }
         public  void ___deleteByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___deleteByName {0} {1} called : {2}", this.GetType(), this, ___name);
             }
@@ -907,7 +907,7 @@ namespace MultiversalRenderer.Core
         }
         public  object[] ___getByIds()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getByIds() {0} {1} called", this.GetType(), this);
             }
@@ -916,7 +916,7 @@ namespace MultiversalRenderer.Core
         }
         public string ___getClassName()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getClassName {0} {1} called", this.GetType(), this);
             }
@@ -924,7 +924,7 @@ namespace MultiversalRenderer.Core
         }
         public  object ___getDefaultValue()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getDefaultValue {0} {1} called", this.GetType(), this);
             }
@@ -932,7 +932,7 @@ namespace MultiversalRenderer.Core
         }
         public  object ___getParentScope()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getParentScope {0} {1} called", this.GetType(), this);
             }
@@ -940,14 +940,14 @@ namespace MultiversalRenderer.Core
         }
         public void ___setParentScope(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setParentScope {0} {1} called : {2}", this.GetType(), this, ___object);
             }
         }
         public  object ___getProtoType()
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___getProtoType {0} {1} called", this.GetType(), this);
             }
@@ -955,7 +955,7 @@ namespace MultiversalRenderer.Core
         }
         public  bool ___hasInstance(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___hasInstance {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -963,7 +963,7 @@ namespace MultiversalRenderer.Core
         }
         public bool ___instanceEquals(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___instanceEquals {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -971,7 +971,7 @@ namespace MultiversalRenderer.Core
         }
         public  void ___setProtoType(object ___object)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("___setProtoType {0} {1} called : {2}", this.GetType(), this, ___object);
             }
@@ -1016,7 +1016,7 @@ namespace MultiversalRenderer.Core
         #endregion
         public bool isPrototypeOf(object ___protoObject)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("calling {0}.isPrototpyeOf('{1}') ", this, ___protoObject);
             }
@@ -1024,7 +1024,7 @@ namespace MultiversalRenderer.Core
             {
                 case 0:
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("TODO:  {0}.isPrototpyeOf('{1}') test needs more test. returns true for now... ", this, ___protoObject);
                     }
@@ -1068,12 +1068,12 @@ namespace MultiversalRenderer.Core
             }
             catch (Exception exConvert)
             {
-                if (commonLog.LoggingEnabled && commonLog.LogLevel > 8)
+                if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 8)
                 {
                     commonLog.LogEntry("convertArrayObjectIntoCHtmlNativeArray exception", exConvert);
                 }
             }
-            if (commonLog.LoggingEnabled && commonLog.LogLevel > 3)
+            if (commonLog.LoggingEnabled && commonLog.CommonLogLevel > 3)
             {
                 commonLog.LogEntry("TODO : convertArrayObjectIntoCHtmlNativeArray failed : {0}, returning empty array...", ___currentArrayType);
             }
@@ -1107,7 +1107,7 @@ namespace MultiversalRenderer.Core
                     Array.Copy(__originalBytesList.___floatArray, ___byteArrayList.___floatArray, __originalBytesList.___floatArray.Length);
                     break;
                 default:
-                    if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+                    if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
                     {
                        commonLog.LogEntry("TODO: ____getCHtmlNativeArrayIntoNewArray Copy");
                     }

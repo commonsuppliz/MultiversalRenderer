@@ -145,7 +145,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___p3"></param>
         public void setPosition(object ___p1, object ___p2, object ___p3)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: calling {0}.setPosition()", this);
             }
@@ -161,7 +161,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___p3"></param>
         public void setVolocity(object ___p1, object ___p2, object ___p3)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: calling {0}.setVelocity()", this);
             }
@@ -177,7 +177,7 @@ namespace MultiversalRenderer.Core
         /// <param name="___p3"></param>
         public void setOrientation(object ___p1, object ___p2, object ___p3)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("TODO: calling {0}.setOrientation()",  this);
             }
@@ -188,7 +188,7 @@ namespace MultiversalRenderer.Core
 
         public override object ___getPropertyByName(string ___name)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering GetPropertyValue for {0} {1} ", this, ___name);
             }
@@ -232,7 +232,7 @@ namespace MultiversalRenderer.Core
             {
                 return propValue;
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValue for {0} {1} failed", this, ___name);
             }
@@ -241,7 +241,7 @@ namespace MultiversalRenderer.Core
 
         public override  void ___setPropertyByName(string ___name, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("entering SetPropertyValue for {0} {1}  {2} = {3} ", this.GetType(), this, ___name, val);
             }
@@ -296,14 +296,14 @@ namespace MultiversalRenderer.Core
         }
         public override  void ___setPropertyByIndex(int ___index, object val)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("SetPropertyValueIndex for {0} {1}  {2} = {3} failed", this.GetType(), this, ___index, val);
             }
         }
         public override object ___getPropertyByIndex(int ___index)
         {
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 8)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 8)
             {
                commonLog.LogEntry("GetPropertyValueInex for {0} {1} {2} failed", this.GetType(), this, ___index);
             }

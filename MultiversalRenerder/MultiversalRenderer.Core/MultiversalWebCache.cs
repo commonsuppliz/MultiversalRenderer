@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 
@@ -14,29 +15,57 @@ namespace MultiversalRenderer.Core
         public string Url { get; set; }
         public string FileLocation { get; set; }
         public string ContentType { get; set; }
-        public DateTime LastModified { get; set; }
+        public DateTimeOffset? LastModified { get; set; }
         public string Authority { get; set; }
+        public string HtmlContent { get; set; }
+        public string Charset { get; set; }
+        public int ContentLength { get; set; }  
         public MultivasalContentData() { }
-        static MultivasalContentData()
-        {
-            MultiversalWebCache.initHTMLDataStorePath();
-        }
+   
     }
         public static class MultiversalWebCache
 
-    {
+         {
+        internal static string CachedData = "Cachedata.json";
+        internal static string TrustedWenAuthorityData = "TrustedWenAuthority.json";
+        public static List<string> TrustedWebAuthority = new List<string>();
         public static string StoregePath { get
             ; set; }
         public static Dictionary<string, MultivasalContentData> CacheData = new Dictionary<string, MultivasalContentData>();
-        public static void initHTMLDataStorePath()
+        internal static void initHTMLDataStorePath()
         {
 
-           StoregePath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + System.IO.Path.DirectorySeparatorChar + "MultiversalDataStore";
+            StoregePath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + System.IO.Path.DirectorySeparatorChar + "MultiversalDataStore";
             if (System.IO.Directory.Exists(StoregePath) == false)
             {
                 System.IO.Directory.CreateDirectory(StoregePath);
             }
+            if (System.IO.File.Exists(StoregePath + System.IO.Path.DirectorySeparatorChar + CachedData) == true)
+            {
+                string _cachedData = System.IO.File.ReadAllText(StoregePath + System.IO.Path.DirectorySeparatorChar + CachedData);
+                CacheData = JsonSerializer.Deserialize<Dictionary<string, MultivasalContentData>>(_cachedData);
+            }
+            if (System.IO.File.Exists(StoregePath + System.IO.Path.DirectorySeparatorChar + TrustedWenAuthorityData) == true)
+            {
+                string _trustedWenAuthorityData = System.IO.File.ReadAllText(StoregePath + System.IO.Path.DirectorySeparatorChar + TrustedWenAuthorityData);
+                TrustedWebAuthority = JsonSerializer.Deserialize<List<string>>(_trustedWenAuthorityData);
+            }
         }
+        static MultiversalWebCache()
+        {
+            initHTMLDataStorePath();
+        }
+        public static void SaveCacheData()
+        {
+            string _cachedData = JsonSerializer.Serialize(CacheData);
+            System.IO.File.WriteAllText(StoregePath + System.IO.Path.DirectorySeparatorChar + CachedData, _cachedData);
+
+        }
+        public static void SaveTrustedWebAuthority()
+        {
+            string _trustedWenAuthorityData = JsonSerializer.Serialize(TrustedWebAuthority);
+            System.IO.File.WriteAllText(StoregePath + System.IO.Path.DirectorySeparatorChar + TrustedWenAuthorityData, _trustedWenAuthorityData);
+        }   
 
 
         public static MultivasalContentData CreateUrlContentDataPath(string _url, string _contentType)

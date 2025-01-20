@@ -82,7 +82,7 @@ namespace MultiversalRenderer.Core
 
                 }
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("window.frame(int {0}) will returns {1}", i, ___returnObject);
             }
@@ -97,7 +97,7 @@ namespace MultiversalRenderer.Core
             {
                 ___returnObject =  this.___ConvertWeakReferenceToWindow(___elemRef);
             }
-            if (commonLog.LoggingEnabled &&commonLog.LogLevel >= 10)
+            if (commonLog.LoggingEnabled &&commonLog.CommonLogLevel >= 10)
             {
                commonLog.LogEntry("window.frame(string {0}) will returns {1}",str, ___returnObject);
             }
