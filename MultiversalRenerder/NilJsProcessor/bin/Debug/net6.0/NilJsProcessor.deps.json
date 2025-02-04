@@ -1,0 +1,69 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "NilJsProcessor/1.0.0": {
+        "dependencies": {
+          "MultiversalRenderer.Interfaces": "1.0.0",
+          "NiL.JS": "2.5.1684",
+          "MultiversalRenderer.Interfaces.Reference": "0.0.0.0"
+        },
+        "runtime": {
+          "NilJsProcessor.dll": {}
+        }
+      },
+      "NiL.JS/2.5.1684": {
+        "runtime": {
+          "lib/net6.0/NiL.JS.dll": {
+            "assemblyVersion": "2.5.1684.0",
+            "fileVersion": "2.5.1684.0"
+          }
+        }
+      },
+      "MultiversalRenderer.Interfaces/1.0.0": {
+        "runtime": {
+          "MultiversalRenderer.Interfaces.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": ""
+          }
+        }
+      },
+      "MultiversalRenderer.Interfaces.Reference/0.0.0.0": {
+        "runtime": {
+          "MultiversalRenderer.Interfaces.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NilJsProcessor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NiL.JS/2.5.1684": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A+fVprM2qn/nlXFZoCa8kGxWhXoH8CTlaBPT8m3lGZm6oTXUZWrUT3slUOIr778KxxAbKW34Mm6YFgYqA/e5nA==",
+      "path": "nil.js/2.5.1684",
+      "hashPath": "nil.js.2.5.1684.nupkg.sha512"
+    },
+    "MultiversalRenderer.Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MultiversalRenderer.Interfaces.Reference/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
