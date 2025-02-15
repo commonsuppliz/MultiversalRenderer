@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MultiversalRenerder",
+    "\\MultiversalRenerder\\MultiversalRenderer.Core",
+    "\\MultiversalRenerder\\NilJsProcessor",
+    "\\MultiversalRenerder\\PythonProssesor"
   ],
-  "SelectedNode": "\\MultiversalRenderer.sln",
   "PreviewInSolutionExplorer": false
 }

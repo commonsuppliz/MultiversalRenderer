@@ -1,0 +1,153 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FC6F0B64-D2A7-1895-F216-989AFB6BCA9E}|ClearScriptProcessor.csproj|c:\\users\\user\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptprocessor\\clearscriptprocessorscope.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC6F0B64-D2A7-1895-F216-989AFB6BCA9E}|ClearScriptProcessor.csproj|solutionrelative:clearscriptprocessorscope.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC6F0B64-D2A7-1895-F216-989AFB6BCA9E}|ClearScriptProcessor.csproj|c:\\users\\user\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptprocessor\\clearscriptprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC6F0B64-D2A7-1895-F216-989AFB6BCA9E}|ClearScriptProcessor.csproj|solutionrelative:clearscriptprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07D34D2A-B443-404A-AACA-ABE175E32852}|..\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj|c:\\users\\user\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptprocessortester\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\source\\repos\\ConsNilJSBenchmark\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07D34D2A-B443-404A-AACA-ABE175E32852}|..\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj|c:\\users\\user\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptprocessortester\\clearscriptprocessortester.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07D34D2A-B443-404A-AACA-ABE175E32852}|..\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj|c:\\users\\user\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptprocessortester\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC6F0B64-D2A7-1895-F216-989AFB6BCA9E}|ClearScriptProcessor.csproj|c:\\users\\user\\source\\repos\\multiversalrenderer\\multiversalrenerder\\clearscriptprocessor\\clearscriptprocessor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FC6F0B64-D2A7-1895-F216-989AFB6BCA9E}|ClearScriptProcessor.csproj|solutionrelative:clearscriptprocessor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessorTester\\App.config",
+              "RelativeDocumentMoniker": "..\\ClearScriptProcessorTester\\App.config",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessorTester\\App.config",
+              "RelativeToolTip": "..\\ClearScriptProcessorTester\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAB+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-02-14T11:06:23.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessorTester\\Program.cs",
+              "RelativeDocumentMoniker": "..\\ClearScriptProcessorTester\\Program.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessorTester\\Program.cs",
+              "RelativeToolTip": "..\\ClearScriptProcessorTester\\Program.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAYwFgAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T11:04:17.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClearScriptProcessor.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\ClearScriptProcessor.cs",
+              "RelativeDocumentMoniker": "ClearScriptProcessor.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\ClearScriptProcessor.cs",
+              "RelativeToolTip": "ClearScriptProcessor.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAADwvzgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T10:51:17.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClearScriptProcessorScope.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\ClearScriptProcessorScope.cs",
+              "RelativeDocumentMoniker": "ClearScriptProcessorScope.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\ClearScriptProcessorScope.cs",
+              "RelativeToolTip": "ClearScriptProcessorScope.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T10:40:46.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClearScriptProcessorTester.csproj",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj",
+              "RelativeDocumentMoniker": "..\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj",
+              "RelativeToolTip": "..\\ClearScriptProcessorTester\\ClearScriptProcessorTester.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-14T11:07:08.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\ConsNilJSBenchmark\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\ConsNilJSBenchmark\\Program.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\ConsNilJSBenchmark\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\ConsNilJSBenchmark\\Program.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T11:38:14.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClearScriptProcessor.csproj",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\ClearScriptProcessor.csproj",
+              "RelativeDocumentMoniker": "ClearScriptProcessor.csproj",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\MultiversalRenderer\\MultiversalRenerder\\ClearScriptProcessor\\ClearScriptProcessor.csproj",
+              "RelativeToolTip": "ClearScriptProcessor.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-14T10:41:29.221Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 67,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

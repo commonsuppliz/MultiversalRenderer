@@ -1,0 +1,16 @@
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\bin\Debug\net6.0\ClearScriptProcessor.deps.json
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\bin\Debug\net6.0\ClearScriptProcessor.dll
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\bin\Debug\net6.0\ClearScriptProcessor.pdb
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\bin\Debug\net6.0\MultiversalRenderer.Interfaces.dll
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\bin\Debug\net6.0\MultiversalRenderer.Interfaces.pdb
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.AssemblyInfo.cs
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.sourcelink.json
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScr.6E898E0D.Up2Date
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.dll
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\refint\ClearScriptProcessor.dll
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ClearScriptProcessor.pdb
+C:\Users\USER\source\repos\MultiversalRenderer\MultiversalRenerder\ClearScriptProcessor\obj\Debug\net6.0\ref\ClearScriptProcessor.dll

@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilJsProcessor", "Multivers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonProcessor", "MultiversalRenerder\PythonProssesor\PythonProcessor.csproj", "{05B7075D-F3F2-4FF1-92E1-34345643E4A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearScriptProcessor", "MultiversalRenerder\ClearScriptProcessor\ClearScriptProcessor.csproj", "{9516DAEC-A5B7-84A1-CE3B-05736E1565E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearScriptProcessorTester", "MultiversalRenerder\ClearScriptProcessorTester\ClearScriptProcessorTester.csproj", "{45C7AFF5-E1A1-EE6C-A9A8-2C2212951253}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +50,14 @@ Global
 		{05B7075D-F3F2-4FF1-92E1-34345643E4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B7075D-F3F2-4FF1-92E1-34345643E4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B7075D-F3F2-4FF1-92E1-34345643E4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9516DAEC-A5B7-84A1-CE3B-05736E1565E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9516DAEC-A5B7-84A1-CE3B-05736E1565E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9516DAEC-A5B7-84A1-CE3B-05736E1565E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9516DAEC-A5B7-84A1-CE3B-05736E1565E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45C7AFF5-E1A1-EE6C-A9A8-2C2212951253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C7AFF5-E1A1-EE6C-A9A8-2C2212951253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C7AFF5-E1A1-EE6C-A9A8-2C2212951253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C7AFF5-E1A1-EE6C-A9A8-2C2212951253}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
